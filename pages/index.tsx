@@ -11,7 +11,7 @@ const Home: NextPage<ServerSideProps> = ({
   return (
     <>
       <section
-        className="min-h-[100vh] items-center flex"
+        className="min-h-[100vh] items-center flex overflow-hidden"
         style={{ backgroundColor: "#7C3AED" }}
       >
         <div className="grid lg:grid-cols-3 grid-cols-1 container content-center">
@@ -63,7 +63,7 @@ const Home: NextPage<ServerSideProps> = ({
         >
           ACTIVITY
         </span>
-        <div className="flex flex-row lg:space-x-24 items-center justify-center text-white flex-wrap">
+        <div className="flex lg:flex-row flex-col lg:space-x-24 items-center justify-center text-white flex-wrap">
           <div
             data-aos="fade-up"
             data-aos-anchor-placement="top-bottom"
@@ -99,7 +99,7 @@ const Home: NextPage<ServerSideProps> = ({
         </div>
       </section>
       <section>
-        
+
       </section>
     </>
   );

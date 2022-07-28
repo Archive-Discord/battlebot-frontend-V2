@@ -1,9 +1,8 @@
 import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import type { AppContext, AppProps } from 'next/app'
 import Navbar from '../components/Navbar'
 import { useRouter } from 'next/router'
 import AOS from "aos";
-
 import "aos/dist/aos.css"
 import { useEffect } from 'react';
 
@@ -17,7 +16,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, []);
   const routuer = useRouter()
   return <>
-    <Navbar/>
+    <Navbar />
     {routuer.asPath === "/" ?? <hr className='pt-20 border-none'/>}
     <Component {...pageProps} />
   </>
