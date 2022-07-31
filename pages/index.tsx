@@ -87,7 +87,7 @@ const Home: NextPage<ServerSideProps> = ({
           </span>
           <span className="text-4xl lg:mt-5 mt-2">
             <CountUp
-              start={100}
+              start={0}
               end={Math.floor(
                 moment
                   .duration(moment(new Date()).diff(moment("2022-1-6")))
@@ -149,7 +149,7 @@ const Home: NextPage<ServerSideProps> = ({
         </div>
       </section>
       <section
-        className="items-center flex lg:min-h-[80vh] min-h-[80vh] bg-[#7C3AED] overflow-hidden bg-white text-white font-bold"
+        className="items-center flex lg:min-h-[80vh] min-h-[80vh] bg-[#7C3AED] overflow-hidden text-white font-bold"
         style={{ fontFamily: "Noto Sans KR" }}
       >
         <div className="flex items-center justify-center container flex-col">
