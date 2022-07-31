@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import AOS from "aos";
 import "aos/dist/aos.css"
 import { useEffect } from 'react';
+import Footer from '../components/Footer';
 
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
@@ -19,6 +20,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <Navbar />
     {routuer.asPath === "/" ?? <hr className='pt-20 border-none'/>}
     <Component {...pageProps} />
+    {!routuer.asPath.startsWith("/dashboard") && <Footer/>}
   </>
 }
 

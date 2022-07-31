@@ -3,11 +3,39 @@ import Head from "next/head";
 import Image from "next/image";
 import client from "../utils/client";
 import { numberWithCommas } from "../utils/utils";
+import moment from "moment";
+import CountUp from "react-countup";
+import lottie, { LottiePlayer } from "lottie-web";
+import { MutableRefObject, useEffect, useRef, useState } from "react";
+import { battlebot } from "../utils/Constants";
 
 const Home: NextPage<ServerSideProps> = ({
   servers,
   users,
 }: ServerSideProps) => {
+  const verifiedRef = useRef<HTMLDivElement>(null);
+  const [verifiedLottie, setVerifiedLottie] = useState<LottiePlayer | null>(
+    null
+  );
+
+  useEffect(() => {
+    import("lottie-web").then(Lottie => setVerifiedLottie(Lottie.default));
+  }, []);
+
+  useEffect(() => {
+    if (verifiedLottie && verifiedRef.current) {
+      const animation = verifiedLottie.loadAnimation({
+        container: verifiedRef.current,
+        renderer: "svg",
+        loop: true,
+        autoplay: true,
+        path: "/verified.json",
+      });
+
+      return () => animation.destroy();
+    }
+  }, [verifiedLottie]);
+
   return (
     <>
       <section
@@ -44,62 +72,94 @@ const Home: NextPage<ServerSideProps> = ({
         </div>
       </section>
       <section
-        className="lg:min-h-[100vh] min-h-[160vh]  items-center flex flex-col justify-center font-bold"
+        className="lg:min-h-[60vh] min-h-[50vh]  items-center flex flex-col justify-center font-bold"
         style={{ backgroundColor: "#fffff", fontFamily: "Noto Sans KR" }}
+        data-aos="fade-bottom"
+        data-aos-offset="200"
+        data-aos-easing="ease-in-sine"
       >
-        <div
-          className="mx-auto lg:text-6xl text-4xl mb-4"
-          data-aos="fade-up"
-          data-aos-anchor-placement="top-bottom"
-        >
-          <span className="font-thin">지금 </span>
-          <span>배틀이</span>
-          <span className="font-thin">는 바빠요</span>
-        </div>
-        <span
-          className="text-4xl text-gray-500 font-bold mb-24"
-          data-aos="fade-up"
-          data-aos-anchor-placement="top-bottom"
-        >
-          ACTIVITY
+        <span className="text-sm">
+          {moment().locale("ko").format("YYYY.MM.DD")} 기준
         </span>
-        <div className="flex lg:flex-row flex-col lg:space-x-24 items-center justify-center text-white flex-wrap">
+        <span className="lg:mt-5 mt-10 lg:block flex flex-col items-center">
+          <span className="lg:text-2xl text-xl font-normal">
+            배틀이와 함께한{" "}
+          </span>
+          <span className="text-4xl lg:mt-5 mt-2">
+            <CountUp
+              start={100}
+              end={Math.floor(
+                moment
+                  .duration(moment(new Date()).diff(moment("2022-1-6")))
+                  .asDays()
+              )}
+              enableScrollSpy
+              separator=","
+            />
+            일
+          </span>
+        </span>
+        <div className="text-base lg:max-w-[1000px] max-w-[400px] lg:space-y-0 space-y-2 mt-10 w-full lg:border lg:mt-10 flex lg:flex-row flex-col justify-between p-5 border-[#e6e6e6] items-center">
           <div
-            data-aos="fade-up"
-            data-aos-anchor-placement="top-bottom"
-            data-aos-offset="200"
-            className="bg-violet-600 flex flex-col items-center lg:p-20 lg:px-28 p-14 px-20 rounded-3xl  lg:mb-0 mb-20"
+            className="w-full flex lg:justify-center justify-between	lg:border-r lg:flex-col flex-row items-center"
+            style={{ flex: "1 1 25%", margin: "15x 0px 15px" }}
           >
-            <span className="lg:text-5xl text-3xl">사용중인 서버 수</span>
-            <span className="lg:text-2xl mt-5 lg:border-4 border-2 px-5 py-1 rounded-3xl">
-              SERVER
-            </span>
-            <span className="lg:text-7xl text-5xl mt-8">
-              {numberWithCommas(servers)}
-            </span>
-            <span className="lg:text-5xl text-2xl mt-8 underline underline-offset-4">
-              서버에서 사용중
+            <span className="font-blod">사용중인 유저 수</span>
+            <span className="lg:mt-3 lg:text-xl">
+              <CountUp start={100} end={users} enableScrollSpy separator="," />
+              명
             </span>
           </div>
           <div
-            data-aos="fade-up"
-            data-aos-anchor-placement="top-bottom"
-            data-aos-offset="500"
-            className="bg-neutral-900 flex flex-col items-center lg:p-20 lg:px-28 p-14 px-20 rounded-3xl"
+            className="w-full flex lg:justify-center justify-between lg:flex-col flex-row items-center"
+            style={{ flex: "1 1 25%", margin: "15x 0px 15px" }}
           >
-            <span className="lg:text-5xl text-3xl">사용중인 유저 수</span>
-            <span className="lg:text-2xl mt-5 lg:border-4 border-2 px-5 py-1 rounded-3xl">
-              USER
-            </span>
-            <span className="lg:text-7xl text-5xl mt-8">{numberWithCommas(users)}</span>
-            <span className="lg:text-5xl text-2xl mt-8 underline underline-offset-4">
-              유저가 사용중
+            <span className="font-blod">사용중인 서버 수</span>
+            <span className="lg:mt-3 lg:text-xl">
+              <CountUp start={0} end={servers} enableScrollSpy separator="," />
+              서버
             </span>
           </div>
         </div>
       </section>
-      <section>
-
+      <section
+        className="items-center flex lg:min-h-[60vh] min-h-[40vh] overflow-hidden bg-[#f6f6f6] text-black"
+        style={{ fontFamily: "Noto Sans KR" }}
+      >
+        <div className="grid lg:grid-cols-2 grid-cols-1 container content-center">
+          <div className="col-span-1 flex flex-col lg:items-start items-center justify-center g:p-0 p-10">
+            <span className="lg:text-2xl text-xl font-bold mt-5">
+              간단한 인증 설정으로
+            </span>
+            <span className="lg:text-4xl text-2xl font-bold">
+              서버의 보안을 한층 더 위로
+            </span>
+          </div>
+          <div className="col-span-1">
+            <video
+              loop
+              autoPlay
+              muted
+              className="lg:p-0 p-10"
+              style={{ borderRadius: "50px" }}
+            >
+              <source src="/verify.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+      </section>
+      <section
+        className="items-center flex lg:min-h-[80vh] min-h-[80vh] bg-[#7C3AED] overflow-hidden bg-white text-white font-bold"
+        style={{ fontFamily: "Noto Sans KR" }}
+      >
+        <div className="flex items-center justify-center container flex-col">
+          <div ref={verifiedRef} className="w-48 h-48" />
+          <span className="mt-10 text-2xl">디스코드에서 인증된 봇으로</span>
+          <span className="text-2xl">안심하고 이용하세요</span>
+          <button onClick={() => {
+            window.open(battlebot.invite, '봇 초대하기', "width=450, height=850")
+          }} className="mt-8 bg-white text-lg text-gray-800 px-3 py-1 rounded-md">시작하기</button>
+        </div>
       </section>
     </>
   );

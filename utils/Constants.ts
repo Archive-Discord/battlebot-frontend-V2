@@ -22,3 +22,7 @@ export const EndPoints = {
         CDN: 'https://cdn.discordapp.com',
     }
 }
+
+export const battlebot = {
+  invite: "https://discord.com/oauth2/authorize?client_id=928523914890608671&permissions=8&scope=bot%20applications.commands"
+}

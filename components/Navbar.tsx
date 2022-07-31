@@ -54,7 +54,7 @@ const Navbar = () => {
             : "fixed top-0 w-full font-bold bg-white border-b z-40"
         }
       >
-        <div className="flex flex-row items-center w-full px-10 py-1 lg:py-1.5 nav-container">
+        <div className="flex flex-row items-center w-full px-10 py-1 lg:py-1 nav-container">
           <div className="flex align-center items-center mr-8">
             <Link href={"/"}>
               <a className="flex items-center">
@@ -62,15 +62,15 @@ const Navbar = () => {
                   <Image
                     src={"/logo.png"}
                     alt="배틀이"
-                    width="60px"
-                    height="60px"
+                    width="50px"
+                    height="50px"
                   />
                 </div>
               </a>
             </Link>
             <span
               style={{ fontFamily: "Noto Sans KR" }}
-              className="text-xl lg:text-2xl font-bold ml-2"
+              className="text-xl lg:text-xl font-bold ml-2"
             >
               배틀이
             </span>
@@ -87,10 +87,10 @@ const Navbar = () => {
                       router.asPath === "/"
                         ? classNames(
                             !openMobileDropDown && scrollPosition < 1
-                              ? "hover:bg-violet-800 py-3 px-2 rounded-lg"
-                              : "hover:bg-gray-100 py-3 px-2 rounded-lg"
+                              ? "hover:bg-violet-800 py-3 text-sm px-2 rounded-lg"
+                              : "hover:bg-gray-100 text-sm py-3 px-2 rounded-lg"
                           )
-                        : "hover:bg-gray-100 py-3 px-2 rounded-lg"
+                        : "hover:bg-gray-100 text-sm py-3 px-2 rounded-lg"
                     }
                     key={index}
                   >
@@ -112,13 +112,13 @@ const Navbar = () => {
           >
             {user ? (
               <>
-                <div className="flex flex-row items-center">
+                <div className="flex flex-row items-center text-sm">
                   <img
                     className="w-8 h-8 rounded-full mr-2"
                     src={userAvaterLink(user.user)}
                   />
                   <span>{user.user.username}</span>
-                  <i className="fas fa-caret-down ml-3" />
+                  <i className="fas fa-caret-down ml-2" />
                 </div>
                 <div
                   className={`rounded drop-shadow-lg absolute mt-14 top-0 w-36 bg-white text-black text-sm ${
@@ -216,7 +216,7 @@ const Navbar = () => {
         </div>
       </nav>
       <div
-        className={`z-30 w-full h-full fixed bg-discord-blurple bg-white mt-8 sm:mt-0 lg:hidden overflow-y-scroll lg:scroll-none pt-10 ${
+        className={`z-30 w-full h-full fixed bg-discord-blurple bg-white mt-8 sm:mt-0 lg:hidden overflow-y-scroll lg:scroll-none pt-16 ${
           openMobileDropDown ? "visible" : "invisible"
         }`}
         style={{
@@ -260,8 +260,8 @@ const Navbar = () => {
               </Link>
               <a
                 onClick={() => {
-                    setOpenMobileDropDown(false);
-                    Logout()
+                  setOpenMobileDropDown(false);
+                  Logout();
                 }}
                 className="pl-6 hover:bg-gray-100 py-3 px-2 rounded-lg text-red-500"
               >
@@ -274,8 +274,8 @@ const Navbar = () => {
             <div className="flex flex-col p-4">
               <a
                 onClick={() => {
-                    Login()
-                    setOpenMobileDropDown(false);
+                  Login();
+                  setOpenMobileDropDown(false);
                 }}
                 className="pl-6 hover:bg-gray-100 py-3 px-2 rounded-lg"
               >
