@@ -40,7 +40,6 @@ jobs:
           builder: ${{ steps.buildx.outputs.name }}
           push: true
           tags: ${{ env.DOCKER_IMAGE }}:latest
-          platforms: linux/arm64/v8
   # 배포
   deploy:
     needs: build
@@ -56,4 +55,4 @@ jobs:
       - name: Docker run
         run: |
           docker stop ${{ env.NAME }} && docker rm ${{ env.NAME }} && docker rmi ${{ env.DOCKER_IMAGE }}:latest
-          docker run -d -p ${{ secrets.PROD_PROT }}:3000 --name ${{ env.NAME }} --restart always ${{ env.DOCKER_IMAGE }}:latest
+          docker run --platform linux/amd64 -d -p ${{ secrets.PROD_PROT }}:3000 --name ${{ env.NAME }} --restart always ${{ env.DOCKER_IMAGE }}:latest
