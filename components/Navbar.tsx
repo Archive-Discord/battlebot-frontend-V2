@@ -6,13 +6,19 @@ import client from "../utils/client";
 import { NavBarItems } from "../utils/Constants";
 import { classNames, userAvaterLink } from "../utils/utils";
 import { useDetectClickOutside } from "react-detect-click-outside";
+import FlareLane from "@flarelane/flarelane-web-sdk";
+import { User } from "types/user";
 
-const Navbar = () => {
+interface NavbarProps {
+  auth: string
+}
+
+const Navbar = ({auth}: NavbarProps) => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [userDropDownOpen, setUserDropDownOpen] = useState(false);
   const [openMobileDropDown, setOpenMobileDropDown] = useState(false);
   const router = useRouter();
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<User|null>(null);
   const ref = useDetectClickOutside({
     onTriggered: () => setUserDropDownOpen(false),
   });
@@ -24,11 +30,23 @@ const Navbar = () => {
   });
 
   useEffect(() => {
-    client("GET", "/auth/me").then(data => {
-      if (data.error) return;
-      setUser(data.data);
-    });
-  }, []);
+    if(localStorage.userData) {
+      setUser(auth ? JSON.parse(localStorage.userData) : null)
+    } else {
+      client("GET", "/auth/me").then(data => {
+        if (data.error) localStorage.removeItem("userData");
+        else {
+          setUser(data.data);
+          localStorage.userData = JSON.stringify(data.data)
+          FlareLane.setUserId(data.data.user.id);
+          FlareLane.setTags({
+            username: data.data.user.username,
+            discriminator: data.data.user.discriminator,
+          });
+        }
+      });
+    }
+  }, [auth]);
 
   const Login = () => {
     window.location.href =
@@ -37,6 +55,7 @@ const Navbar = () => {
   };
 
   const Logout = () => {
+    localStorage.removeItem("userData")
     window.location.href = process.env.NEXT_PUBLIC_API_URL + `/auth/logout`;
   };
 
@@ -81,7 +100,7 @@ const Navbar = () => {
           >
             {NavBarItems.map(({ name, href }, index) => (
               <>
-                <Link href={href}>
+                <Link href={href} key={index}>
                   <a
                     className={
                       router.asPath === "/"
@@ -216,7 +235,7 @@ const Navbar = () => {
         </div>
       </nav>
       <div
-        className={`z-30 w-full h-full fixed bg-discord-blurple bg-white mt-8 sm:mt-0 lg:hidden overflow-y-scroll lg:scroll-none pt-16 ${
+        className={`z-30 w-full h-full fixed bg-white mt-2 sm:mt-0 lg:hidden overflow-y-scroll lg:scroll-none pt-16 ${
           openMobileDropDown ? "visible" : "invisible"
         }`}
         style={{
@@ -229,7 +248,7 @@ const Navbar = () => {
         <div className="flex flex-col p-4">
           {NavBarItems.map(({ name, href, icon }, index) => (
             <>
-              <Link href={href}>
+              <Link href={href} key={index}>
                 <a
                   className="pl-6 hover:bg-gray-100 py-3 px-2 rounded-lg"
                   key={index}
@@ -246,7 +265,7 @@ const Navbar = () => {
         </div>
         {user ? (
           <>
-            <div className="flex flex-col p-4">
+            <div className="flex flex-col p-3">
               <Link href={`/me`}>
                 <a
                   onClick={() => {
@@ -271,7 +290,7 @@ const Navbar = () => {
           </>
         ) : (
           <>
-            <div className="flex flex-col p-4">
+            <div className="flex flex-col p-3">
               <a
                 onClick={() => {
                   Login();

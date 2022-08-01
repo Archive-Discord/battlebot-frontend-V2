@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosResponse, Method } from "axios";
-
+import useSWR from "swr";
 export const client = async (
   method: Method = "GET",
   endpoints: string,
@@ -33,6 +33,22 @@ export const client = async (
     };
   }
 };
+
+export const swrfetcher = (endpoints: string) =>
+  axios
+    .get(process.env.NEXT_PUBLIC_API_URL + endpoints, { withCredentials: true })
+    .then(data => data.data)
+    .catch((e: AxiosError) => {
+      const response = e.response as any;
+      throw new Error(
+        response.data.message
+          ? response.data.message
+          : "알 수 없는 오류가 발생했습니다", {
+            cause: e.response?.status
+          }
+      );
+    });
+
 export interface Response<
   T extends { [key: string]: any } = { [key: string]: any }
 > {

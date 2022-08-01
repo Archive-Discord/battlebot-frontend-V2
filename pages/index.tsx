@@ -90,7 +90,7 @@ const Home: NextPage<ServerSideProps> = ({
               start={0}
               end={Math.floor(
                 moment
-                  .duration(moment(new Date()).diff(moment("2022-1-6")))
+                  .duration(moment().diff(moment("2022-1-6")))
                   .asDays()
               )}
               enableScrollSpy
@@ -99,14 +99,14 @@ const Home: NextPage<ServerSideProps> = ({
             일
           </span>
         </span>
-        <div className="text-base lg:max-w-[1000px] max-w-[400px] lg:space-y-0 space-y-2 mt-10 w-full lg:border lg:mt-10 flex lg:flex-row flex-col justify-between p-5 border-[#e6e6e6] items-center">
+        <div className="text-base lg:max-w-[1000px] max-w-[400px] lg:space-y-0 space-y-2 mt-10 w-full lg:border lg:mt-10 flex lg:flex-row flex-col justify-between p-5 border-[#e6e6e6] items-center rounded-2xl">
           <div
             className="w-full flex lg:justify-center justify-between	lg:border-r lg:flex-col flex-row items-center"
             style={{ flex: "1 1 25%", margin: "15x 0px 15px" }}
           >
             <span className="font-blod">사용중인 유저 수</span>
             <span className="lg:mt-3 lg:text-xl">
-              <CountUp start={100} end={users} enableScrollSpy separator="," />
+              <CountUp start={0} end={users} enableScrollSpy separator="," />
               명
             </span>
           </div>
