@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import Footer from "../components/Footer";
 import FlareLane from "@flarelane/flarelane-web-sdk";
 import cookie from "cookie";
+import { cookieParser } from "@utils/utils";
 
 function BattlebotApp({ Component, pageProps, auth }: BattlebotAppProps) {
   const router = useRouter();
@@ -38,23 +39,17 @@ function BattlebotApp({ Component, pageProps, auth }: BattlebotAppProps) {
 }
 
 BattlebotApp.getInitialProps = async (ctx: AppContext) => {
-  if (ctx.ctx.req) {
-    // @ts-ignore
-    const auth = cookie.parse(ctx.ctx.req?.headers.cookie).Authorization;
-    return {
-      auth: auth ? auth : undefined,
-      pageProps: {
-        auth: auth ? auth : undefined,
-      }
-    };
-  } else {
-    return {
-      auth: undefined,
-      pageProps: {
-        auth: undefined,
-      }
-    };
+  if (ctx && ctx.ctx && ctx.ctx.req) {
+    const cookies = cookieParser(ctx.ctx);
+    if (cookies && cookies.Authorization) {
+      return {
+        auth: cookies.Authorization
+      };
+    }
   }
+  return {
+    auth: undefined
+  };
 };
 
 interface BattlebotAppProps extends AppProps {

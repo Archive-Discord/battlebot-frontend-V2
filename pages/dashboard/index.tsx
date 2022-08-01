@@ -4,18 +4,23 @@ import Login from "@components/Login";
 import ServerCard from "@components/ServerCard";
 import { PageDefaultProps, User } from "@types";
 import { swrfetcher } from "@utils/client";
-import { NextPage } from "next";
+import { cookieParser } from "@utils/utils";
+import { GetServerSideProps, NextPage } from "next";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import { UserGulds } from "types/guild";
 
 const Dashboard: NextPage<PageDefaultProps> = ({ auth }) => {
   const router = useRouter();
-  const {
-    data: guildData,
-    error: guildError,
-    mutate: guildMutate,
-  } = useSWR<UserGulds>("/auth/me/guilds", swrfetcher);
+
+  const { data: guildData, error: guildError } = useSWR<UserGulds>(
+    "/auth/me/guilds",
+    swrfetcher,
+    {
+      refreshInterval: 10000,
+    }
+  );
+
   if (!auth) return <Login />;
   if (guildError && guildError.cause === 401) return <Login />;
   if (guildError && guildError.cause === 429)
@@ -29,13 +34,8 @@ const Dashboard: NextPage<PageDefaultProps> = ({ auth }) => {
         </button>
       </Error>
     );
-  if (guildError)
-    return <Error message={guildError.message} />;
+  if (guildError) return <Error message={guildError.message} />;
   if (!guildData) return <Loading />;
-
-  const serverReload = () => {
-    guildMutate();
-  };
 
   return (
     <>
@@ -57,6 +57,15 @@ const Dashboard: NextPage<PageDefaultProps> = ({ auth }) => {
       </div>
     </>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async ctx => {
+  const cookies = cookieParser(ctx);
+  return {
+    props: {
+      auth: cookies?.Authorization ? cookies.Authorization : null,
+    },
+  };
 };
 
 export default Dashboard;

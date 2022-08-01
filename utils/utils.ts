@@ -22,8 +22,8 @@ export const numberWithCommas = (x: number) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-export const cookieParser = (ctx: GetServerSidePropsContext) => {
-    if(!ctx ||!ctx.req || !ctx.req.headers) return undefined;
+export const cookieParser = (ctx: GetServerSidePropsContext|NextPageContext) => {
+    if(!ctx ||!ctx.req || !ctx.req.headers || !ctx.req.headers.cookie) return undefined;
     const cookies = cookie.parse(ctx.req.headers.cookie as string);
     return cookies
 }

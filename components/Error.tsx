@@ -27,7 +27,7 @@ const Error: React.FC<ErrorPageProps> = ({message, children}) => {
   return <>
     <div className="flex flex-col justify-center items-center min-h-[100vh] w-full h-full" style={{ fontFamily: "Noto Sans KR" }}>
         <div className="w-52 h-52" ref={Ref}/>
-        <span className="text-2xl font-bold">{message}</span>
+        <span className="lg:text-2xl text-xl font-bold">{message}</span>
         <div className="mt-2">
             {children}
         </div>

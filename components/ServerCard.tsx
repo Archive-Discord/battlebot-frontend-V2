@@ -1,9 +1,10 @@
 import { UserGuld } from "@types";
 import { battlebot } from "@utils/Constants";
 import { guildProfileLink } from "@utils/utils";
-import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
+  const router = useRouter();
   const onInviteClick = (guildId: string) => {
     window.open(
       battlebot.invite + `&guild_id=${guildId}&disable_guild_select=true`,
@@ -34,7 +35,12 @@ const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
           <div className="flex justify-between items-center">
             <span className="font-bold text-lg truncate">{server.name}</span>
             {server.bot ? (
-              <button className="max-w-[77px] px-2 py-1 border text-black rounded-lg text-bold hover:-translate-y-1 transform transition duration-100 ease-in">
+              <button
+                className="max-w-[77px] px-2 py-1 border text-black rounded-lg text-bold hover:-translate-y-1 transform transition duration-100 ease-in"
+                onClick={() => {
+                    router.push(`/dashboard/${server.id}`)
+                }}
+              >
                 관리하기
               </button>
             ) : (

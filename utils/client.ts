@@ -44,7 +44,7 @@ export const swrfetcher = (endpoints: string) =>
         response.data.message
           ? response.data.message
           : "알 수 없는 오류가 발생했습니다", {
-            cause: e.response?.status
+            cause: response.status
           }
       );
     });
