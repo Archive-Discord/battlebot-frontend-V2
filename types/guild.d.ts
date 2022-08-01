@@ -14,4 +14,4 @@ export interface UserGuld extends RESTAPIPartialCurrentUserGuild {
     bot: boolean;
   }
   
-  export type UserGulds = UserGuld[]
+export type UserGulds = UserGuld[]

@@ -37,7 +37,7 @@ export const client = async (
 export const swrfetcher = (endpoints: string) =>
   axios
     .get(process.env.NEXT_PUBLIC_API_URL + endpoints, { withCredentials: true })
-    .then(data => data.data)
+    .then(data => data.data.data)
     .catch((e: AxiosError) => {
       const response = e.response as any;
       throw new Error(

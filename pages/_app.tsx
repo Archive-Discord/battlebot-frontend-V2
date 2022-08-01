@@ -8,7 +8,6 @@ import { useEffect } from "react";
 import Footer from "../components/Footer";
 import FlareLane from "@flarelane/flarelane-web-sdk";
 import cookie from "cookie";
-import Loading from "@components/Loading";
 
 function BattlebotApp({ Component, pageProps, auth }: BattlebotAppProps) {
   const router = useRouter();
@@ -33,7 +32,7 @@ function BattlebotApp({ Component, pageProps, auth }: BattlebotAppProps) {
       <Navbar auth={auth} />
       {router.asPath === "/" ?? <hr className="pt-20 border-none" />}
       <Component {...pageProps} />
-      {!router.asPath.startsWith("/dashboard") && <Footer />}
+      {!router.asPath.startsWith("/dashboard/") && <Footer />}
     </>
   );
 }

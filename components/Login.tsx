@@ -8,9 +8,13 @@ const Login = () => {
   const [loading, setLoading] = useState("");
   const [count, setCount] = useState(0);
   const router = useRouter();
-
   const completionWord = "...";
-
+  
+  useEffect(() => {
+    window.location.href =
+      process.env.NEXT_PUBLIC_API_URL +
+      `/auth/discord?redirect=${router.asPath}`;
+  });
 
   useEffect(() => {
     import("lottie-web").then(Lottie => setLottie(Lottie.default));
@@ -50,12 +54,6 @@ const Login = () => {
     return () => {
       clearInterval(typingInterval);
     };
-  });
-
-  useEffect(() => {
-    window.location.href =
-      process.env.NEXT_PUBLIC_API_URL +
-      `/auth/discord?redirect=${router.asPath}`;
   });
 
   return (
