@@ -38,4 +38,40 @@ const Loading = () => {
   );
 };
 
+export const SmallLoading = () => {
+  const loadingRef = useRef<HTMLDivElement>(null);
+  const [loadingLottie, setLoadingLottie] = useState<LottiePlayer | null>(null);
+
+  useEffect(() => {
+    import("lottie-web").then(Lottie => setLoadingLottie(Lottie.default));
+  }, []);
+
+  useEffect(() => {
+    if (loadingLottie && loadingRef.current) {
+      const animation = loadingLottie.loadAnimation({
+        container: loadingRef.current,
+        renderer: "svg",
+        loop: true,
+        autoplay: true,
+        path: "/loading.json",
+      });
+
+      return () => animation.destroy();
+    }
+  }, [loadingLottie]);
+
+  return (
+    <>
+      <div
+        className="w-full h-full"
+        style={{ transition: "all .3s ease" }}
+      >
+        <div className="flex items-center justify-center h-full opacity-100">
+          <div className="w-42 h-42 p-12" ref={loadingRef} />
+        </div>
+      </div>
+    </>
+  );
+};
+
 export default Loading;

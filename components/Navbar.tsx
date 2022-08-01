@@ -248,10 +248,9 @@ const Navbar = ({auth}: NavbarProps) => {
         <div className="flex flex-col p-4">
           {NavBarItems.map(({ name, href, icon }, index) => (
             <>
-              <Link href={href} key={index}>
+              <Link href={href} key={index * 2}>
                 <a
                   className="pl-6 hover:bg-gray-100 py-3 px-2 rounded-lg"
-                  key={index}
                   onClick={() => {
                     setOpenMobileDropDown(false);
                   }}

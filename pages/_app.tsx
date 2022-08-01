@@ -18,9 +18,9 @@ function BattlebotApp({ Component, pageProps, auth }: BattlebotAppProps) {
   }, [router.events]);
 
   useEffect(() => {
-    FlareLane.initialize({
-      projectId: "7926d4f1-fbdb-4db9-bcc7-62fec4f86224",
-    });
+    //FlareLane.initialize({
+    //  projectId: "7926d4f1-fbdb-4db9-bcc7-62fec4f86224",
+    //});
     AOS.init({
       easing: "ease-out-cubic",
       once: true,

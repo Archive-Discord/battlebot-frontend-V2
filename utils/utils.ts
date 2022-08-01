@@ -2,7 +2,7 @@ import { EndPoints } from "./Constants"
 import cookie from "cookie"
 import { GetServerSidePropsContext, NextPageContext } from "next"
 import type { Guild, User as DiscordUser } from "discord.js"
-import { UserGuld } from "@types"
+import { UserGuld, Guild as BattlebotGuild } from "@types"
 
 export const classNames = (...classes: any) => {
     return classes.filter(Boolean).join(' ')
@@ -13,8 +13,8 @@ export const userAvaterLink = (user: DiscordUser): string => {
     return `${EndPoints.Discord.CDN}/avatars/${user.id}/${user.avatar}`
 }
 
-export const guildProfileLink = (guild: UserGuld | Guild): string => {
-    if(!guild.icon) return `${EndPoints.Discord.CDN}/embed/avatars/${Math.floor(Math.random() * (5 - 1 + 1)) + 1}.png`
+export const guildProfileLink = (guild: UserGuld | Guild | BattlebotGuild): string => {
+    if(!guild.icon) return `${EndPoints.Discord.CDN}/embed/avatars/1.png`
     return `${EndPoints.Discord.CDN}/icons/${guild.id}/${guild.icon}`
 }
 
