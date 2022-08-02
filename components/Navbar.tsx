@@ -10,15 +10,15 @@ import { useDetectClickOutside } from "react-detect-click-outside";
 import FlareLane from "@flarelane/flarelane-web-sdk";
 
 interface NavbarProps {
-  auth: string
+  auth: string;
 }
 
-const Navbar = ({auth}: NavbarProps) => {
+const Navbar = ({ auth }: NavbarProps) => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [userDropDownOpen, setUserDropDownOpen] = useState(false);
   const [openMobileDropDown, setOpenMobileDropDown] = useState(false);
   const router = useRouter();
-  const [user, setUser] = useState<User|null>(null);
+  const [user, setUser] = useState<User | null>(null);
   const ref = useDetectClickOutside({
     onTriggered: () => setUserDropDownOpen(false),
   });
@@ -30,14 +30,14 @@ const Navbar = ({auth}: NavbarProps) => {
   });
 
   useEffect(() => {
-    if(localStorage.userData) {
-      setUser(auth ? JSON.parse(localStorage.userData) : null)
+    if (localStorage.userData) {
+      setUser(auth ? JSON.parse(localStorage.userData) : null);
     } else {
       client("GET", "/auth/me").then(data => {
         if (data.error) localStorage.removeItem("userData");
         else {
           setUser(data.data);
-          localStorage.userData = JSON.stringify(data.data)
+          localStorage.userData = JSON.stringify(data.data);
           FlareLane.setUserId(data.data.user.id);
           FlareLane.setTags({
             username: data.data.user.username,
@@ -55,7 +55,7 @@ const Navbar = ({auth}: NavbarProps) => {
   };
 
   const Logout = () => {
-    localStorage.removeItem("userData")
+    localStorage.removeItem("userData");
     window.location.href = process.env.NEXT_PUBLIC_API_URL + `/auth/logout`;
   };
 
@@ -97,10 +97,11 @@ const Navbar = ({auth}: NavbarProps) => {
           <div
             className="flex lg:block hidden space-x-2"
             style={{ fontFamily: "Noto Sans KR" }}
+            key="desktop"
           >
-            {NavBarItems.map(({ name, href }, index) => (
+            {NavBarItems.map(item => (
               <>
-                <Link href={href} key={index}>
+                <Link href={item.href} key={item.name}>
                   <a
                     className={
                       router.asPath === "/"
@@ -111,9 +112,8 @@ const Navbar = ({auth}: NavbarProps) => {
                           )
                         : "hover:bg-gray-100 text-sm py-3 px-2 rounded-lg"
                     }
-                    key={index}
                   >
-                    {name}
+                    {item.name}
                   </a>
                 </Link>
               </>
@@ -244,19 +244,20 @@ const Navbar = ({auth}: NavbarProps) => {
           transform: openMobileDropDown ? "scaleY(1)" : "scaleY(0)",
           transformOrigin: "top",
         }}
+        key="mobile"
       >
         <div className="flex flex-col p-4">
-          {NavBarItems.map(({ name, href, icon }, index) => (
+          {NavBarItems.map(item => (
             <>
-              <Link href={href} key={index * 2}>
+              <Link href={item.href} key={item.name + "mobile"}>
                 <a
                   className="pl-6 hover:bg-gray-100 py-3 px-2 rounded-lg"
                   onClick={() => {
                     setOpenMobileDropDown(false);
                   }}
                 >
-                  <i className={icon + " mr-3"} />
-                  {name}
+                  <i className={item.icon + " mr-3"} />
+                  {item.name}
                 </a>
               </Link>
             </>
