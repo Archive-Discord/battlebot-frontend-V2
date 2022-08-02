@@ -20,7 +20,7 @@ const SidebarSelectServer: React.FC<SideBarSelectServerProps> = ({
     "/auth/me/guilds",
     swrfetcher,
     {
-      refreshInterval: 20000,
+      refreshInterval: 10000,
     }
   );
 
