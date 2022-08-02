@@ -1,7 +1,7 @@
 import type { NextPage, GetStaticProps } from "next";
 import client from "@utils/client";
 import { battlebot } from "@utils/Constants";
-import moment from "moment";
+import dayjs from "dayjs";
 import CountUp from "react-countup";
 import { LottiePlayer } from "lottie-web";
 import { useEffect, useRef, useState } from "react";
@@ -76,7 +76,7 @@ const Home: NextPage<ServerSideProps> = ({
         data-aos-easing="ease-in-sine"
       >
         <span className="text-sm">
-          {moment().locale("ko").format("YYYY.MM.DD")} 기준
+          {dayjs().format("YYYY.MM.DD")} 기준
         </span>
         <span className="lg:mt-5 mt-10 lg:block flex flex-col items-center">
           <span className="lg:text-2xl text-xl font-normal">
@@ -85,11 +85,7 @@ const Home: NextPage<ServerSideProps> = ({
           <span className="text-4xl lg:mt-5 mt-2">
             <CountUp
               start={0}
-              end={Math.floor(
-                moment
-                  .duration(moment().diff(moment("2022-1-6")))
-                  .asDays()
-              )}
+              end={dayjs(new Date()).diff("2022-1-6", 'days')}
               enableScrollSpy
               separator=","
             />
