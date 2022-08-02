@@ -51,7 +51,7 @@ const SidebarSelectServer: React.FC<SideBarSelectServerProps> = ({
           </div>
         </div>
         <div
-          className={`absolute min-h-[40px] bg-white border w-full mt-1 rounded-xl lg:max-w-[260px] ${
+          className={`overflow-y-auto absolute min-h-[40px] max-h-[200px] bg-white border w-full mt-1 rounded-xl lg:max-w-[260px] ${
             openServerList ? "visible" : "invisible"
           }`}
           style={{
