@@ -33,6 +33,23 @@ export const SideBarItems: SideBarItem[] = [{
   icon: "fas fa-crown"
 }]
 
+export const premiumItems = [{
+  name: "선택 가능한 다양한 인증 방식",
+  type: ["month", "year"]
+},{
+  name: "선택 가능한 추가적인 자동관리",
+  type: ["month", "year"]
+},{
+  name: "서버만의 커스텀 링크",
+  type: ["month", "year"]
+},{
+  name: "클레이튼 기반 NFT 홀더 인증",
+  type: ["month", "year"]
+},{
+  name: "프리미엄 적용 서버 변경",
+  type: ["year"]
+},]
+
 export const EndPoints = {
     Discord: {
         API: 'https://discord.com/api',

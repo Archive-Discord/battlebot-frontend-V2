@@ -5,12 +5,6 @@ const AnalyticsServer: React.FC<AnalyticsServerProps> = ({ guild }) => {
   return (
     <>
       <div className="w-full" style={{ fontFamily: "Noto Sans KR" }}>
-        <div className="flex flex-col mr-1.5 ml-1.5">
-          <span className="text-2xl font-bold">대시보드</span>
-          <span className="text-lg mt-1 text-gray-500">
-            서버에 대한 간략한 정보를 확인하세요!
-          </span>
-        </div>
         <div className="mt-4 flex flex-wrap flex-row">
           <div className="mr-1.5 ml-1.5 mb-5 max-w-80 w-80 max-h-44 h-44 bg-white border rounded-md">
             <div className="px-5 h-[7.5rem] flex items-center justify-between">

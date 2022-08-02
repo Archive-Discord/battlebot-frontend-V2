@@ -43,6 +43,12 @@ const DashboardMain: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
   return (
     <>
       <Layout guild={guildData}>
+        <div className="flex flex-col mr-1.5 ml-1.5">
+          <span className="text-2xl font-bold">대시보드</span>
+          <span className="text-lg mt-1 text-gray-500">
+            서버에 대한 간략한 정보를 확인하세요!
+          </span>
+        </div>
         <AnalyticsServer guild={guildData} />
       </Layout>
     </>
