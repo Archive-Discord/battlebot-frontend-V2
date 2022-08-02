@@ -51,7 +51,7 @@ const SidebarSelectServer: React.FC<SideBarSelectServerProps> = ({
           </div>
         </div>
         <div
-          className={`overflow-y-auto absolute min-h-[40px] max-h-[200px] bg-white border w-full mt-1 rounded-xl lg:max-w-[260px] ${
+          className={`overflow-y-auto absolute min-h-[40px] max-h-[200px] bg-white border w-full mt-1 rounded-xl lg:max-w-[260px] z-10 ${
             openServerList ? "visible" : "invisible"
           }`}
           style={{
@@ -71,6 +71,7 @@ const SidebarSelectServer: React.FC<SideBarSelectServerProps> = ({
                   <>
                     <button onClick={() => {
                         router.push(`/dashboard/${guild.id}`)
+                        setOpenServerList(false)
                     }} key={index} className={`w-full px-3 py-1.5 hover:bg-gray-100 ${index === 0 && "rounded-t-xl"} ${index == (guilds.length - 1) && "rounded-b-xl" }`}>
                       <div className="w-full flex flex-row items-center justify-between">
                         <div className="flex flex-row items-center">
