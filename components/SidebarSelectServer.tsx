@@ -26,10 +26,9 @@ const SidebarSelectServer: React.FC<SideBarSelectServerProps> = ({
 
   return (
     <>
-      <div className="relative lg:block inline-block w-full h-full min-h-[50px] h-[50px]">
+      <div ref={ref} className="relative lg:block inline-block w-full h-full min-h-[50px] h-[50px]">
         <div
           className="h-full flex flex-row justify-between border px-3 py-1.5 rounded-xl"
-          ref={ref}
           onClick={() => {
             if (!openServerList) setOpenServerList(true);
             else setOpenServerList(false);
