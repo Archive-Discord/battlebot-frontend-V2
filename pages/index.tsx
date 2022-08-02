@@ -1,4 +1,4 @@
-import type { NextPage, GetStaticProps } from "next";
+import type { NextPage, GetServerSideProps } from "next";
 import client from "@utils/client";
 import { battlebot } from "@utils/Constants";
 import dayjs from "dayjs";
@@ -158,23 +158,21 @@ const Home: NextPage<ServerSideProps> = ({
   );
 };
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const { data, error } = await client("GET", "/discord/caches");
   if (error) {
     return {
       props: {
         servers: 0,
         users: 0,
-      },
-      revalidate: 5000,
+      }
     };
   } else {
     return {
       props: {
         servers: data.servers,
         users: data.users,
-      },
-      revalidate: 5000,
+      }
     };
   }
 };

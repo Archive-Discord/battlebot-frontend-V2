@@ -23,7 +23,7 @@ export const numberWithCommas = (x: number) => {
 }
 
 export const cookieParser = (ctx: GetServerSidePropsContext|NextPageContext) => {
-    if(!ctx ||!ctx.req || !ctx.req.headers || !ctx.req.headers.cookie) return undefined;
-    const cookies = cookie.parse(ctx.req.headers.cookie as string);
+    if(!ctx ||!ctx.req) return {};
+    const cookies = cookie.parse(ctx.req.headers.cookie as string || '');
     return cookies
 }

@@ -9,6 +9,7 @@ import { cookieParser } from "@utils/utils";
 
 import "../styles/globals.css";
 import "aos/dist/aos.css";
+import App from "next/app";
 
 function BattlebotApp({ Component, pageProps, auth }: BattlebotAppProps) {
   const router = useRouter();
@@ -38,17 +39,18 @@ function BattlebotApp({ Component, pageProps, auth }: BattlebotAppProps) {
   );
 }
 
-BattlebotApp.getInitialProps = async (ctx: AppContext) => {
-  if (ctx && ctx.ctx && ctx.ctx.req) {
-    const cookies = cookieParser(ctx.ctx);
-    if (cookies && cookies.Authorization) {
-      return {
-        auth: cookies.Authorization
-      };
-    }
+BattlebotApp.getInitialProps = async (appContext: AppContext) => {
+  const appProps = await App.getInitialProps(appContext);
+  const cookies = cookieParser(appContext.ctx);
+  if (cookies && cookies.Authorization) {
+    return {
+      ...appProps,
+      auth: cookies.Authorization,
+    };
   }
   return {
-    auth: undefined
+    ...appProps,
+    auth: undefined,
   };
 };
 
