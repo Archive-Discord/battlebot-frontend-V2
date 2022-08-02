@@ -7,7 +7,9 @@ export interface Guild {
     icon: string;
     channels: GuildTextBasedChannel[];
     categories: CategoryChannel[];
-    roles: Role[]
+    roles: Role[];
+    tickets: number;
+    verifys: number;
 }
 
 export interface UserGuld extends RESTAPIPartialCurrentUserGuild {

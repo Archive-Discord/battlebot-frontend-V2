@@ -7,10 +7,10 @@ import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import AnalyticsServer from "@components/dashboard/AnalyticsServer";
 
-const Error = dynamic(() => import('@components/Error'))
-const Login = dynamic(() => import('@components/Login'))
-const Layout = dynamic(() => import('@components/DashboardLayout'))
-const Loading = dynamic(() => import('@components/Loading'))
+const Error = dynamic(() => import("@components/Error"));
+const Login = dynamic(() => import("@components/Login"));
+const Layout = dynamic(() => import("@components/DashboardLayout"));
+const Loading = dynamic(() => import("@components/Loading"));
 
 const DashboardMain: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
   const router = useRouter();
@@ -28,7 +28,7 @@ const DashboardMain: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
   );
   if (userError && userError.cause === 401) return <Login />;
   if (!auth) return <Login />;
-  if (!guildData)  return <Loading/>
+  if (!guildData) return <Loading />;
   if (guildError && guildError.cause !== 401)
     return (
       <Error message={guildError.message}>
@@ -43,7 +43,7 @@ const DashboardMain: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
   return (
     <>
       <Layout guild={guildData}>
-        <AnalyticsServer guild={guildData}/>
+        <AnalyticsServer guild={guildData} />
       </Layout>
     </>
   );
