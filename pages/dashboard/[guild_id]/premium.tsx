@@ -40,7 +40,9 @@ const DashboardPremium: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
     );
   return (
     <>
-      <Layout guild={guildData}>asdasd</Layout>
+      <Layout guild={guildData}>
+        
+      </Layout>
     </>
   );
 };
