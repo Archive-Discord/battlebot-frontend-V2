@@ -12,7 +12,7 @@ const AnalyticsServer: React.FC<AnalyticsServerProps> = ({ guild }) => {
           </span>
         </div>
         <div className="mt-4 flex flex-wrap flex-row">
-          <div className="mr-3 mb-5 max-w-80 w-80 max-h-44 h-44 bg-white border rounded-md">
+          <div className="mr-1.5 ml-1.5 mb-5 max-w-80 w-80 max-h-44 h-44 bg-white border rounded-md">
             <div className="px-5 h-[7.5rem] flex items-center justify-between">
               <div className="flex flex-col">
                 <div className="text-3xl font-bold text-purple-600">
@@ -34,7 +34,7 @@ const AnalyticsServer: React.FC<AnalyticsServerProps> = ({ guild }) => {
               <i className="fas fa-chart-line" />
             </div>
           </div>
-          <div className="mr-3 mb-5 max-w-80 w-80 max-h-44 h-44 bg-white border rounded-md">
+          <div className="mr-1.5 ml-1.5 mb-5 max-w-80 w-80 max-h-44 h-44 bg-white border rounded-md">
             <div className="px-5 h-[7.5rem] flex items-center justify-between">
               <div className="flex flex-col">
                 <div className="text-3xl font-bold text-sky-600">
@@ -56,7 +56,7 @@ const AnalyticsServer: React.FC<AnalyticsServerProps> = ({ guild }) => {
               <i className="fas fa-chart-line" />
             </div>
           </div>
-          <div className="mr-3 mb-5 max-w-80 w-80 max-h-44 h-44 bg-white border rounded-md">
+          <div className="mr-1.5 ml-1.5 mb-5 max-w-80 w-80 max-h-44 h-44 bg-white border rounded-md">
             <div className="px-5 h-[7.5rem] flex items-center justify-between">
               <div className="flex flex-col">
                 <div className="text-3xl font-bold text-emerald-600">
