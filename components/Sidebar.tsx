@@ -11,7 +11,7 @@ const SideBar: React.FC<SideBarProps> = ({ guild }) => {
   return (
     <>
       <aside
-        className={`fixed left-0 p-5 border-r h-full overflow-y-auto w-full lg:w-[300px] lg:min-w-[300px] lg:visible lg:transform-none ${
+        className={`fixed left-0 p-5 border-r h-full overflow-y-auto w-full lg:w-[300px] lg:min-w-[300px] lg:visible lg:transform-none bg-white ${
           isOpen ? "scale-x-100" : "scale-x-0"
         }`}
         style={{
@@ -27,7 +27,7 @@ const SideBar: React.FC<SideBarProps> = ({ guild }) => {
             return item.categori === "none";
           }).map((item, index) => (
             <>
-              <Link href={`/dashboard/${guild.id}${item.path}`}>
+              <Link key={item.pathName} href={`/dashboard/${guild.id}${item.path}`}>
                 <a
                   key={index}
                   className={`${
