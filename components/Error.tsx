@@ -1,11 +1,9 @@
-import { LottiePlayer } from "lottie-web";
-import { useRouter } from "next/router";
+import type { LottiePlayer } from "lottie-web";
 import { useEffect, useRef, useState } from "react";
 
 const Error: React.FC<ErrorPageProps> = ({message, children}) => {
   const Ref = useRef<HTMLDivElement>(null);
   const [lottie, setLottie] = useState<LottiePlayer | null>(null);
-  const router = useRouter();
 
   useEffect(() => {
     import("lottie-web").then(Lottie => setLottie(Lottie.default));

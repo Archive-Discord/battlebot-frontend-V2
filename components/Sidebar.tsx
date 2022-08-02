@@ -1,5 +1,4 @@
 import { Guild } from "@types";
-import { guildProfileLink } from "@utils/utils";
 import React, { useState } from "react";
 import SidebarSelectServer from "@components/SidebarSelectServer";
 import { SideBarItems } from "@utils/Constants";

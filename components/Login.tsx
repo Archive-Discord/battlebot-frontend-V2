@@ -1,4 +1,4 @@
-import { LottiePlayer } from "lottie-web";
+import type { LottiePlayer } from "lottie-web";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 

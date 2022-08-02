@@ -1,13 +1,13 @@
+import type { User } from "@types";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import client from "../utils/client";
-import { NavBarItems } from "../utils/Constants";
-import { classNames, userAvaterLink } from "../utils/utils";
+import client from "@utils/client";
+import { NavBarItems } from "@utils/Constants";
+import { classNames, userAvaterLink } from "@utils/utils";
 import { useDetectClickOutside } from "react-detect-click-outside";
 import FlareLane from "@flarelane/flarelane-web-sdk";
-import { User } from "types/user";
 
 interface NavbarProps {
   auth: string

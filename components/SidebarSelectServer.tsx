@@ -1,4 +1,4 @@
-import { Guild, UserGulds } from "@types";
+import type { Guild, UserGulds } from "@types";
 import { swrfetcher } from "@utils/client";
 import { guildProfileLink } from "@utils/utils";
 import { useRouter } from "next/router";

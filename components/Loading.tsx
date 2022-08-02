@@ -1,4 +1,4 @@
-import { LottiePlayer } from "lottie-web";
+import type { LottiePlayer } from "lottie-web";
 import { useEffect, useRef, useState } from "react";
 
 const Loading = () => {

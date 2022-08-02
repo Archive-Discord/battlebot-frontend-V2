@@ -10,7 +10,6 @@
     "aos": "^2.3.4",
     "axios": "^0.27.2",
     "cookie": "^0.5.0",
-    "discord.js": "^14.1.2",
     "lottie-web": "^5.9.6",
     "moment": "^2.29.4",
     "next": "latest",
@@ -27,6 +26,7 @@
     "@types/react": "18.0.9",
     "@types/react-dom": "18.0.5",
     "autoprefixer": "^10.4.7",
+    "discord.js": "^14.1.2",
     "postcss": "^8.4.14",
     "tailwindcss": "^3.1.2",
     "typescript": "4.7.2"

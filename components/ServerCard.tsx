@@ -1,4 +1,4 @@
-import { UserGuld } from "@types";
+import type { UserGuld } from "@types";
 import { battlebot } from "@utils/Constants";
 import { guildProfileLink } from "@utils/utils";
 import { useRouter } from "next/router";

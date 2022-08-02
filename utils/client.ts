@@ -1,5 +1,4 @@
 import axios, { AxiosError, AxiosResponse, Method } from "axios";
-import useSWR from "swr";
 export const client = async (
   method: Method = "GET",
   endpoints: string,
