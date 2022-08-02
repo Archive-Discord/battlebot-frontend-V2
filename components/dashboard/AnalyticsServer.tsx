@@ -29,7 +29,7 @@ const AnalyticsServer: React.FC<AnalyticsServerProps> = ({ guild }) => {
                 <i className="far fa-user text-4xl"/>
               </div>
             </div>
-            <div className="h-14 bg-gradient-to-r from-purple-600 to-purple-400 rounded-md flex items-center text-white justify-between px-5 border-b">
+            <div className="h-14 bg-gradient-to-r from-purple-600 to-purple-400 rounded-b-md flex items-center text-white justify-between px-5 border-b">
               <span className="font-bold text-lg">자세히 보기</span>
               <i className="fas fa-chart-line" />
             </div>
@@ -51,7 +51,7 @@ const AnalyticsServer: React.FC<AnalyticsServerProps> = ({ guild }) => {
                 <i className="far fa-bell text-4xl"/>
               </div>
             </div>
-            <div className="h-14 bg-gradient-to-r from-sky-600 to-sky-400 rounded-md flex items-center text-white justify-between px-5 border-b">
+            <div className="h-14 bg-gradient-to-r from-sky-600 to-sky-400 rounded-b-md flex items-center text-white justify-between px-5 border-b">
               <span className="font-bold text-lg">자세히 보기</span>
               <i className="fas fa-chart-line" />
             </div>
@@ -73,7 +73,7 @@ const AnalyticsServer: React.FC<AnalyticsServerProps> = ({ guild }) => {
                 <i className="far fa-check-circle text-4xl"/>
               </div>
             </div>
-            <div className="h-14 bg-gradient-to-r from-emerald-600 to-emerald-400 rounded-md flex items-center text-white justify-between px-5 border-b">
+            <div className="h-14 bg-gradient-to-r from-emerald-600 to-emerald-400 rounded-b-md flex items-center text-white justify-between px-5 border-b">
               <span className="font-bold text-lg">자세히 보기</span>
               <i className="fas fa-chart-line" />
             </div>
