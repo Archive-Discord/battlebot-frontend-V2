@@ -1,14 +1,14 @@
-import Layout from "@components/DashboardLayout";
-import Login from "@components/Login";
-import { Guild, PageDefaultProps } from "@types";
+import type { Guild, PageDefaultProps } from "@types";
+import type { NextPage, GetServerSideProps } from "next";
 import { cookieParser } from "@utils/utils";
-import type { NextPage, GetStaticProps, GetServerSideProps } from "next";
 import useSWR from "swr";
-import Head from "next/head";
-import Image from "next/image";
 import { swrfetcher } from "@utils/client";
-import Error from "@components/Error";
 import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
+
+const Error = dynamic(() => import('@components/Error'))
+const Login = dynamic(() => import('@components/Login'))
+const Layout = dynamic(() => import('@components/DashboardLayout'))
 
 const DashboardPremium: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
   const router = useRouter();

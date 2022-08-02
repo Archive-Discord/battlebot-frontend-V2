@@ -1,14 +1,14 @@
-import "../styles/globals.css";
 import type { AppContext, AppProps } from "next/app";
 import Navbar from "../components/Navbar";
 import { useRouter } from "next/router";
 import AOS from "aos";
-import "aos/dist/aos.css";
 import { useEffect } from "react";
 import Footer from "../components/Footer";
 import FlareLane from "@flarelane/flarelane-web-sdk";
-import cookie from "cookie";
 import { cookieParser } from "@utils/utils";
+
+import "../styles/globals.css";
+import "aos/dist/aos.css";
 
 function BattlebotApp({ Component, pageProps, auth }: BattlebotAppProps) {
   const router = useRouter();

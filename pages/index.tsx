@@ -1,13 +1,10 @@
-import type { NextPage, GetServerSideProps, GetStaticProps } from "next";
-import Head from "next/head";
-import Image from "next/image";
-import client from "../utils/client";
-import { numberWithCommas } from "../utils/utils";
+import type { NextPage, GetStaticProps } from "next";
+import client from "@utils/client";
+import { battlebot } from "@utils/Constants";
 import moment from "moment";
 import CountUp from "react-countup";
-import lottie, { LottiePlayer } from "lottie-web";
-import { MutableRefObject, useEffect, useRef, useState } from "react";
-import { battlebot } from "../utils/Constants";
+import { LottiePlayer } from "lottie-web";
+import { useEffect, useRef, useState } from "react";
 
 const Home: NextPage<ServerSideProps> = ({
   servers,
