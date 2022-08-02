@@ -5,6 +5,7 @@ import useSWR from "swr";
 import { swrfetcher } from "@utils/client";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
+import Loading from "@components/Loading";
 
 const Error = dynamic(() => import('@components/Error'))
 const Login = dynamic(() => import('@components/Login'))
@@ -25,6 +26,7 @@ const DashboardPremium: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
   );
   if (userError && userError.cause === 401) return <Login />;
   if (!auth) return <Login />;
+  if (!guildData)  return <Loading/>
   if (guildError && guildError.cause !== 401)
     return (
       <Error message={guildError.message}>
