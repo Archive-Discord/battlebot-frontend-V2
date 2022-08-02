@@ -67,9 +67,9 @@ const SideBar: React.FC<SideBarProps> = ({ guild }) => {
           ))}
         </ul>
       </aside>
-      <div className="lg:hidden fixed bottom-0 left-0 z-20 ml-4 mb-7">
+      <div className="lg:hidden fixed bottom-0 left-0 z-20 ml-4 mb-5">
         <button
-          className="bg-white w-full p-3 w-14 h-14 hover:shadow-[0_13px_100px_2px_rgba(0,0,0,0.3)] shadow-[0_13px_120px_2px_rgba(0,0,0,0.3)] transition duration-200"
+          className="bg-white w-full flex items-center justify-center shadow-[0_13px_135px_2px_rgba(0,0,0,0.6)] p-2 w-[38px] h-[38px] transition duration-200"
           style={{
             borderRadius: "40%",
           }}
@@ -80,11 +80,11 @@ const SideBar: React.FC<SideBarProps> = ({ guild }) => {
         >
           {isOpen ? (
             <>
-              <i className="fas fa-arrow-left text-2xl" />
+              <i className="fas fa-arrow-left text-xl" />
             </>
           ) : (
             <>
-              <i className="fas fa-arrow-right text-2xl" />
+              <i className="fas fa-arrow-right text-xl" />
             </>
           )}
         </button>
