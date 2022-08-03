@@ -31,6 +31,27 @@ export const SideBarItems: SideBarItem[] = [{
   pathName: "/dashboard/[guild_id]/premium",
   categori: "none",
   icon: "fas fa-crown"
+},
+{
+  name: "자동관리",
+  path: "/automod",
+  pathName: "/dashboard/[guild_id]/automod",
+  categori: "server_manage",
+  icon: "fas fa-sync-alt"
+},
+{
+  name: "유저관리",
+  path: "/members",
+  pathName: "/dashboard/[guild_id]/members",
+  categori: "server_manage",
+  icon: "fas fa-users"
+},
+{
+  name: "티켓",
+  path: "/ticket",
+  pathName: "/dashboard/[guild_id]/ticket",
+  categori: "utils",
+  icon: "fas fa-credit-card"
 }]
 
 export const premiumItems = [{

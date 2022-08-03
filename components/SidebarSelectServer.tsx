@@ -11,7 +11,7 @@ const SidebarSelectServer: React.FC<SideBarSelectServerProps> = ({
   selectGuild,
 }) => {
   const [openServerList, setOpenServerList] = useState(false);
-  const router = useRouter()
+  const router = useRouter();
   const ref = useDetectClickOutside({
     onTriggered: () => setOpenServerList(false),
   });
@@ -26,7 +26,10 @@ const SidebarSelectServer: React.FC<SideBarSelectServerProps> = ({
 
   return (
     <>
-      <div ref={ref} className="relative lg:block inline-block w-full h-full min-h-[50px] h-[50px]">
+      <div
+        ref={ref}
+        className="relative lg:block inline-block w-full h-full min-h-[50px] h-[50px]"
+      >
         <div
           className="h-full flex flex-row justify-between border px-3 py-1.5 rounded-xl"
           onClick={() => {
@@ -42,11 +45,14 @@ const SidebarSelectServer: React.FC<SideBarSelectServerProps> = ({
             <span>{selectGuild.name}</span>
           </div>
           <div className="flex items-center">
-            {openServerList ? (
-              <i className="fas fa-caret-up mr-1" />
-            ) : (
-              <i className="fas fa-caret-down mr-1" />
-            )}
+            <i
+              className={`fas fa-caret-up mr-1 ${
+                openServerList ? "rotate-180" : ""
+              }`}
+              style={{
+                transition: "all 0.3s",
+              }}
+            />
           </div>
         </div>
         <div
@@ -65,20 +71,33 @@ const SidebarSelectServer: React.FC<SideBarSelectServerProps> = ({
                 .filter(guild => {
                   return guild.bot;
                 })
-                .sort((a,b) => (a.id === b.id ? 0 : a.id === selectGuild.id ? -1 : 1))
+                .sort((a, b) =>
+                  a.id === b.id ? 0 : a.id === selectGuild.id ? -1 : 1
+                )
                 .map((guild, index, guilds) => (
                   <>
-                    <button onClick={() => {
-                        router.push(`/dashboard/${guild.id}`)
-                        setOpenServerList(false)
-                    }} key={index} className={`w-full px-3 py-1.5 hover:bg-gray-100 ${index === 0 && "rounded-t-xl"} ${index == (guilds.length - 1) && "rounded-b-xl" }`}>
+                    <button
+                      onClick={() => {
+                        router.push(`/dashboard/${guild.id}`);
+                        setOpenServerList(false);
+                      }}
+                      key={index}
+                      className={`w-full px-3 py-1.5 hover:bg-gray-100 ${
+                        index === 0 && "rounded-t-xl"
+                      } ${index == guilds.length - 1 && "rounded-b-xl"}`}
+                    >
                       <div className="w-full flex flex-row items-center justify-between">
                         <div className="flex flex-row items-center">
-                          <img className="w-8 h-8 rounded-full mr-2" src={guildProfileLink(guild)}/>
-                            {guild.name}
+                          <img
+                            className="w-8 h-8 rounded-full mr-2"
+                            src={guildProfileLink(guild)}
+                          />
+                          {guild.name}
                         </div>
                         <div>
-                            {selectGuild.id == guild.id && <i className="fas fa-check text-green-500 mr-1"/>}
+                          {selectGuild.id == guild.id && (
+                            <i className="fas fa-check text-green-500 mr-1" />
+                          )}
                         </div>
                       </div>
                     </button>
