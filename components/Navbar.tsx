@@ -1,4 +1,4 @@
-import type { User } from "@types";
+import type { User } from "discord.js";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -36,8 +36,8 @@ const Navbar = ({ auth }: NavbarProps) => {
       client("GET", "/auth/me").then(data => {
         if (data.error) localStorage.removeItem("userData");
         else {
-          setUser(data.data);
-          localStorage.userData = JSON.stringify(data.data);
+          setUser(data.data.user);
+          localStorage.userData = JSON.stringify(data.data.user);
           FlareLane.setUserId(data.data.user.id);
           FlareLane.setTags({
             username: data.data.user.username,
@@ -134,9 +134,9 @@ const Navbar = ({ auth }: NavbarProps) => {
                 <div className="flex flex-row items-center text-sm">
                   <img
                     className="w-8 h-8 rounded-full mr-2"
-                    src={userAvaterLink(user.user)}
+                    src={userAvaterLink(user)}
                   />
-                  <span>{user.user.username}</span>
+                  <span>{user.username}</span>
                   <i className="fas fa-caret-down ml-2" />
                 </div>
                 <div
@@ -274,7 +274,7 @@ const Navbar = ({ auth }: NavbarProps) => {
                   className="pl-6 hover:bg-gray-100 py-3 px-2 rounded-lg"
                 >
                   <i className="fas fa-user mr-3" />
-                  {user.user.username}님의 정보
+                  {user.username}님의 정보
                 </a>
               </Link>
               <a
