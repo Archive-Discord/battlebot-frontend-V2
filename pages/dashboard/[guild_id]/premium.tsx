@@ -54,7 +54,7 @@ const DashboardPremium: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
               배틀이를 더욱 유용하게 사용하세요!
             </span>
           </div>
-          <div className="grid lg:grid-cols-2 w-full mt-5 gap-4 mr-1.5 ml-1.5">
+          <div className="grid lg:grid-cols-2 w-full mt-5 gap-4 lg:mr-1.5 lg:ml-1.5">
             <div
               onClick={() => {
                 setSelectPremiumType("month");
@@ -112,7 +112,7 @@ const DashboardPremium: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
           <div className="mt-3 w-full flex">
             <button
               style={{ transition: "all 0.3s" }}
-              className="px-5 py-2 rounded-xl text-xl ml-2 hover:bg-violet-100 border hover:border-purple-500"
+              className="px-5 py-2 rounded-xl text-xl lg:ml-2 hover:bg-violet-100 border hover:border-purple-500"
             >
               결제 진행하기
             </button>
@@ -132,7 +132,7 @@ const DashboardPremium: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
             </>)
           }
           <section className="grid lg:grid-cols-2 grid-cols-1 mt-24 px-2 pb-10">
-            <div className="col-span-1 flex lg:items-start justify-center items-center flex-col p-10">
+            <div className="col-span-1 flex lg:items-start justify-center items-center flex-col lg:p-10 py-10">
               <span className="lg:text-2xl text-xl font-bold">이메일 인증</span>
               <span className="lg:text-3xl text-2xl font-bold">이메일 인증을 이용한 2차인증</span>
             </div>

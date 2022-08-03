@@ -89,6 +89,7 @@ const SideBar: React.FC<SideBarProps> = ({ guild }) => {
               />
             </button>
             <div
+              className="space-y-1"
               style={{
                 transition: "all 0.3s",
                 transform: serverManageOpen ? "scaleY(1)" : "scaleY(0)",
@@ -162,6 +163,7 @@ const SideBar: React.FC<SideBarProps> = ({ guild }) => {
               />
             </button>
             <div
+              className="space-y-1"
               style={{
                 transition: "all 0.3s",
                 transform: serverUtilOpen ? "scaleY(1)" : "scaleY(0)",
@@ -170,7 +172,7 @@ const SideBar: React.FC<SideBarProps> = ({ guild }) => {
               }}
             >
               {SideBarItems.filter(item => {
-                return item.categori === 'utils';
+                return item.categori === "utils";
               }).map((item, index) => (
                 <>
                   <Link
