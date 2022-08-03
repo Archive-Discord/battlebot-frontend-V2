@@ -14,7 +14,7 @@ const Login = () => {
     window.location.href =
       process.env.NEXT_PUBLIC_API_URL +
       `/auth/discord?redirect=${router.asPath}`;
-  });
+  }, []);
 
   useEffect(() => {
     import("lottie-web").then(Lottie => setLottie(Lottie.default));
