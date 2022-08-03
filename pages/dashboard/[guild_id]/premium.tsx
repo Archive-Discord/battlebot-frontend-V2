@@ -112,13 +112,42 @@ const DashboardPremium: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
           <div className="mt-3 w-full flex">
             <button
               style={{ transition: "all 0.3s" }}
-              className="px-5 py-2 rounded-md text-xl ml-2 hover:bg-violet-100 border hover:border-purple-500"
+              className="px-5 py-2 rounded-xl text-xl ml-2 hover:bg-violet-100 border hover:border-purple-500"
             >
               결제 진행하기
             </button>
           </div>
-          <div>
-          </div>
+          {
+            guildData.memberCount > 300 ? (<>
+              <section className="flex flex-col items-center justify-center pt-20 min-h-[50vh]">
+                <LottieAnimaition className="w-52 h-52 -z-10" animation={require('../../../lottieFiles/partner.json')}/>
+                <span className="lg:text-xl text-base font-bold">어라.. 서버 인원이 300명 이상인 거 같아요!</span>
+                <span className="lg:text-2xl text-xl font-bold">배틀이 파트너는 어떠세요?</span>
+                <button onClick={() => {
+                  router.push("/partner")
+                }} className="mt-3 rounded-md border border-purple-500 hover:bg-violet-100 text-xl px-3 py-1 font-bold">신청하기</button>
+              </section>
+            </>) :
+            (<>
+            </>)
+          }
+          <section className="grid lg:grid-cols-2 grid-cols-1 mt-24 px-2 pb-10">
+            <div className="col-span-1 flex lg:items-start justify-center items-center flex-col p-10">
+              <span className="lg:text-2xl text-xl font-bold">이메일 인증</span>
+              <span className="lg:text-3xl text-2xl font-bold">이메일 인증을 이용한 2차인증</span>
+            </div>
+            <div className="col-span-1">
+            <video
+                loop
+                autoPlay
+                muted
+                className="border-2"
+                style={{ borderRadius: "50px" }}
+              >
+                <source src="/verify_email.mp4" type="video/mp4" />
+              </video>
+            </div>
+          </section>
         </div>
       </Layout>
     </>

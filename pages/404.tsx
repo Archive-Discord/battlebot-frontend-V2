@@ -26,7 +26,7 @@ const NotFoundPage = () => {
   return (<>
     <div className="h-[100vh] flex items-center justify-center p-5 flex-col ">
       <div className="-mt-16" ref={Ref}/>
-      <span className="-mt-12 lg:text-3xl text-xl font-bold" style={{fontFamily: "Noto Sans KR"}}>찾을 수 없는 페이지</span>
+      <span className="-mt-12 lg:text-2xl text-xl font-bold" style={{fontFamily: "Noto Sans KR"}}>이런... 페이지를 찾을 수 없어요</span>
     </div>
   </>);
 };

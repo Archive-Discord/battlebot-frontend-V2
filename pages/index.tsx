@@ -120,7 +120,7 @@ const Home: NextPage<ServerSideProps> = ({
         style={{ fontFamily: "Noto Sans KR" }}
       >
         <div className="grid lg:grid-cols-2 grid-cols-1 container content-center">
-          <div className="col-span-1 flex flex-col lg:items-start items-center justify-center g:p-0 p-10">
+          <div className="col-span-1 flex flex-col lg:items-start items-center justify-center p-10">
             <span className="lg:text-2xl text-xl font-bold mt-5">
               간단한 인증 설정으로
             </span>
