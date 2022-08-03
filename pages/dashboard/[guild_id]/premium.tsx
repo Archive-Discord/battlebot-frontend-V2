@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import { premiumItems } from "@utils/Constants";
 import { useState } from "react";
+import LottieAnimaition from "@components/LottieAnimaition";
 
 const Error = dynamic(() => import("@components/Error"));
 const Login = dynamic(() => import("@components/Login"));
@@ -53,7 +54,7 @@ const DashboardPremium: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
               배틀이를 더욱 유용하게 사용하세요!
             </span>
           </div>
-          <div className="grid lg:grid-cols-2 grid-rows-2 w-full mt-5 gap-4 mr-1.5 ml-1.5">
+          <div className="grid lg:grid-cols-2 w-full mt-5 gap-4 mr-1.5 ml-1.5">
             <div
               onClick={() => {
                 setSelectPremiumType("month");
@@ -107,6 +108,16 @@ const DashboardPremium: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
                   ))}
               </div>
             </div>
+          </div>
+          <div className="mt-3 w-full flex">
+            <button
+              style={{ transition: "all 0.3s" }}
+              className="px-5 py-2 rounded-md text-xl ml-2 hover:bg-violet-100 border hover:border-purple-500"
+            >
+              결제 진행하기
+            </button>
+          </div>
+          <div>
           </div>
         </div>
       </Layout>

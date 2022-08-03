@@ -16,7 +16,7 @@ const Loading = () => {
         renderer: "svg",
         loop: true,
         autoplay: true,
-        path: "/loading.json",
+        animationData: require("../lottieFiles/loading.json"),
       });
 
       return () => animation.destroy();
@@ -53,7 +53,7 @@ export const SmallLoading = () => {
         renderer: "svg",
         loop: true,
         autoplay: true,
-        path: "/loading.json",
+        animationData: require("../lottieFiles/loading.json"),
       });
 
       return () => animation.destroy();

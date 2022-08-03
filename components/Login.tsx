@@ -27,7 +27,7 @@ const Login = () => {
         renderer: "svg",
         loop: true,
         autoplay: true,
-        path: "/loading.json",
+        animationData:require('../lottieFiles/loading.json')
       });
 
       return () => animation.destroy();

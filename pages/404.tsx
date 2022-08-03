@@ -16,7 +16,7 @@ const NotFoundPage = () => {
         renderer: "svg",
         loop: true,
         autoplay: true,
-        path: "/404.json",
+        animationData: require("../lottieFiles/404.json"),
       });
 
       return () => animation.destroy();

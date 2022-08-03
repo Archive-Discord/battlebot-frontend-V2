@@ -26,7 +26,7 @@ const Home: NextPage<ServerSideProps> = ({
         renderer: "svg",
         loop: true,
         autoplay: true,
-        path: "/verified.json",
+        animationData: require('../lottieFiles/verified.json')
       });
 
       return () => animation.destroy();
