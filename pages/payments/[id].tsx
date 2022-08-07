@@ -75,7 +75,11 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
 
   if (userError && userError.cause === 401) return <Login />;
   if (!userData) return <Loading />;
-
+  if(userCardsError) {
+    brandpay(userData).then(pay => {
+      pay.authenticate()
+    });
+  }
   const addMethod = () => {
     brandpay(userData).then(pay => {
       pay.addPaymentMethod().then(result => {
