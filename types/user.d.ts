@@ -4,6 +4,7 @@ export interface User {
     discordAccessToken: any;
     _id: string;
     id: string;
+    phone: string
     email: string;
     accessToken: string;
     refreshToken: string;

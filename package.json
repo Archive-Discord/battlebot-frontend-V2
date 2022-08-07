@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "@flarelane/flarelane-web-sdk": "^0.1.5",
+    "@tosspayments/brandpay-sdk": "^1.0.5",
     "aos": "^2.3.4",
     "axios": "^0.27.2",
     "cookie": "^0.5.0",
@@ -17,7 +18,9 @@
     "react-countup": "^6.3.0",
     "react-detect-click-outside": "^1.1.7",
     "react-dom": "18.1.0",
+    "react-toastify": "^9.0.8",
     "sharp": "^0.30.7",
+    "swiper": "^8.3.2",
     "swr": "^1.3.0"
   },
   "devDependencies": {

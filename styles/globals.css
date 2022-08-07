@@ -3,48 +3,59 @@
 @tailwind utilities;
 
 @font-face {
-    font-family: 'establishRetrosansOTF';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2112@1.0/establishRetrosansOTF.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+  font-family: "establishRetrosansOTF";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2112@1.0/establishRetrosansOTF.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: 'HSSaemaul-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/HSSaemaul-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+  font-family: "HSSaemaul-Regular";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/HSSaemaul-Regular.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
 @font-face {
-    font-family: 'Noto Sans KR','Apple SD Gothic Neo',Sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    src: 
-    url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff2) format('woff2'),
-    url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff) format('woff'),
-    url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.otf) format('opentype');
+  font-family: "Noto Sans KR", "Apple SD Gothic Neo", Sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff2)
+      format("woff2"),
+    url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff)
+      format("woff"),
+    url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.otf)
+      format("opentype");
 }
-
 
 @media (max-width: 976px) {
-    .container {
-        max-width: 600px;
-        margin-left: auto;
-        margin-right: auto;
-        height: 100%;
-    }
-}
-.container {
-    max-width: 1500px;
+  .container {
+    max-width: 600px;
     margin-left: auto;
     margin-right: auto;
     height: 100%;
+  }
+}
+.container {
+  max-width: 1500px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100%;
 }
 
 .nav-container {
-    max-width: 1660px;
-    margin-left: auto;
-    margin-right: auto;
-    height: 100%;
-    font-family: 'Noto Sans KR', sans-serif;
+  max-width: 1660px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100%;
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+.swiper-button-next {
+  color: #7c3aed !important;
+}
+
+.swiper-button-prev {
+  color: #7c3aed !important;
 }

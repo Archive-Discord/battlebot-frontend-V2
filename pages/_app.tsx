@@ -1,4 +1,5 @@
 import type { AppContext, AppProps } from "next/app";
+import App from "next/app";
 import Navbar from "../components/Navbar";
 import { useRouter } from "next/router";
 import AOS from "aos";
@@ -6,10 +7,13 @@ import { useEffect } from "react";
 import Footer from "../components/Footer";
 import FlareLane from "@flarelane/flarelane-web-sdk";
 import { cookieParser } from "@utils/utils";
+import { ToastContainer, toast } from 'react-toastify';
 
 import "../styles/globals.css";
 import "aos/dist/aos.css";
-import App from "next/app";
+import 'react-toastify/dist/ReactToastify.css';
+import "swiper/css"
+import "swiper/css/navigation"
 
 function BattlebotApp({ Component, pageProps, auth }: BattlebotAppProps) {
   const router = useRouter();
@@ -35,6 +39,7 @@ function BattlebotApp({ Component, pageProps, auth }: BattlebotAppProps) {
       {router.asPath === "/" ?? <hr className="pt-20 border-none" />}
       <Component {...pageProps} />
       {!router.asPath.startsWith("/dashboard/") && <Footer />}
+      <ToastContainer/>
     </>
   );
 }

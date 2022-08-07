@@ -1,13 +1,14 @@
-import type { Guild, PageDefaultProps } from "@types";
+import type { Guild, PageDefaultProps, User } from "@types";
 import type { NextPage, GetServerSideProps } from "next";
 import { cookieParser } from "@utils/utils";
 import useSWR from "swr";
-import { swrfetcher } from "@utils/client";
+import client, { swrfetcher } from "@utils/client";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import { premiumItems } from "@utils/Constants";
 import { useState } from "react";
 import LottieAnimaition from "@components/LottieAnimaition";
+import Toast from "@utils/toast";
 
 const Error = dynamic(() => import("@components/Error"));
 const Login = dynamic(() => import("@components/Login"));
@@ -26,7 +27,7 @@ const DashboardPremium: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
       refreshInterval: 10000,
     }
   );
-  const { data: userData, error: userError } = useSWR<Guild>(
+  const { data: userData, error: userError } = useSWR<User>(
     `/auth/me`,
     swrfetcher
   );
@@ -44,6 +45,19 @@ const DashboardPremium: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
         </button>
       </Error>
     );
+
+  const handlePayments = () => {
+    client('POST', '/payments/order', {
+      itemId: `guild_${selectPremiumType}`,
+      guildId: guildData.id
+    }).then(data => {
+      if(data.error) {
+        Toast(data.message, 'error')
+      } else {
+        router.push(`/payments/${data.data.paymentId}`)
+      }
+    })
+  }
   return (
     <>
       <Layout guild={guildData}>
@@ -111,6 +125,7 @@ const DashboardPremium: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
           </div>
           <div className="mt-3 w-full flex">
             <button
+              onClick={() => {handlePayments()}}
               style={{ transition: "all 0.3s" }}
               className="px-5 py-2 rounded-xl text-xl lg:ml-2 hover:bg-violet-100 border hover:border-purple-500"
             >
