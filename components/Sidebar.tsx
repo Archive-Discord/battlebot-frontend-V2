@@ -1,8 +1,8 @@
-import { Guild } from "@types";
-import React, { useState } from "react";
-import SidebarSelectServer from "@components/SidebarSelectServer";
+import type { Guild } from "@types";
 import { SideBarItems } from "@utils/Constants";
 import { useRouter } from "next/router";
+import React, { useState } from "react";
+import SidebarSelectServer from "@components/SidebarSelectServer";
 import Link from "next/link";
 
 const SideBar: React.FC<SideBarProps> = ({ guild }) => {

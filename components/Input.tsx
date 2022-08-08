@@ -1,7 +1,6 @@
 import { validateEmail, validatePhone } from "@utils/utils";
 import React, {
   HTMLInputTypeAttribute,
-  InputHTMLAttributes,
   useEffect,
   useState,
 } from "react";

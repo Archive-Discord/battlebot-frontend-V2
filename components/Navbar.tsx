@@ -1,12 +1,12 @@
 import type { User } from "discord.js";
-import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import client from "@utils/client";
 import { NavBarItems } from "@utils/Constants";
 import { classNames, userAvaterLink } from "@utils/utils";
 import { useDetectClickOutside } from "react-detect-click-outside";
+import Image from "next/image";
+import Link from "next/link";
+import client from "@utils/client";
 import FlareLane from "@flarelane/flarelane-web-sdk";
 
 interface NavbarProps {

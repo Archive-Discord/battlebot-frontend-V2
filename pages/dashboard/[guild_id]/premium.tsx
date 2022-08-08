@@ -1,12 +1,12 @@
 import type { Guild, PageDefaultProps, User } from "@types";
 import type { NextPage, GetServerSideProps } from "next";
 import { cookieParser } from "@utils/utils";
-import useSWR from "swr";
-import client, { swrfetcher } from "@utils/client";
 import { useRouter } from "next/router";
-import dynamic from "next/dynamic";
 import { premiumItems } from "@utils/Constants";
 import { useState } from "react";
+import client, { swrfetcher } from "@utils/client";
+import useSWR from "swr";
+import dynamic from "next/dynamic";
 import LottieAnimaition from "@components/LottieAnimaition";
 import Toast from "@utils/toast";
 

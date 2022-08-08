@@ -1,5 +1,5 @@
 import { loadBrandPay } from "@tosspayments/brandpay-sdk";
-import { User } from "@types";
+import type { User } from "@types";
 
 export const brandpay = async (user: User) => {
   return await loadBrandPay(

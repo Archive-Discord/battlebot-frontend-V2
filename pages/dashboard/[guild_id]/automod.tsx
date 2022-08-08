@@ -1,10 +1,11 @@
 import type { Guild, PageDefaultProps } from "@types";
 import type { NextPage, GetServerSideProps } from "next";
 import { cookieParser } from "@utils/utils";
-import useSWR from "swr";
 import { swrfetcher } from "@utils/client";
 import { useRouter } from "next/router";
+import useSWR from "swr";
 import dynamic from "next/dynamic";
+
 const Error = dynamic(() => import("@components/Error"));
 const Login = dynamic(() => import("@components/Login"));
 const Layout = dynamic(() => import("@components/DashboardLayout"));

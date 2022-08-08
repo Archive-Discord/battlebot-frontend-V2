@@ -1,7 +1,4 @@
-import type { Guild, Item, UserGulds } from "@types";
-import { swrfetcher } from "@utils/client";
-import { guildProfileLink } from "@utils/utils";
-import { useRouter } from "next/router";
+import type { Item } from "@types";
 import { useEffect, useState } from "react";
 import { useDetectClickOutside } from "react-detect-click-outside";
 

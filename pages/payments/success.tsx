@@ -1,17 +1,13 @@
-import type { Guild, PageDefaultProps } from "@types";
+import type { PageDefaultProps } from "@types";
 import type { NextPage, GetServerSideProps } from "next";
 import { cookieParser, numberWithCommas } from "@utils/utils";
-import useSWR from "swr";
-import client, { swrfetcher } from "@utils/client";
 import { useRouter } from "next/router";
+import client from "@utils/client";
 import dynamic from "next/dynamic";
-import AnalyticsServer from "@components/dashboard/AnalyticsServer";
 import dayjs from "dayjs";
 
 const Error = dynamic(() => import("@components/Error"));
 const Login = dynamic(() => import("@components/Login"));
-const Layout = dynamic(() => import("@components/DashboardLayout"));
-const Loading = dynamic(() => import("@components/Loading"));
 
 const PaymentsSuccess: NextPage<PageDefaultProps> = ({
   auth,
@@ -61,7 +57,14 @@ const PaymentsSuccess: NextPage<PageDefaultProps> = ({
                 <span>{numberWithCommas(data.amount)}원</span>
               </div>
               <div className="flex lg:items-center lg:justify-between text-lg lg:flex-row flex-col">
-                <span className="font-bold">적용{data.metadata.type === "guild" ? "서버" : (data.metadata.type === "유저" ? "유저" : "")}</span>
+                <span className="font-bold">
+                  적용
+                  {data.metadata.type === "guild"
+                    ? "서버"
+                    : data.metadata.type === "유저"
+                    ? "유저"
+                    : ""}
+                </span>
                 <span>{data.metadata.name}</span>
               </div>
             </div>
@@ -92,9 +95,7 @@ const PaymentsSuccess: NextPage<PageDefaultProps> = ({
               <div className="flex lg:items-center lg:justify-between text-lg lg:flex-row flex-col">
                 <span className="font-bold">다음 결제 예정일</span>
                 <span className="truncate">
-                  {dayjs(data.nextPayDate).format(
-                    "YYYY년 MM월 DD일 HH시 mm분"
-                  )}
+                  {dayjs(data.nextPayDate).format("YYYY년 MM월 DD일 HH시 mm분")}
                 </span>
               </div>
             </div>
@@ -105,7 +106,7 @@ const PaymentsSuccess: NextPage<PageDefaultProps> = ({
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ctx => {
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const cookies = cookieParser(ctx);
   const auth = cookies?.Authorization ? cookies.Authorization : null;
   const data = await client(

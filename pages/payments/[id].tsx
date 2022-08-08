@@ -4,35 +4,34 @@ import type {
   PaymentsMethods as Methods,
   PayMethods,
   User,
-  UserGulds,
 } from "@types";
 import type { GetServerSideProps, NextPage } from "next";
 import type { User as DiscordUser } from "discord.js";
 import type { MethodId } from "@tosspayments/brandpay-types";
-import client, { swrfetcher } from "@utils/client";
 import {
   cookieParser,
   guildProfileLink,
   numberWithCommas,
   userAvaterLink,
 } from "@utils/utils";
-import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import useSWR from "swr";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { brandpay } from "@utils/toss";
-import Input from "@components/Input";
-import PaymentsMethods from "@components/PaymentsMethods";
 import { SmallLoading } from "@components/Loading";
-import Dropdown from "@components/Dropdown";
 import { payMethods } from "@utils/Constants";
-import CheckBox from "@components/checkbox";
-import Toast from "@utils/toast";
 import { AxiosError } from "axios";
+import client, { swrfetcher } from "@utils/client";
+import dynamic from "next/dynamic";
+import useSWR from "swr";
+import PaymentsMethods from "@components/PaymentsMethods";
+import Toast from "@utils/toast";
 
 const Error = dynamic(() => import("@components/Error"));
 const Login = dynamic(() => import("@components/Login"));
 const Loading = dynamic(() => import("@components/Loading"));
+const CheckBox = dynamic(() => import("@components/checkbox"));
+const Dropdown = dynamic(() => import("@components/Dropdown"));
+const Input = dynamic(() => import("@components/Input"));
 
 const PaymentsOrder: NextPage<PageDefaultProps> = ({
   auth,
@@ -75,14 +74,14 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
 
   if (userError && userError.cause === 401) return <Login />;
   if (!userData) return <Loading />;
-  if(userCardsError) {
-    brandpay(userData).then(pay => {
-      pay.authenticate()
+  if (userCardsError) {
+    brandpay(userData).then((pay) => {
+      pay.authenticate();
     });
   }
   const addMethod = () => {
-    brandpay(userData).then(pay => {
-      pay.addPaymentMethod().then(result => {
+    brandpay(userData).then((pay) => {
+      pay.addPaymentMethod().then((result) => {
         reloadCards();
       });
     });
@@ -102,27 +101,32 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
     if (payMethod === "battlepay") {
       if (!userCards || userCards.length === 0)
         return Toast("등록된 카드가 없습니다", "error");
-      brandpay(userData).then(pay => {
-        pay.requestPayment({
-          amount: Number(data.amount),
-          orderId: data.id,
-          orderName: data.name,
-          customerEmail: email,
-          methodId: selectPayMethod ? selectPayMethod as MethodId : userCards[0].id as MethodId,
-        }).then((result) => {
-          return client('POST', '/payments/confirm-payment', {
-            phone,
-            email,
-            ...result
-          }).then((payments) => {
-            if(payments.error) throw new AxiosError(payments.message);
+      brandpay(userData).then((pay) => {
+        pay
+          .requestPayment({
+            amount: Number(data.amount),
+            orderId: data.id,
+            orderName: data.name,
+            customerEmail: email,
+            methodId: selectPayMethod
+              ? (selectPayMethod as MethodId)
+              : (userCards[0].id as MethodId),
           })
-        }).then(() => {
-          router.push(`/payments/success?orderId=${data.id}`)
-        }).catch((error) => {
-          Toast(error.message, 'error');
-          router.push(`/payments/error?orderId=${data.id}`)
-        })
+          .then((result) => {
+            return client("POST", "/payments/confirm-payment", {
+              phone: phone ? phone : userData.phone,
+              email: email ? email : userData.email,
+              ...result,
+            }).then((payments) => {
+              if (payments.error) throw new AxiosError(payments.message);
+            });
+          })
+          .then(() => {
+            router.push(`/payments/success?orderId=${data.id}`);
+          })
+          .catch((error) => {
+            Toast(error.message, "error");
+          });
       });
     }
   };
@@ -145,7 +149,7 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
                 <Input
                   placeholder="이름을 입력해 주세요"
                   defaultValue={userData.user.username}
-                  onChangeHandler={value => setName(value)}
+                  onChangeHandler={(value) => setName(value)}
                   className="text-base ml-auto lg:w-80 w-full lg:mt-0 mt-1"
                 />
               </div>
@@ -155,7 +159,9 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
                   type={"phone"}
                   placeholder="“-“없이 입력해 주세요"
                   defaultValue={userData.phone ? userData.phone : undefined}
-                  onChangeHandler={value => setPhone(value?.replace(/-/g, ""))}
+                  onChangeHandler={(value) =>
+                    setPhone(value?.replace(/-/g, ""))
+                  }
                   className="text-base ml-auto lg:w-80 w-full lg:mt-0 mt-1"
                 />
               </div>
@@ -171,7 +177,7 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
                       ? userData.kakao_email
                       : undefined
                   }
-                  onChangeHandler={value => setEmail(value)}
+                  onChangeHandler={(value) => setEmail(value)}
                   className="text-base ml-auto lg:w-80 w-full lg:mt-0 mt-1"
                 />
               </div>
@@ -247,7 +253,7 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
               <CheckBox
                 className="mt-2"
                 placeholder={"자동결제 이용 동의"}
-                onChangeHandler={check => setAutoPayments(check)}
+                onChangeHandler={(check) => setAutoPayments(check)}
               />
               <button
                 onClick={() => {
@@ -265,7 +271,7 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ctx => {
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const cookies = cookieParser(ctx);
   const auth = cookies?.Authorization ? cookies.Authorization : null;
   const data = await client(

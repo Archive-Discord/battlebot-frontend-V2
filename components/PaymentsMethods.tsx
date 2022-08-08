@@ -1,4 +1,4 @@
-import { PaymentsMethods as Methods } from "@types";
+import type { PaymentsMethods as Methods } from "@types";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 

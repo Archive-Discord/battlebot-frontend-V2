@@ -1,13 +1,13 @@
 import type { AppContext, AppProps } from "next/app";
+import { useRouter } from "next/router";
+import { cookieParser } from "@utils/utils";
+import { ToastContainer } from 'react-toastify';
+import { useEffect } from "react";
 import App from "next/app";
 import Navbar from "../components/Navbar";
-import { useRouter } from "next/router";
 import AOS from "aos";
-import { useEffect } from "react";
 import Footer from "../components/Footer";
 import FlareLane from "@flarelane/flarelane-web-sdk";
-import { cookieParser } from "@utils/utils";
-import { ToastContainer, toast } from 'react-toastify';
 
 import "../styles/globals.css";
 import "aos/dist/aos.css";

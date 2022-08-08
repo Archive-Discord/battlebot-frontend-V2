@@ -1,8 +1,8 @@
+import type { GetServerSidePropsContext, NextPageContext } from "next";
+import type { Guild, User as DiscordUser } from "discord.js";
+import type { UserGuld, Guild as BattlebotGuild } from "@types";
 import { EndPoints } from "./Constants";
 import cookie from "cookie";
-import { GetServerSidePropsContext, NextPageContext } from "next";
-import type { Guild, User as DiscordUser } from "discord.js";
-import { UserGuld, Guild as BattlebotGuild } from "@types";
 
 export const classNames = (...classes: any) => {
   return classes.filter(Boolean).join(" ");

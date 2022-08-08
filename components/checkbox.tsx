@@ -1,4 +1,3 @@
-import { validateEmail, validatePhone } from "@utils/utils";
 import React, { useEffect, useState } from "react";
 
 const CheckBox: React.FC<CheckBoxProps> = ({

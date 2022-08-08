@@ -1,10 +1,10 @@
 import type { NextPage, GetServerSideProps } from "next";
-import client from "@utils/client";
+import type { LottiePlayer } from "lottie-web";
+import { useEffect, useRef, useState } from "react";
 import { battlebot } from "@utils/Constants";
+import client from "@utils/client";
 import dayjs from "dayjs";
 import CountUp from "react-countup";
-import { LottiePlayer } from "lottie-web";
-import { useEffect, useRef, useState } from "react";
 
 const Home: NextPage<ServerSideProps> = ({
   servers,

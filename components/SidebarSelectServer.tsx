@@ -3,9 +3,9 @@ import { swrfetcher } from "@utils/client";
 import { guildProfileLink } from "@utils/utils";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { SmallLoading } from "./Loading";
 import { useDetectClickOutside } from "react-detect-click-outside";
 import useSWR from "swr";
-import { SmallLoading } from "./Loading";
 
 const SidebarSelectServer: React.FC<SideBarSelectServerProps> = ({
   selectGuild,

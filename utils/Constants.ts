@@ -1,4 +1,4 @@
-import { Item, SideBarItem } from "types/battlebot";
+import type { Item, SideBarItem } from "@types";
 
 export const NavBarItems = [
   {
@@ -81,14 +81,14 @@ export const premiumItems = [
 
 export const payMethods: Item[] = [
   {
-    id: "cultureland",
-    name: "문화상품권",
-    icon: "fas fa-gift",
-  },
-  {
     id: "battlepay",
     name: "배틀페이",
     icon: "fas fa-credit-card",
+  },
+  {
+    id: "cultureland",
+    name: "문화상품권",
+    icon: "fas fa-gift",
   },
 ];
 

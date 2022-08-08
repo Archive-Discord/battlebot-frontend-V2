@@ -1,15 +1,15 @@
 import type { PageDefaultProps, UserGulds } from "@types";
 import type { GetServerSideProps, NextPage } from "next";
-import ServerCard from "@components/ServerCard";
 import { swrfetcher } from "@utils/client";
 import { cookieParser } from "@utils/utils";
-import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
 import useSWR from "swr";
 
 const Error = dynamic(() => import('@components/Error'))
 const Login = dynamic(() => import('@components/Login'))
 const Loading = dynamic(() => import('@components/Loading'))
+const ServerCard = dynamic(() => import("@components/ServerCard"))
 
 const Dashboard: NextPage<PageDefaultProps> = ({ auth }) => {
   const router = useRouter();
