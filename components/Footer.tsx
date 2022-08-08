@@ -21,7 +21,7 @@ const Footer = () => {
               </Link>
             </li>
             <li>
-              <a href={"https://help.archiver.me/"} target={"_blank"}>
+              <a href={"https://help.archiver.me/"} target={"_blank"} rel="noreferrer">
                 이용 가이드
               </a>
             </li>
@@ -29,7 +29,7 @@ const Footer = () => {
               <a
                 href={"https://recruit.archiver.me/"}
                 target={"_blank"}
-                className="relative inline-flex items-center"
+                className="relative inline-flex items-center" rel="noreferrer"
               >
                 채용
                 <span className="flex absolute h-2 w-2 right-0 lg:-mr-4 -mr-3">
@@ -48,10 +48,10 @@ const Footer = () => {
             제2022-부산동래-0109 | E-mail: admin@battlebot.kr{" "}
           </div>
           <div className="mt-8 flex w-full space-x-2 lg:justify-start justify-center">
-            <a href="https://archiver.me" target={"_blank"}>
+            <a href="https://archiver.me" target={"_blank"} rel="noreferrer">
               <Image width={"60px"} height={"60px"} src={"/archive_logo.png"} />
             </a>
-            <a href="https://discord.com" target={"_blank"}>
+            <a href="https://discord.com" target={"_blank"} rel="noreferrer">
               <Image width={"50px"} height={"60px"} src={"/discord_logo.png"} />
             </a>
           </div>

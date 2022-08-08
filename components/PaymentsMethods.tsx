@@ -22,7 +22,7 @@ const PaymentsMethods: React.FC<PaymentsMethodsProps> = ({
         {methods.map(method => (
           <SwiperSlide
             className="items-center flex justify-center"
-            data-method={method.id}
+            key={method.id}
           >
             <div className="w-80 h-48 border rounded-xl p-4 relative">
               <img className="w-9 absolute" src={method.iconUrl} />

@@ -48,6 +48,16 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
   const [payMethod, setPayMethod] = useState<PayMethods>();
   const router = useRouter();
 
+  const { data: userData, error: userError } = useSWR<User>(
+    `/auth/me`,
+    swrfetcher
+  );
+  const {
+    data: userCards,
+    error: userCardsError,
+    mutate: reloadCards,
+  } = useSWR<Methods[]>(`/payments/methods`, swrfetcher);
+
   if (error && status === 401) return <Login />;
   if (error && message)
     return (
@@ -61,17 +71,6 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
       </Error>
     );
   if (!auth) return <Login />;
-
-  const { data: userData, error: userError } = useSWR<User>(
-    `/auth/me`,
-    swrfetcher
-  );
-  const {
-    data: userCards,
-    error: userCardsError,
-    mutate: reloadCards,
-  } = useSWR<Methods[]>(`/payments/methods`, swrfetcher);
-
   if (userError && userError.cause === 401) return <Login />;
   if (!userData) return <Loading />;
   if (userCardsError) {

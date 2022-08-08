@@ -20,7 +20,7 @@ function BattlebotApp({ Component, pageProps, auth }: BattlebotAppProps) {
 
   useEffect(() => {
     FlareLane.setCurrentPath(router.asPath);
-  }, [router.events]);
+  }, [router.asPath, router.events]);
 
   useEffect(() => {
     //FlareLane.initialize({
