@@ -5,8 +5,8 @@ import { useRouter } from "next/router";
 import client from "@utils/client";
 import dynamic from "next/dynamic";
 import dayjs from "dayjs";
+import Error from "@components/Error"
 
-const Error = dynamic(() => import("@components/Error"));
 const Login = dynamic(() => import("@components/Login"));
 
 const PaymentsSuccess: NextPage<PageDefaultProps> = ({
