@@ -1,4 +1,4 @@
-import type { Guild, PageDefaultProps } from "@types";
+import type { Guild, PageDefaultProps, User } from "@types";
 import type { NextPage, GetServerSideProps } from "next";
 import { cookieParser } from "@utils/utils";
 import { swrfetcher } from "@utils/client";
@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import dynamic from "next/dynamic";
 import AnalyticsServer from "@components/dashboard/AnalyticsServer";
-import Error from "@components/Error"
+import Error from "@components/Error";
 
 const Login = dynamic(() => import("@components/Login"));
 const Layout = dynamic(() => import("@components/DashboardLayout"));
@@ -21,14 +21,13 @@ const DashboardMain: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
       refreshInterval: 10000,
     }
   );
-
-  const { data: userData, error: userError } = useSWR<Guild>(
+  const { data: userData, error: userError } = useSWR<User>(
     `/auth/me`,
     swrfetcher
   );
-  if (userError && userError.cause === 401) return <Login />;
+
   if (!auth) return <Login />;
-  if (!guildData) return <Loading />;
+  if (userError && userError.cause === 401) return <Login />;
   if (guildError && guildError.cause !== 401)
     return (
       <Error message={guildError.message}>
@@ -40,6 +39,7 @@ const DashboardMain: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
         </button>
       </Error>
     );
+  if (!guildData) return <Loading />;
   return (
     <>
       <Layout guild={guildData}>

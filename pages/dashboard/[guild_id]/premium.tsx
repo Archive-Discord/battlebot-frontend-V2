@@ -33,7 +33,7 @@ const DashboardPremium: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
   );
   if (userError && userError.cause === 401) return <Login />;
   if (!auth) return <Login />;
-  if (!guildData) return <Loading />;
+  if (userError && userError.cause === 401) return <Login />;
   if (guildError && guildError.cause !== 401)
     return (
       <Error message={guildError.message}>
@@ -45,6 +45,7 @@ const DashboardPremium: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
         </button>
       </Error>
     );
+  if (!guildData) return <Loading />;
 
   const handlePayments = () => {
     client('POST', '/payments/order', {

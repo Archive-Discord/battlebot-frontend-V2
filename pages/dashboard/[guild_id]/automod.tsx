@@ -5,7 +5,7 @@ import { swrfetcher } from "@utils/client";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import dynamic from "next/dynamic";
-import Error from "@components/Error"
+import Error from "@components/Error";
 
 const Login = dynamic(() => import("@components/Login"));
 const Layout = dynamic(() => import("@components/DashboardLayout"));
@@ -24,9 +24,8 @@ const DashboardAutomod: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
     `/auth/me`,
     swrfetcher
   );
-  if (userError && userError.cause === 401) return <Login />;
   if (!auth) return <Login />;
-  if (!guildData) return <Loading />;
+  if (userError && userError.cause === 401) return <Login />;
   if (guildError && guildError.cause !== 401)
     return (
       <Error message={guildError.message}>
@@ -38,11 +37,10 @@ const DashboardAutomod: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
         </button>
       </Error>
     );
+  if (!guildData) return <Loading />;
   return (
     <>
-      <Layout guild={guildData}>
-        
-      </Layout>
+      <Layout guild={guildData}></Layout>
     </>
   );
 };
