@@ -16,7 +16,7 @@ const Error: React.FC<ErrorPageProps> = ({message, children}) => {
         renderer: "svg",
         loop: true,
         autoplay: true,
-        animationData: require("../lottieFiles/error.json")
+        path: "/lottie/error.json"
       });
 
       return () => animation.destroy();
