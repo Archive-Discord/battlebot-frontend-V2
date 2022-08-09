@@ -25,8 +25,8 @@ import dynamic from "next/dynamic";
 import useSWR from "swr";
 import PaymentsMethods from "@components/PaymentsMethods";
 import Toast from "@utils/toast";
-import Error from "@components/Error"
 
+const Error = dynamic(() => import("@components/Error"));
 const Login = dynamic(() => import("@components/Login"));
 const Loading = dynamic(() => import("@components/Loading"));
 const CheckBox = dynamic(() => import("@components/checkbox"));

@@ -6,8 +6,8 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import dynamic from "next/dynamic";
 import AnalyticsServer from "@components/dashboard/AnalyticsServer";
-import Error from "@components/Error"
 
+const Error = dynamic(() => import("@components/Error"));
 const Login = dynamic(() => import("@components/Login"));
 const Layout = dynamic(() => import("@components/DashboardLayout"));
 const Loading = dynamic(() => import("@components/Loading"));

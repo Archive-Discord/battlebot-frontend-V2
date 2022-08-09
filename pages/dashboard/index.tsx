@@ -5,8 +5,8 @@ import { cookieParser } from "@utils/utils";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import useSWR from "swr";
-import Error from "@components/Error"
 
+const Error = dynamic(() => import('@components/Error'))
 const Login = dynamic(() => import('@components/Login'))
 const Loading = dynamic(() => import('@components/Loading'))
 const ServerCard = dynamic(() => import("@components/ServerCard"))

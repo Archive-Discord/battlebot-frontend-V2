@@ -1,4 +1,4 @@
-import type { LottiePlayer } from "lottie-web";
+import { LottiePlayer } from "lottie-web";
 import { useEffect, useRef, useState } from "react";
 
 const LottieAnimaition: React.FC<LottieAnimaitionProps> = ({animation: animationData, className, speed}) => {
