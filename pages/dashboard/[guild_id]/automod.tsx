@@ -17,7 +17,7 @@ const DashboardAutomod: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
     `/guilds/${guildId}`,
     swrfetcher,
     {
-      refreshInterval: 10000,
+      refreshInterval: 30000,
     }
   );
   const { data: userData, error: userError } = useSWR<Guild>(

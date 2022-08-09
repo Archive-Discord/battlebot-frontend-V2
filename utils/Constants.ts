@@ -34,6 +34,13 @@ export const SideBarItems: SideBarItem[] = [
     icon: "fas fa-crown",
   },
   {
+    name: "통계",
+    path: "/analytics",
+    pathName: "/dashboard/[guild_id]/analytics",
+    categori: "none",
+    icon: "fas fa-chart-line",
+  },
+  {
     name: "자동관리",
     path: "/automod",
     pathName: "/dashboard/[guild_id]/automod",

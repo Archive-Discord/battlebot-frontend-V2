@@ -24,7 +24,7 @@ const DashboardPremium: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
     `/guilds/${guildId}`,
     swrfetcher,
     {
-      refreshInterval: 10000,
+      refreshInterval: 30000,
     }
   );
   const { data: userData, error: userError } = useSWR<User>(
@@ -69,7 +69,7 @@ const DashboardPremium: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
               배틀이를 더욱 유용하게 사용하세요!
             </span>
           </div>
-          <div className="grid lg:grid-cols-2 w-full mt-12 gap-4 lg:mr-1.5 lg:ml-1.5">
+          <div className="grid lg:grid-cols-2 w-full mt-4 gap-4 lg:mr-1.5 lg:ml-1.5">
             <div
               onClick={() => {
                 setSelectPremiumType("month");

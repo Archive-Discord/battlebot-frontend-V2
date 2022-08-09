@@ -18,7 +18,7 @@ const Dashboard: NextPage<PageDefaultProps> = ({ auth }) => {
     "/auth/me/guilds",
     swrfetcher,
     {
-      refreshInterval: 20000,
+      refreshInterval: 30000,
     }
   );
 

@@ -44,3 +44,18 @@ export const validateEmail = (email: string) => {
 export const validatePhone = (phone: string) => {
   return phone.match(/^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/);
 };
+
+export const lastDate = (date: number): Date => {
+  const d = new Date();
+  const dayOfMonth = d.getDate();
+  d.setDate(dayOfMonth - date);
+  return d;
+};
+
+export function numberToColour(decimal: number) {
+  if (decimal == 0) return `rgb(255,255,255)`;
+  const r = (decimal >> 16) & 0xff;
+  const g = (decimal >> 8) & 0xff;
+  const b = decimal & 0xff;
+  return `rgb(${r},${g},${b})`;
+}
