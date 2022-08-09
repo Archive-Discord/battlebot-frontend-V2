@@ -1,5 +1,6 @@
-import { loadBrandPay } from "@tosspayments/brandpay-sdk";
 import type { User } from "@types";
+import { loadBrandPay } from "@tosspayments/brandpay-sdk";
+import { loadTossPayments } from '@tosspayments/payment-sdk'
 
 export const brandpay = async (user: User) => {
   return await loadBrandPay(
@@ -17,3 +18,8 @@ export const brandpay = async (user: User) => {
     }
   );
 };
+
+export const tossPayments = async () => {
+  return await loadTossPayments(process.env.NEXT_PUBLIC_TOSS_PAYMENTS_CLIENT_KEY as string,);
+};
+

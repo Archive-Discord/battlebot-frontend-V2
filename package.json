@@ -11,6 +11,7 @@
     "@flarelane/flarelane-web-sdk": "^0.1.5",
     "@next/bundle-analyzer": "^12.2.4",
     "@tosspayments/brandpay-sdk": "^1.0.5",
+    "@tosspayments/payment-sdk": "^1.1.1",
     "aos": "^2.3.4",
     "axios": "^0.27.2",
     "cookie": "^0.5.0",

@@ -15,8 +15,8 @@ import {
   userAvaterLink,
 } from "@utils/utils";
 import { useRouter } from "next/router";
-import { useState } from "react";
-import { brandpay } from "@utils/toss";
+import { useEffect, useState } from "react";
+import { brandpay, tossPayments } from "@utils/toss";
 import { SmallLoading } from "@components/Loading";
 import { payMethods } from "@utils/Constants";
 import { AxiosError } from "axios";
@@ -44,9 +44,24 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
   const [phone, setPhone] = useState<string>();
   const [email, setEmail] = useState<string>();
   const [autoPayments, setAutoPayments] = useState<boolean>(false);
+  const [culturelandFee, setCulturelandFee] = useState<boolean>(false);
   const [selectPayMethod, setSelectPayMethod] = useState<string>();
   const [payMethod, setPayMethod] = useState<PayMethods>();
+  const [discount, setDiscount] = useState<number>(0);
+  const [defaultAmount, setDefalutAmount] = useState<number>(
+    data?.amount ? Number(data.amount) : 0
+  );
+  const [amount, setAmount] = useState<number>(0);
   const router = useRouter();
+  useEffect(() => {
+    setAmount(defaultAmount);
+    if (discount > 1) setAmount(defaultAmount - defaultAmount / discount);
+    if (payMethod === "battlepay") {
+      setAmount(prev => prev);
+    } else if (payMethod === "cultureland") {
+      setAmount(defaultAmount + defaultAmount / 10);
+    }
+  }, [payMethod, discount]);
 
   const { data: userData, error: userError } = useSWR<User>(
     `/auth/me`,
@@ -74,13 +89,13 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
   if (userError && userError.cause === 401) return <Login />;
   if (!userData) return <Loading />;
   if (userCardsError) {
-    brandpay(userData).then((pay) => {
+    brandpay(userData).then(pay => {
       pay.authenticate();
     });
   }
   const addMethod = () => {
-    brandpay(userData).then((pay) => {
-      pay.addPaymentMethod().then((result) => {
+    brandpay(userData).then(pay => {
+      pay.addPaymentMethod().then(result => {
         reloadCards();
       });
     });
@@ -93,17 +108,17 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
     setPayMethod(method as PayMethods);
   };
   const requestPayments = () => {
-    if (!autoPayments) return Toast("자동결제 이용에 동의해주세요", "error");
     if (!name) return Toast("이름을 입력해주세요", "error");
     if (!email) return Toast("이메일을 입력해주세요", "error");
     if (!phone) return Toast("전화번호를 입력해주세요", "error");
     if (payMethod === "battlepay") {
+      if (!autoPayments) return Toast("자동결제 이용에 동의해주세요", "error");
       if (!userCards || userCards.length === 0)
         return Toast("등록된 카드가 없습니다", "error");
-      brandpay(userData).then((pay) => {
+      brandpay(userData).then(pay => {
         pay
           .requestPayment({
-            amount: Number(data.amount),
+            amount: amount,
             orderId: data.id,
             orderName: data.name,
             customerEmail: email,
@@ -111,21 +126,34 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
               ? (selectPayMethod as MethodId)
               : (userCards[0].id as MethodId),
           })
-          .then((result) => {
+          .then(result => {
             return client("POST", "/payments/confirm-payment", {
-              phone: phone ? phone : userData.phone,
+              phone: phone ? phone.replace(/-/g, "") : userData.phone,
               email: email ? email : userData.email,
               ...result,
-            }).then((payments) => {
+            }).then(payments => {
               if (payments.error) throw new AxiosError(payments.message);
             });
           })
           .then(() => {
             router.push(`/payments/success?orderId=${data.id}`);
           })
-          .catch((error) => {
+          .catch(error => {
             Toast(error.message, "error");
           });
+      });
+    } else if (payMethod === "cultureland") {
+      if(!culturelandFee) return Toast("문화상품권 결제 수수료에 동의해주세요", "error");
+      tossPayments().then(payments => {
+        payments.requestPayment("문화상품권", {
+          amount: amount,
+          orderId: data.id,
+          orderName: data.name,
+          customerEmail: email,
+          successUrl:
+          window.location.origin + `/payments/gift?phone=${phone}`,
+          failUrl: window.location.origin + `/payments/fail?phone=${phone}`,
+        });
       });
     }
   };
@@ -148,7 +176,7 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
                 <Input
                   placeholder="이름을 입력해 주세요"
                   defaultValue={userData.user.username}
-                  onChangeHandler={(value) => setName(value)}
+                  onChangeHandler={value => setName(value)}
                   className="text-base ml-auto lg:w-80 w-full lg:mt-0 mt-1"
                 />
               </div>
@@ -158,9 +186,7 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
                   type={"phone"}
                   placeholder="“-“없이 입력해 주세요"
                   defaultValue={userData.phone ? userData.phone : undefined}
-                  onChangeHandler={(value) =>
-                    setPhone(value?.replace(/-/g, ""))
-                  }
+                  onChangeHandler={value => setPhone(value?.replace(/-/g, ""))}
                   className="text-base ml-auto lg:w-80 w-full lg:mt-0 mt-1"
                 />
               </div>
@@ -176,7 +202,7 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
                       ? userData.kakao_email
                       : undefined
                   }
-                  onChangeHandler={(value) => setEmail(value)}
+                  onChangeHandler={value => setEmail(value)}
                   className="text-base ml-auto lg:w-80 w-full lg:mt-0 mt-1"
                 />
               </div>
@@ -237,6 +263,32 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
                     {numberWithCommas(data.amount as number)}원
                   </span>
                 </div>
+                {discount > 1 ? (
+                  <>
+                    <div className="flex flex-row justify-between">
+                      <span className="text-lg font-bold">할인금액</span>
+                      <span className="text-lg">
+                        -{numberWithCommas(defaultAmount / discount)}원
+                      </span>
+                    </div>
+                  </>
+                ) : (
+                  <></>
+                )}
+                {payMethod === "cultureland" ? (
+                  <>
+                    <div className="flex flex-row justify-between">
+                      <span className="text-lg font-bold">
+                        문화상품권 결제 수수료
+                      </span>
+                      <span className="text-lg">
+                        {numberWithCommas(defaultAmount / 10)}원
+                      </span>
+                    </div>
+                  </>
+                ) : (
+                  <></>
+                )}
               </div>
               <hr className="w-full my-4" />
               <div className="flex flex-row justify-between items-center">
@@ -244,16 +296,28 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
                 <span className="text-lg">
                   월{" "}
                   <span className="font-bold text-xl">
-                    {numberWithCommas(data.amount as number)}
+                    {numberWithCommas(amount)}
                   </span>
                   원
                 </span>
               </div>
-              <CheckBox
-                className="mt-2"
-                placeholder={"자동결제 이용 동의"}
-                onChangeHandler={(check) => setAutoPayments(check)}
-              />
+              {payMethod === "cultureland" ? (
+                <>
+                  <CheckBox
+                    className="mt-2"
+                    placeholder={"문화상품권 결제 수수료 동의"}
+                    onChangeHandler={check => setCulturelandFee(check)}
+                  />
+                </>
+              ) : (
+                <>
+                  <CheckBox
+                    className="mt-2"
+                    placeholder={"자동결제 이용 동의"}
+                    onChangeHandler={check => setAutoPayments(check)}
+                  />
+                </>
+              )}
               <button
                 onClick={() => {
                   requestPayments();
@@ -270,7 +334,7 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
+export const getServerSideProps: GetServerSideProps = async ctx => {
   const cookies = cookieParser(ctx);
   const auth = cookies?.Authorization ? cookies.Authorization : null;
   const data = await client(
