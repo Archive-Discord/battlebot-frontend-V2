@@ -9,8 +9,8 @@ import useSWR from "swr";
 import dynamic from "next/dynamic";
 import LottieAnimaition from "@components/LottieAnimaition";
 import Toast from "@utils/toast";
+import Error from "@components/Error"
 
-const Error = dynamic(() => import("@components/Error"));
 const Login = dynamic(() => import("@components/Login"));
 const Layout = dynamic(() => import("@components/DashboardLayout"));
 const Loading = dynamic(() => import("@components/Loading"));
