@@ -3,6 +3,8 @@ import type { GetServerSideProps, NextPage } from "next";
 import { swrfetcher } from "@utils/client";
 import { cookieParser } from "@utils/utils";
 import { useRouter } from "next/router";
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { useTranslation } from 'next-i18next'
 import dynamic from "next/dynamic";
 import useSWR from "swr";
 import Error from "@components/Error"
@@ -60,11 +62,12 @@ const Dashboard: NextPage<PageDefaultProps> = ({ auth }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ctx => {
+export const getServerSideProps: GetServerSideProps = async(ctx) => {
   const cookies = cookieParser(ctx);
   return {
     props: {
       auth: cookies?.Authorization ? cookies.Authorization : null,
+      ...(await serverSideTranslations(ctx.locale ? ctx.locale : "ko", ['about']))
     },
   };
 };

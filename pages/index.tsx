@@ -5,11 +5,14 @@ import { battlebot } from "@utils/Constants";
 import client from "@utils/client";
 import dayjs from "dayjs";
 import CountUp from "react-countup";
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { useTranslation } from 'next-i18next'
 
 const Home: NextPage<ServerSideProps> = ({
   servers,
   users,
 }: ServerSideProps) => {
+  const { t } = useTranslation('index')
   const verifiedRef = useRef<HTMLDivElement>(null);
   const [verifiedLottie, setVerifiedLottie] = useState<LottiePlayer | null>(
     null
@@ -57,7 +60,7 @@ const Home: NextPage<ServerSideProps> = ({
             data-aos-easing="ease-in-sine"
           >
             <span className="drop-shadow-[6px_7px_#7800ff] lg:text-9xl text-6xl lg:mb-12 mb-5 font-bold">
-              배틀이
+              {t("battlebot")}
             </span>
             <span className="drop-shadow-[5px_4.5px_#7800ff]">
               웹 대시보드로 편리하게
@@ -158,13 +161,14 @@ const Home: NextPage<ServerSideProps> = ({
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const { data, error } = await client("GET", "/discord/caches");
   if (error) {
     return {
       props: {
         servers: 0,
         users: 0,
+        ...(await serverSideTranslations(ctx.locale ? ctx.locale : "ko", ['index']))
       }
     };
   } else {
@@ -172,6 +176,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
       props: {
         servers: data.servers,
         users: data.users,
+        ...(await serverSideTranslations(ctx.locale ? ctx.locale : "ko", ['index']))
       }
     };
   }

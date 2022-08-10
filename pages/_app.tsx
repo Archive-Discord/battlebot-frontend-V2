@@ -8,6 +8,7 @@ import Navbar from "../components/Navbar";
 import AOS from "aos";
 import Footer from "../components/Footer";
 import FlareLane from "@flarelane/flarelane-web-sdk";
+import { appWithTranslation } from 'next-i18next'
 
 import "../styles/globals.css";
 import "aos/dist/aos.css";
@@ -15,7 +16,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import "swiper/css"
 import "swiper/css/navigation"
 
-function BattlebotApp({ Component, pageProps, auth }: BattlebotAppProps) {
+function BattlebotApp({ Component, pageProps, auth }: BattlebotAppProps & { locale: string }) {
   const router = useRouter();
 
   useEffect(() => {
@@ -51,15 +52,17 @@ BattlebotApp.getInitialProps = async (appContext: AppContext) => {
     return {
       ...appProps,
       auth: cookies.Authorization,
+      locale: appContext.ctx.locale
     };
   }
   return {
     ...appProps,
     auth: undefined,
+    locale: appContext.ctx.locale
   };
 };
 
 interface BattlebotAppProps extends AppProps {
   auth: string;
 }
-export default BattlebotApp;
+export default appWithTranslation(BattlebotApp);

@@ -1,4 +1,11 @@
-import type { Guild, PageDefaultProps, User } from "@types";
+import type {
+  Guild,
+  Members,
+  PageDefaultProps,
+  Roles,
+  Ticket,
+  User,
+} from "@types";
 import type { NextPage, GetServerSideProps } from "next";
 import { cookieParser } from "@utils/utils";
 import { swrfetcher } from "@utils/client";
@@ -24,6 +31,28 @@ const DashboardMain: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
   const { data: userData, error: userError } = useSWR<User>(
     `/auth/me`,
     swrfetcher
+  );
+
+  const { data: guildMembersData, error: guildMembersError } = useSWR<
+    Members[]
+  >(`/guilds/${guildId}/members`, swrfetcher, {
+    refreshInterval: 30000,
+  });
+
+  const { data: guildRolesData, error: guildRolesError } = useSWR<Roles[]>(
+    `/guilds/${guildId}/roles`,
+    swrfetcher,
+    {
+      refreshInterval: 30000,
+    }
+  );
+
+  const { data: guildTicketData, error: guildTicketError } = useSWR<Ticket[]>(
+    `/guilds/${guildId}/tickets`,
+    swrfetcher,
+    {
+      refreshInterval: 30000,
+    }
   );
 
   if (!auth) return <Login />;

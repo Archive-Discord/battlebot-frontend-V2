@@ -1,0 +1,8 @@
+module.exports = {
+  debug: process.env.NODE_ENV === 'development',
+  i18n: {
+    defaultLocale: "ko",
+    locales: ["en", "ko"],
+  },
+  reloadOnPrerender: process.env.NODE_ENV === 'development',
+};
