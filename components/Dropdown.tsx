@@ -71,7 +71,7 @@ const Dropdown: React.FC<DropdownProps> = ({ items, selectCallback }) => {
                 </div>
                 <div>
                   {selectItem.id == item.id && (
-                    <i className="fas fa-check text-green-500 mr-1" />
+                    <i className="fas fa-check text-purple-500 mr-1" />
                   )}
                 </div>
               </div>

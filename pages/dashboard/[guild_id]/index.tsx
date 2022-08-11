@@ -14,6 +14,7 @@ import useSWR from "swr";
 import dynamic from "next/dynamic";
 import AnalyticsServer from "@components/dashboard/AnalyticsServer";
 import Error from "@components/Error";
+import { useTranslation } from "react-i18next";
 
 const Login = dynamic(() => import("@components/Login"));
 const Layout = dynamic(() => import("@components/DashboardLayout"));
@@ -21,6 +22,7 @@ const Loading = dynamic(() => import("@components/Loading"));
 
 const DashboardMain: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
   const router = useRouter();
+  const { t } = useTranslation()
   const { data: guildData, error: guildError } = useSWR<Guild>(
     `/guilds/${guildId}`,
     swrfetcher,
@@ -64,7 +66,7 @@ const DashboardMain: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
           className="hover:bg-gray-200 font-bold rounded-md px-3 py-1 mt-5"
           onClick={() => router.reload()}
         >
-          다시 시도하기
+          {t("retry")}
         </button>
       </Error>
     );
@@ -73,9 +75,9 @@ const DashboardMain: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
     <>
       <Layout guild={guildData}>
         <div className="flex flex-col mr-1.5 ml-1.5">
-          <span className="text-2xl font-bold">대시보드</span>
+          <span className="text-2xl font-bold">{t("dashboard.index.dashboard")}</span>
           <span className="text-lg mt-1 text-gray-500">
-            서버에 대한 간략한 정보를 확인하세요!
+          {t("dashboard.index.lookAbout")}
           </span>
         </div>
         <AnalyticsServer guild={guildData} />

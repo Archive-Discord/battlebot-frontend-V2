@@ -8,6 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 import client from "@utils/client";
 import FlareLane from "@flarelane/flarelane-web-sdk";
+import { useTranslation } from "react-i18next";
 
 interface NavbarProps {
   auth: string;
@@ -19,6 +20,7 @@ const Navbar = ({ auth }: NavbarProps) => {
   const [openMobileDropDown, setOpenMobileDropDown] = useState(false);
   const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
+  const { t } = useTranslation();
   const ref = useDetectClickOutside({
     onTriggered: () => setUserDropDownOpen(false),
   });
@@ -91,7 +93,7 @@ const Navbar = ({ auth }: NavbarProps) => {
               style={{ fontFamily: "Noto Sans KR" }}
               className="text-xl lg:text-xl font-bold ml-2"
             >
-              배틀이
+              {t("battlebot")}
             </span>
           </div>
           <div
@@ -113,7 +115,7 @@ const Navbar = ({ auth }: NavbarProps) => {
                         : "hover:bg-gray-100 text-sm py-3 px-2 rounded-lg"
                     }
                   >
-                    {item.name}
+                    {t(item.name)}
                   </a>
                 </Link>
               </>
@@ -148,7 +150,7 @@ const Navbar = ({ auth }: NavbarProps) => {
                     <Link href={`/me`}>
                       <a className="px-4 py-2 block hover:bg-gray-100 rounded-t">
                         <i className="fas fa-user mr-2" />
-                        <span>내 정보</span>
+                        <span>{t("navbar.myInfo")}</span>
                       </a>
                     </Link>
                     <div>
@@ -157,7 +159,7 @@ const Navbar = ({ auth }: NavbarProps) => {
                         className="px-4 py-2 block text-red-500 hover:bg-gray-100 rounded-b"
                       >
                         <i className="fas fa-sign-out-alt mr-2" />
-                        <span>로그아웃</span>
+                        <span>{t("navbar.logout")}</span>
                       </a>
                     </div>
                   </div>
@@ -165,7 +167,7 @@ const Navbar = ({ auth }: NavbarProps) => {
               </>
             ) : (
               <>
-                <button onClick={Login}>로그인</button>
+                <button onClick={Login}>{t("navbar.login")}</button>
               </>
             )}
           </div>
@@ -257,7 +259,7 @@ const Navbar = ({ auth }: NavbarProps) => {
                   }}
                 >
                   <i className={item.icon + " mr-3"} />
-                  {item.name}
+                  {t(item.name)}
                 </a>
               </Link>
             </>
@@ -274,7 +276,7 @@ const Navbar = ({ auth }: NavbarProps) => {
                   className="pl-6 hover:bg-gray-100 py-3 px-2 rounded-lg"
                 >
                   <i className="fas fa-user mr-3" />
-                  {user.username}님의 정보
+                  {user.username}{t("navbar.usersInfo")}
                 </a>
               </Link>
               <a
@@ -284,7 +286,7 @@ const Navbar = ({ auth }: NavbarProps) => {
                 }}
                 className="pl-6 hover:bg-gray-100 py-3 px-2 rounded-lg text-red-500"
               >
-                <i className="fas fa-sign-out-alt mr-3" /> 로그아웃
+                <i className="fas fa-sign-out-alt mr-3" /> {t("navbar.logout")}
               </a>
             </div>
           </>
@@ -298,7 +300,7 @@ const Navbar = ({ auth }: NavbarProps) => {
                 }}
                 className="pl-6 hover:bg-gray-100 py-3 px-2 rounded-lg"
               >
-                <i className="fas fa-sign-out-alt mr-3" /> 로그인
+                <i className="fas fa-sign-out-alt mr-3" /> {t("navbar.login")}
               </a>
             </div>
           </>

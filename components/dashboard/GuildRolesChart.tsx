@@ -12,8 +12,10 @@ import {
   ArcElement,
 } from "chart.js";
 import { Pie } from "react-chartjs-2";
+import { useTranslation } from "react-i18next";
 
 const GuildRolesChart: React.FC<GuildRolesChartProps> = ({guildRolesData}) => {
+  const { t } = useTranslation()
   ChartJS.register(
     ArcElement,
     CategoryScale,
@@ -46,7 +48,7 @@ const GuildRolesChart: React.FC<GuildRolesChartProps> = ({guildRolesData}) => {
 
   return (
     <>
-      <span className="font-bold mt-3 text-xl">역할 통계</span>
+      <span className="font-bold mt-3 text-xl">{t("dashboard.analytics.roles")}</span>
       <Pie className="mb-4" data={guildRolesdata} />
     </>
   );

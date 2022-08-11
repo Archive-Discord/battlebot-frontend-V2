@@ -10,12 +10,14 @@ import dynamic from "next/dynamic";
 import LottieAnimaition from "@components/LottieAnimaition";
 import Toast from "@utils/toast";
 import Error from "@components/Error"
+import { useTranslation } from "react-i18next";
 
 const Login = dynamic(() => import("@components/Login"));
 const Layout = dynamic(() => import("@components/DashboardLayout"));
 const Loading = dynamic(() => import("@components/Loading"));
 
 const DashboardPremium: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
+  const { t } = useTranslation()
   const [selectPremiumType, setSelectPremiumType] = useState<"month" | "year">(
     "month"
   );
@@ -41,7 +43,7 @@ const DashboardPremium: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
           className="hover:bg-gray-200 font-bold rounded-md px-3 py-1 mt-5"
           onClick={() => router.reload()}
         >
-          다시 시도하기
+          {t("retry")}
         </button>
       </Error>
     );
@@ -64,9 +66,9 @@ const DashboardPremium: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
       <Layout guild={guildData}>
         <div className="w-full" style={{ fontFamily: "Noto Sans KR" }}>
           <div className="w-full flex flex-col mr-1.5 ml-1.5">
-            <span className="text-2xl font-bold">배틀이 프리미엄</span>
+            <span className="text-2xl font-bold">{t("dashboard.premium.battlebot")}</span>
             <span className="text-lg mt-1 text-gray-500">
-              배틀이를 더욱 유용하게 사용하세요!
+            {t("dashboard.premium.useage")}
             </span>
           </div>
           <div className="grid lg:grid-cols-2 w-full mt-4 gap-4 lg:mr-1.5 lg:ml-1.5">
@@ -80,9 +82,9 @@ const DashboardPremium: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
               }`}
               style={{ transition: "all 0.3s" }}
             >
-              <span className="font-bold">프리미엄 월간플랜</span>
+              <span className="font-bold">{t("dashboard.premium.month")}</span>
               <span className="mt-5 font-bold lg:text-3xl text-2xl">
-                4,900 ₩
+                4,900 {t("dashboard.premium.won")}
               </span>
               <div className="flex flex-col items-center min-h-[100px] justify-center my-auto">
                 {premiumItems
@@ -106,9 +108,9 @@ const DashboardPremium: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
                 "bg-violet-100 border-2 border-purple-500"
               }`}
             >
-              <span className="font-bold">프리미엄 연간플랜</span>
+              <span className="font-bold">{t("dashboard.premium.year")}</span>
               <span className="mt-5 font-bold lg:text-3xl text-2xl">
-                49,000 ₩
+                49,000 {t("dashboard.premium.won")}
               </span>
               <div className="flex flex-col items-center min-h-[100px] justify-center my-auto">
                 {premiumItems
@@ -130,7 +132,7 @@ const DashboardPremium: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
               style={{ transition: "all 0.3s" }}
               className="px-5 py-2 rounded-xl text-xl lg:ml-2 hover:bg-violet-100 border hover:border-purple-500"
             >
-              결제 진행하기
+              {t("dashboard.premium.continuePayments")}
             </button>
           </div>
           <div className="max-w-[1300px] mx-auto mt-20">
@@ -142,10 +144,10 @@ const DashboardPremium: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
                     animation={require("../../../lottieFiles/partner.json")}
                   />
                   <span className="lg:text-xl text-base font-bold">
-                    어라.. 서버 인원이 500명 이상인 거 같아요!
+                  {t("dashboard.premium.serverMember500up")}
                   </span>
                   <span className="lg:text-2xl text-xl font-bold">
-                    배틀이 파트너는 어떠세요?
+                  {t("dashboard.premium.howBattlebotPartner")}
                   </span>
                   <button
                     onClick={() => {
@@ -153,7 +155,7 @@ const DashboardPremium: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
                     }}
                     className="mt-3 rounded-md border border-purple-500 hover:bg-violet-100 text-xl px-3 py-1 font-bold"
                   >
-                    신청하기
+                    {t("dashboard.premium.partnerStart")}
                   </button>
                 </section>
               </>
@@ -162,9 +164,9 @@ const DashboardPremium: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
             )}
             <section className="grid lg:grid-cols-2 grid-cols-1 lg:mt-10 mt-20 px-2 pb-10">
               <div className="col-span-1 flex lg:items-start justify-center items-center flex-col lg:p-10 py-10">
-                <span className="lg:text-2xl text-xl font-bold">이메일</span>
+                <span className="lg:text-2xl text-xl font-bold">{t("dashboard.premium.email")}</span>
                 <span className="lg:text-3xl text-2xl font-bold">
-                  이메일을 이용한 이메일 인증
+                {t("dashboard.premium.verifyToEmail")}
                 </span>
               </div>
               <div className="col-span-1">
@@ -188,19 +190,19 @@ const DashboardPremium: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
                 />
               </div>
               <div className="col-span-1 flex lg:items-end justify-center items-center flex-col lg:p-10">
-                <span className="lg:text-2xl text-xl font-bold">전화번호</span>
+                <span className="lg:text-2xl text-xl font-bold">{t("dashboard.premium.phone")}</span>
                 <span className="lg:text-3xl text-2xl font-bold">
-                  문자를 이용한 전화번호 인증
+                {t("dashboard.premium.verifyToPhone")}
                 </span>
               </div>
             </section>
             <section className="grid lg:grid-cols-2 grid-cols-1 lg:mt-10 mt-20 px-2 pb-10 min-h-[420px]">
               <div className="col-span-1 flex lg:items-start justify-center items-center flex-col lg:p-10 py-10">
                 <span className="lg:text-2xl text-xl font-bold">
-                  커스텀 링크
+                {t("dashboard.premium.customLink")}
                 </span>
                 <span className="lg:text-3xl text-2xl font-bold">
-                  서버만의 링크로 서버 입장
+                {t("dashboard.premium.customLinkJoinServer")}
                 </span>
               </div>
               <div className="col-span-1 flex items-center justify-center">
@@ -217,7 +219,7 @@ const DashboardPremium: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
                 animation={require("../../../lottieFiles/developer.json")}
               />
               <span className="lg:text-xl text-base -mt-8 font-bold">
-                지속적으로 개발 중인 배틀이를 확인하세요
+                {t("dashboard.premium.lookBattlebotDevelop")}
               </span>
               <div className="flex flex-row items-center">
                 <button

@@ -4,6 +4,7 @@ import React, {
   useEffect,
   useState,
 } from "react";
+import { useTranslation } from "react-i18next";
 
 const Input: React.FC<InputProps> = ({
   defaultValue,
@@ -16,6 +17,7 @@ const Input: React.FC<InputProps> = ({
     defaultValue ? defaultValue : undefined
   );
   const [error, setError] = useState<string>();
+  const { t } = useTranslation()
   useEffect(() => {
     onChangeHandler(value);
   }, [value]);
@@ -25,10 +27,10 @@ const Input: React.FC<InputProps> = ({
   useEffect(() => {
     if (!value) return;
     if (type === "email") {
-      if (!validateEmail(value)) setError("이메일을 정확히 입력해 주세요");
+      if (!validateEmail(value)) setError(t("input.error.email"));
       else setError("");
     } else if (type == "phone") {
-      if (!validatePhone(value)) setError("전화번호를 정확히 입력해 주세요");
+      if (!validatePhone(value)) setError(t("input.error.phone"));
       else setError("");
     }
   }, [value]);

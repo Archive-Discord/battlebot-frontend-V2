@@ -26,6 +26,7 @@ import useSWR from "swr";
 import PaymentsMethods from "@components/PaymentsMethods";
 import Toast from "@utils/toast";
 import Error from "@components/Error"
+import { useTranslation } from "react-i18next";
 
 const Login = dynamic(() => import("@components/Login"));
 const Loading = dynamic(() => import("@components/Loading"));
@@ -53,6 +54,7 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
   );
   const [amount, setAmount] = useState<number>(0);
   const router = useRouter();
+  const { t } = useTranslation()
   useEffect(() => {
     setAmount(defaultAmount);
     if (discount > 1) setAmount(defaultAmount - defaultAmount / discount);
@@ -81,7 +83,7 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
           className="hover:bg-gray-200 border font-bold rounded-md px-3 py-1 mt-5"
           onClick={() => router.back()}
         >
-          이전 페이지로
+           {t("retry")}
         </button>
       </Error>
     );

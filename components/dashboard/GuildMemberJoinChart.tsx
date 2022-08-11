@@ -13,11 +13,12 @@ import {
 import { Line } from "react-chartjs-2";
 import React from "react";
 import dayjs from "dayjs";
+import { useTranslation } from "react-i18next";
 
 const GuildMemberJoinChart: React.FC<GuildMemberJoinChartProps> = ({
   guildMembersData,
 }) => {
-
+  const { t } = useTranslation()
   ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -59,7 +60,7 @@ const GuildMemberJoinChart: React.FC<GuildMemberJoinChartProps> = ({
     labels: labels(),
     datasets: [
       {
-        label: "일별 접속 유저",
+        label: t("dashboard.analytics.dayOfusers"),
         data: userDatas(),
         fill: true,
         borderColor: "rgba(124,58,237, 0.8)",
@@ -81,7 +82,7 @@ const GuildMemberJoinChart: React.FC<GuildMemberJoinChartProps> = ({
 
   return (
     <>
-      <span className="font-bold mt-3 text-xl">유저수 통계</span>
+      <span className="font-bold mt-3 text-xl">{t("dashboard.analytics.users")}</span>
       <Line className="px-3 mb-4" data={data} options={options} />
     </>
   );

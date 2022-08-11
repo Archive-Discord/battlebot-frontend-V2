@@ -3,11 +3,10 @@ import type { GetServerSideProps, NextPage } from "next";
 import { swrfetcher } from "@utils/client";
 import { cookieParser } from "@utils/utils";
 import { useRouter } from "next/router";
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { useTranslation } from 'next-i18next'
 import dynamic from "next/dynamic";
 import useSWR from "swr";
 import Error from "@components/Error"
+import { useTranslation } from "react-i18next";
 
 const Login = dynamic(() => import('@components/Login'))
 const Loading = dynamic(() => import('@components/Loading'))
@@ -15,7 +14,7 @@ const ServerCard = dynamic(() => import("@components/ServerCard"))
 
 const Dashboard: NextPage<PageDefaultProps> = ({ auth }) => {
   const router = useRouter();
-
+  const { t } = useTranslation()
   const { data: guildData, error: guildError } = useSWR<UserGulds>(
     "/auth/me/guilds",
     swrfetcher,
@@ -33,7 +32,7 @@ const Dashboard: NextPage<PageDefaultProps> = ({ auth }) => {
           className="hover:bg-gray-200 font-bold rounded-md px-3 py-1 mt-5"
           onClick={() => router.reload()}
         >
-          다시 시도하기
+          {t("retry")}
         </button>
       </Error>
     );
@@ -50,7 +49,7 @@ const Dashboard: NextPage<PageDefaultProps> = ({ auth }) => {
           className="lg:text-2xl text-xl"
           style={{ margin: "100px auto 0px" }}
         >
-          관리할 서버를 선택해주세요
+          {t("dashboard.selectManageServer")}
         </span>
         <div className="flex mt-10 flex-row w-full h-full flex-wrap items-center justify-center">
           {guildData.map((server, index) => (
@@ -67,7 +66,6 @@ export const getServerSideProps: GetServerSideProps = async(ctx) => {
   return {
     props: {
       auth: cookies?.Authorization ? cookies.Authorization : null,
-      ...(await serverSideTranslations(ctx.locale ? ctx.locale : "ko", ['about']))
     },
   };
 };

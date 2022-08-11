@@ -2,9 +2,11 @@ import type { UserGuld } from "@types";
 import { battlebot } from "@utils/Constants";
 import { guildProfileLink } from "@utils/utils";
 import { useRouter } from "next/router";
+import { useTranslation } from "react-i18next";
 
 const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
   const router = useRouter();
+  const { t } = useTranslation()
   const onInviteClick = (guildId: string) => {
     window.open(
       battlebot.invite + `&guild_id=${guildId}&disable_guild_select=true`,
@@ -41,14 +43,14 @@ const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
                     router.push(`/dashboard/${server.id}`)
                 }}
               >
-                관리하기
+                {t("dashboard.manage")}
               </button>
             ) : (
               <button
                 className="max-w-[77px] bg-purple-500 text-white px-2 py-1 border rounded-lg text-bold hover:-translate-y-1 transform transition duration-100 ease-in"
                 onClick={() => onInviteClick(server.id)}
               >
-                초대하기
+                {t("dashboard.invite")}
               </button>
             )}
           </div>

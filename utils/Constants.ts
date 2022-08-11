@@ -2,17 +2,17 @@ import type { Item, SideBarItem } from "@types";
 
 export const NavBarItems = [
   {
-    name: "홈",
+    name: "navbar.home",
     href: "/",
     icon: "fas fa-home",
   },
   {
-    name: "프리미엄",
+    name: "navbar.premium",
     href: "/premium",
     icon: "fas fa-crown",
   },
   {
-    name: "대시보드",
+    name: "navbar.dashboard",
     href: "/dashboard",
     icon: "fas fa-chart-line",
   },
@@ -20,42 +20,42 @@ export const NavBarItems = [
 
 export const SideBarItems: SideBarItem[] = [
   {
-    name: "대시보드",
+    name: "dashboard.sidebar.dashboard",
     path: "/",
     pathName: "/dashboard/[guild_id]",
     categori: "none",
     icon: "fas fa-home",
   },
   {
-    name: "프리미엄",
+    name: "dashboard.sidebar.premium",
     path: "/premium",
     pathName: "/dashboard/[guild_id]/premium",
     categori: "none",
     icon: "fas fa-crown",
   },
   {
-    name: "통계",
+    name: "dashboard.sidebar.analytics",
     path: "/analytics",
     pathName: "/dashboard/[guild_id]/analytics",
     categori: "none",
     icon: "fas fa-chart-line",
   },
   {
-    name: "자동관리",
+    name: "dashboard.sidebar.automod",
     path: "/automod",
     pathName: "/dashboard/[guild_id]/automod",
     categori: "server_manage",
     icon: "fas fa-sync-alt",
   },
   {
-    name: "유저관리",
+    name: "dashboard.sidebar.members",
     path: "/members",
     pathName: "/dashboard/[guild_id]/members",
     categori: "server_manage",
     icon: "fas fa-users",
   },
   {
-    name: "티켓",
+    name: "dashboard.sidebar.ticket",
     path: "/ticket",
     pathName: "/dashboard/[guild_id]/ticket",
     categori: "utils",

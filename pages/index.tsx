@@ -5,14 +5,13 @@ import { battlebot } from "@utils/Constants";
 import client from "@utils/client";
 import dayjs from "dayjs";
 import CountUp from "react-countup";
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { useTranslation } from 'next-i18next'
+import { useTranslation } from "react-i18next";
 
 const Home: NextPage<ServerSideProps> = ({
   servers,
   users,
 }: ServerSideProps) => {
-  const { t } = useTranslation('index')
+  const { t } = useTranslation();
   const verifiedRef = useRef<HTMLDivElement>(null);
   const [verifiedLottie, setVerifiedLottie] = useState<LottiePlayer | null>(
     null
@@ -29,7 +28,7 @@ const Home: NextPage<ServerSideProps> = ({
         renderer: "svg",
         loop: true,
         autoplay: true,
-        animationData: require('../lottieFiles/verified.json')
+        animationData: require("../lottieFiles/verified.json"),
       });
 
       return () => animation.destroy();
@@ -60,13 +59,13 @@ const Home: NextPage<ServerSideProps> = ({
             data-aos-easing="ease-in-sine"
           >
             <span className="drop-shadow-[6px_7px_#7800ff] lg:text-9xl text-6xl lg:mb-12 mb-5 font-bold">
-              {t("battlebot")}
+              {t("index.battlebot")}
             </span>
             <span className="drop-shadow-[5px_4.5px_#7800ff]">
-              웹 대시보드로 편리하게
+              {t("index.description1")}
             </span>
             <span className="drop-shadow-[5px_4.5px_#7800ff]">
-              디스코드 서버를 관리하세요.
+              {t("index.description2")}
             </span>
           </div>
         </div>
@@ -79,20 +78,20 @@ const Home: NextPage<ServerSideProps> = ({
         data-aos-easing="ease-in-sine"
       >
         <span className="text-sm">
-          {dayjs().format("YYYY.MM.DD")} 기준
+          {dayjs().format("YYYY.MM.DD")} {t("index.standard")}
         </span>
         <span className="lg:mt-5 mt-10 lg:block flex flex-col items-center">
           <span className="lg:text-2xl text-xl font-normal">
-            배틀이와 함께한{" "}
+            {t("index.withBattlebot")}{" "}
           </span>
           <span className="text-4xl lg:mt-5 mt-2">
             <CountUp
               start={0}
-              end={dayjs(new Date()).diff("2022-1-6", 'days')}
+              end={dayjs(new Date()).diff("2022-1-6", "days")}
               enableScrollSpy
               separator=","
             />
-            일
+            {t("index.day")}
           </span>
         </span>
         <div className="text-base lg:max-w-[1000px] max-w-[400px] lg:space-y-0 space-y-2 mt-10 w-full lg:border lg:mt-10 flex lg:flex-row flex-col justify-between p-5 border-[#e6e6e6] items-center rounded-2xl">
@@ -100,20 +99,20 @@ const Home: NextPage<ServerSideProps> = ({
             className="w-full flex lg:justify-center justify-between	lg:border-r lg:flex-col flex-row items-center"
             style={{ flex: "1 1 25%", margin: "15x 0px 15px" }}
           >
-            <span className="font-blod">사용중인 유저 수</span>
+            <span className="font-blod">{t("index.useingUsers")}</span>
             <span className="lg:mt-3 lg:text-xl">
               <CountUp start={0} end={users} enableScrollSpy separator="," />
-              명
+              {t("index.userCount")}
             </span>
           </div>
           <div
             className="w-full flex lg:justify-center justify-between lg:flex-col flex-row items-center"
             style={{ flex: "1 1 25%", margin: "15x 0px 15px" }}
           >
-            <span className="font-blod">사용중인 서버 수</span>
+            <span className="font-blod">{t("index.useingServers")}</span>
             <span className="lg:mt-3 lg:text-xl">
               <CountUp start={0} end={servers} enableScrollSpy separator="," />
-              서버
+              {t("index.serverCount")}
             </span>
           </div>
         </div>
@@ -125,10 +124,10 @@ const Home: NextPage<ServerSideProps> = ({
         <div className="grid lg:grid-cols-2 grid-cols-1 container content-center">
           <div className="col-span-1 flex flex-col lg:items-start items-center justify-center p-10">
             <span className="lg:text-2xl text-xl font-bold mt-5">
-              간단한 인증 설정으로
+              {t("index.simpleAuthSetup")}
             </span>
             <span className="lg:text-4xl text-2xl font-bold">
-              서버의 보안을 한층 더 위로
+              {t("index.serverSecurityHigher")}
             </span>
           </div>
           <div className="col-span-1">
@@ -150,34 +149,41 @@ const Home: NextPage<ServerSideProps> = ({
       >
         <div className="flex items-center justify-center container flex-col">
           <div ref={verifiedRef} className="w-48 h-48" />
-          <span className="mt-10 text-2xl">디스코드에서 인증된 봇으로</span>
-          <span className="text-2xl">안심하고 이용하세요</span>
-          <button onClick={() => {
-            window.open(battlebot.invite, '봇 초대하기', "width=450, height=850")
-          }} className="mt-8 bg-white text-lg text-gray-800 px-3 py-1 rounded-md">시작하기</button>
+          <span className="mt-10 text-2xl">{t("index.verifyInDiscord")}</span>
+          <span className="text-2xl">{t("index.usefulRelief")}</span>
+          <button
+            onClick={() => {
+              window.open(
+                battlebot.invite,
+                "봇 초대하기",
+                "width=450, height=850"
+              );
+            }}
+            className="mt-8 bg-white text-lg text-gray-800 px-3 py-1 rounded-md"
+          >
+            {t("index.start")}
+          </button>
         </div>
       </section>
     </>
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
+export const getServerSideProps: GetServerSideProps = async ctx => {
   const { data, error } = await client("GET", "/discord/caches");
   if (error) {
     return {
       props: {
         servers: 0,
-        users: 0,
-        ...(await serverSideTranslations(ctx.locale ? ctx.locale : "ko", ['index']))
-      }
+        users: 0
+      },
     };
   } else {
     return {
       props: {
         servers: data.servers,
-        users: data.users,
-        ...(await serverSideTranslations(ctx.locale ? ctx.locale : "ko", ['index']))
-      }
+        users: data.users
+      },
     };
   }
 };

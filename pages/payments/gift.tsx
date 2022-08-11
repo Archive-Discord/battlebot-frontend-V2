@@ -5,7 +5,8 @@ import { useRouter } from "next/router";
 import client from "@utils/client";
 import dynamic from "next/dynamic";
 import dayjs from "dayjs";
-import Error from "@components/Error"
+import Error from "@components/Error";
+import { useTranslation } from "react-i18next";
 
 const Login = dynamic(() => import("@components/Login"));
 
@@ -17,6 +18,7 @@ const PaymentsSuccess: NextPage<PageDefaultProps> = ({
   data,
 }) => {
   const router = useRouter();
+  const { t } = useTranslation();
   if (error && status === 401) return <Login />;
   if (error && message)
     return (
@@ -25,7 +27,7 @@ const PaymentsSuccess: NextPage<PageDefaultProps> = ({
           className="hover:bg-gray-200 border font-bold rounded-md px-3 py-1 mt-5"
           onClick={() => router.back()}
         >
-          이전 페이지로
+          {t("retry")}
         </button>
       </Error>
     );
@@ -106,33 +108,37 @@ const PaymentsSuccess: NextPage<PageDefaultProps> = ({
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
+export const getServerSideProps: GetServerSideProps = async ctx => {
   const cookies = cookieParser(ctx);
   const auth = cookies?.Authorization ? cookies.Authorization : null;
-  const { orderId, phone, paymentKey, amount } = ctx.query
-  if(!amount||!orderId||!phone||!paymentKey) return {
-    props: {
-      auth,
-      error: true,
-      message: "필수 파라미터가 없습니다"
-    },
-  };
+  const { orderId, phone, paymentKey, amount } = ctx.query;
+  if (!amount || !orderId || !phone || !paymentKey)
+    return {
+      props: {
+        auth,
+        error: true,
+        message: "필수 파라미터가 없습니다",
+      },
+    };
   const data = await client(
     "POST",
     `/payments/order/success/${orderId}/gift`,
     {
-      orderId, phone, paymentKey, amount
+      orderId,
+      phone,
+      paymentKey,
+      amount,
     },
     auth
   );
-  if(data.status === 409) {
+  if (data.status === 409) {
     return {
       redirect: {
         permanent: false,
         destination: `/payments/success?orderId=${orderId}`,
       },
-      props:{},
-    }
+      props: {},
+    };
   }
   return {
     props: {

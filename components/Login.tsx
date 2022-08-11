@@ -1,9 +1,11 @@
 import type { LottiePlayer } from "lottie-web";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const Login = () => {
   const Ref = useRef<HTMLDivElement>(null);
+  const { t } = useTranslation()
   const [lottie, setLottie] = useState<LottiePlayer | null>(null);
   const [loading, setLoading] = useState("");
   const [count, setCount] = useState(0);
@@ -63,7 +65,7 @@ const Login = () => {
         style={{ fontFamily: "Noto Sans KR" }}
       >
         <div className="w-48 h-48" ref={Ref}></div>
-        <span className="-mt-12 w-24 ml-5">로그인 중{loading}</span>
+        <span className="-mt-12 w-24 ml-5">{t("login.loading")}{loading}</span>
       </div>
     </>
   );

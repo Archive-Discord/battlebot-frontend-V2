@@ -4,9 +4,11 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import SidebarSelectServer from "@components/SidebarSelectServer";
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
 
 const SideBar: React.FC<SideBarProps> = ({ guild }) => {
   const router = useRouter();
+  const { t } = useTranslation()
   const [isOpen, setIsOpen] = useState(false);
   const [serverManageOpen, setServerManageOpen] = useState(true);
   const [serverUtilOpen, setServerUtilOpen] = useState(true);
@@ -55,7 +57,7 @@ const SideBar: React.FC<SideBarProps> = ({ guild }) => {
                         " text-lg w-5 h-5 m-auto flex items-center justify-center mr-3"
                       }
                     />
-                    <span className="text-sm">{item.name}</span>
+                    <span className="text-sm">{t(item.name)}</span>
                   </div>
                   <div className="">
                     {item.premium ? (
@@ -78,7 +80,7 @@ const SideBar: React.FC<SideBarProps> = ({ guild }) => {
                 else setServerManageOpen(true);
               }}
             >
-              <span className="text-sm font-bold ">서버관리</span>
+              <span className="text-sm font-bold ">{t("dashboard.sidebar.categori.manage")}</span>
               <i
                 className={`fas fa-caret-up ${
                   serverManageOpen ? "rotate-180" : ""
@@ -127,7 +129,7 @@ const SideBar: React.FC<SideBarProps> = ({ guild }) => {
                             " text-lg w-5 h-5 m-auto flex items-center justify-center mr-3"
                           }
                         />
-                        <span className="text-sm">{item.name}</span>
+                        <span className="text-sm">{t(item.name)}</span>
                       </div>
                       <div className="">
                         {item.premium ? (
@@ -152,7 +154,7 @@ const SideBar: React.FC<SideBarProps> = ({ guild }) => {
                 else setServerUtilOpen(true);
               }}
             >
-              <span className="text-sm font-bold ">유틸</span>
+              <span className="text-sm font-bold ">{t("dashboard.sidebar.categori.util")}</span>
               <i
                 className={`fas fa-caret-up ${
                   serverUtilOpen ? "rotate-180" : ""
@@ -201,7 +203,7 @@ const SideBar: React.FC<SideBarProps> = ({ guild }) => {
                             " text-lg w-5 h-5 m-auto flex items-center justify-center mr-3"
                           }
                         />
-                        <span className="text-sm">{item.name}</span>
+                        <span className="text-sm">{t(item.name)}</span>
                       </div>
                       <div className="">
                         {item.premium ? (

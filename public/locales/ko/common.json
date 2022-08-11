@@ -1,3 +1,98 @@
 {
-    "battlebot": "배틀이"
-}   
+  "battlebot": "배틀이",
+  "index": {
+    "battlebot": "배틀이",
+    "description1": "웹 대시보드로 편리하게",
+    "description2": "디스코드 서버를 관리하세요.",
+    "standard": "기준",
+    "withBattlebot": "배틀이와 함께한",
+    "day": "일",
+    "useingUsers": "사용중인 유저 수",
+    "userCount": "명",
+    "serverCount": "서버",
+    "useingServers": "사용중인 서버 수",
+    "simpleAuthSetup": "간단한 인증 설정으로",
+    "serverSecurityHigher": "서버의 보안을 한층 더 위로",
+    "verifyInDiscord": "디스코드에서 인증된 봇으로",
+    "usefulRelief": "안심하고 이용하세요",
+    "start": "시작하기"
+  },
+  "navbar": {
+    "home": "홈",
+    "premium": "프리미엄",
+    "dashboard": "대시보드",
+    "myInfo": "내 정보",
+    "logout": "로그아웃",
+    "login": "로그인",
+    "usersInfo": "님의 정보"
+  },
+  "footer": {
+    "tos": "이용약관",
+    "privacy": "개인정보처리방침",
+    "guide": "이용 가이드",
+    "recruit": "채용"
+  },
+  "dashboard": {
+    "selectManageServer": "관리할 서버를 선택해주세요",
+    "manage": "관리하기",
+    "invite": "초대하기",
+    "sidebar": {
+        "categori": {
+            "util": "유틸",
+            "manage": "서버관리"
+        },
+        "dashboard": "대시보드",
+        "premium": "프리미엄",
+        "analytics": "통계",
+        "automod": "자동관리",
+        "members": "유저관리",
+        "ticket": "티켓"
+    },
+    "premium": {
+        "battlebot": "배틀이 프리미엄",
+        "useage": "배틀이를 더욱 유용하게 사용하세요!",
+        "month": "프리미엄 월간플랜",
+        "year": "프리미엄 연간플랜",
+        "won": "₩",
+        "continuePayments": "결제 진행하기",
+        "serverMember500up": "어라.. 서버 인원이 500명 이상인 거 같아요!",
+        "howBattlebotPartner": "배틀이 파트너는 어떠세요?",
+        "partnerStart": "신청하기",
+        "email": "이메일",
+        "verifyToEmail": "이메일을 이용한 이메일 인증",
+        "phone": "전화번호",
+        "verifyToPhone": "이메일을 이용한 이메일 인증",
+        "customLink": "커스텀 링크",
+        "customLinkJoinServer": "서버만의 링크로 서버 입장",
+        "lookBattlebotDevelop": "지속적으로 개발 중인 배틀이를 확인하세요"
+    },
+    "analytics": {
+        "analytics": "통계",
+        "analyticsDescrption": "서버에 대한 향목별 통계를 확인하세요!",
+        "users": "유저수 통계",
+        "dayOfusers": "일별 접속 유저",
+        "roles": "역할 통계"
+    },
+    "index": {
+        "dashboard": "대시보드",
+        "lookAbout": "서버에 대한 간략한 정보를 확인하세요!",
+        "analytics": {
+            "countOfUser": "명",
+            "userCount": "유저 수",
+            "detail": "자세히 보기",
+            "tickets": "생성된 티켓",
+            "verifys": "완료한 인증"
+        }
+    }
+  },
+  "input": {
+    "error": {
+        "email": "이메일을 정확히 입력해 주세요",
+        "phone": "전화번호를 정확히 입력해 주세요"
+    }
+  },
+  "login": {
+    "loading": "로그인 중"
+  },
+  "retry": "다시 시도하기"
+}

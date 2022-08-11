@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import dynamic from "next/dynamic";
 import Error from "@components/Error";
+import { useTranslation } from "react-i18next";
 
 const Login = dynamic(() => import("@components/Login"));
 const Layout = dynamic(() => import("@components/DashboardLayout"));
@@ -13,6 +14,7 @@ const Loading = dynamic(() => import("@components/Loading"));
 
 const DashboardAutomod: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
   const router = useRouter();
+  const { t } = useTranslation() 
   const { data: guildData, error: guildError } = useSWR<Guild>(
     `/guilds/${guildId}`,
     swrfetcher,
@@ -33,7 +35,7 @@ const DashboardAutomod: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
           className="hover:bg-gray-200 font-bold rounded-md px-3 py-1 mt-5"
           onClick={() => router.reload()}
         >
-          다시 시도하기
+          {t("retry")}
         </button>
       </Error>
     );
