@@ -93,89 +93,95 @@ const Footer: React.FC<FooterProps> = ({ themeHanler, theme }) => {
                 />
               </a>
             </div>
-            <div
-              ref={ref}
-              className="lg:ml-auto relative lg:block inline-block w-48 h-full min-h-[50px] h-[50px]"
-            >
+            <div className="flex items-center justify-center lg:ml-auto">
               <div
-                className="h-full flex flex-row justify-between px-3 py-1.5 rounded-xl"
-                onClick={() => {
-                  if (!openDropdown) setOpenDropdown(true);
-                  else setOpenDropdown(false);
-                }}
+                ref={ref}
+                className="relative lg:block inline-block w-48 h-full min-h-[50px] h-[50px]"
               >
-                <div className="flex flx-row items-center">
-                  <img
-                    className="w-8 mr-2 rounded border"
-                    src={selectItem.icon}
-                  />
-                  <span>{selectItem.name}</span>
+                <div
+                  className="h-full flex flex-row justify-between px-3 py-1.5 rounded-xl"
+                  onClick={() => {
+                    if (!openDropdown) setOpenDropdown(true);
+                    else setOpenDropdown(false);
+                  }}
+                >
+                  <div className="flex flx-row items-center">
+                    <img
+                      className="w-8 mr-2 rounded border"
+                      src={selectItem.icon}
+                    />
+                    <span>{selectItem.name}</span>
+                  </div>
+                  <div className="flex items-center">
+                    <i
+                      className={`fas fa-caret-up mr-1 ${
+                        openDropdown ? "rotate-180" : ""
+                      }`}
+                      style={{
+                        transition: "all 0.3s",
+                      }}
+                    />
+                  </div>
                 </div>
-                <div className="flex items-center">
-                  <i
-                    className={`fas fa-caret-up mr-1 ${
-                      openDropdown ? "rotate-180" : ""
-                    }`}
-                    style={{
-                      transition: "all 0.3s",
-                    }}
-                  />
+                <div
+                  className={`overflow-y-auto absolute min-h-[40px] max-h-[200px] bg-white border w-full rounded-xl z-10 ${
+                    openDropdown ? "visible" : "invisible"
+                  }`}
+                  style={{
+                    transition: "all 0.3s",
+                    transform: openDropdown ? "scaleY(1)" : "scaleY(0)",
+                    transformOrigin: "bottom",
+                    bottom: "50px",
+                  }}
+                >
+                  {language.map((item, index) => (
+                    <button
+                      onClick={() => {
+                        setOpenDropdown(false);
+                        setSelectItem(
+                          language.filter(
+                            language => language.id === item.id
+                          )[0]
+                        );
+                        i18n.changeLanguage(item.id);
+                      }}
+                      key={index}
+                      className={`w-full px-3 py-1.5 hover:bg-gray-100 min-h-[40px] ${
+                        index === 0 && "rounded-t-xl"
+                      } ${index == language.length - 1 && "rounded-b-xl"}`}
+                    >
+                      <div className="w-full flex flex-row items-center justify-between">
+                        <div className="flex flex-row items-center">
+                          <img
+                            className="w-8 mr-2 rounded border"
+                            src={item.icon}
+                          />
+                          {item.name}
+                        </div>
+                        <div>
+                          {selectItem.id == item.id && (
+                            <i className="fas fa-check text-purple-500 mr-1" />
+                          )}
+                        </div>
+                      </div>
+                    </button>
+                  ))}
                 </div>
               </div>
-              <div
-                className={`overflow-y-auto absolute min-h-[40px] max-h-[200px] bg-white border w-full rounded-xl z-10 ${
-                  openDropdown ? "visible" : "invisible"
-                }`}
-                style={{
-                  transition: "all 0.3s",
-                  transform: openDropdown ? "scaleY(1)" : "scaleY(0)",
-                  transformOrigin: "bottom",
-                  bottom: "50px",
-                }}
+              <button
+                className="w-8 h-8 bg-blue-100 rounded-lg dark:bg-slate-800 flex items-center justify-center hover:ring-2 ring-blue-400 transition-all duration-300 focus:outline-none"
+                onClick={() =>
+                  themeHanler(theme === "light" ? "dark" : "light")
+                }
+                aria-label="Toggle Dark Mode"
               >
-                {language.map((item, index) => (
-                  <button
-                    onClick={() => {
-                      setOpenDropdown(false);
-                      setSelectItem(
-                        language.filter(language => language.id === item.id)[0]
-                      );
-                      i18n.changeLanguage(item.id);
-                    }}
-                    key={index}
-                    className={`w-full px-3 py-1.5 hover:bg-gray-100 min-h-[40px] ${
-                      index === 0 && "rounded-t-xl"
-                    } ${index == language.length - 1 && "rounded-b-xl"}`}
-                  >
-                    <div className="w-full flex flex-row items-center justify-between">
-                      <div className="flex flex-row items-center">
-                        <img
-                          className="w-8 mr-2 rounded border"
-                          src={item.icon}
-                        />
-                        {item.name}
-                      </div>
-                      <div>
-                        {selectItem.id == item.id && (
-                          <i className="fas fa-check text-purple-500 mr-1" />
-                        )}
-                      </div>
-                    </div>
-                  </button>
-                ))}
-              </div>
+                {theme === "light" ? (
+                  <i className="flex items-center justify-center far fa-moon w-5 h-5" />
+                ) : (
+                  <i className="flex items-center justify-center fas fa-sun w-5 h-5" />
+                )}
+              </button>
             </div>
-            <button
-              className="mt-2 w-8 h-8 bg-blue-100 rounded-lg dark:bg-slate-800 flex items-center justify-center hover:ring-2 ring-blue-400 transition-all duration-300 focus:outline-none"
-              onClick={() => themeHanler(theme === "light" ? "dark" : "light")}
-              aria-label="Toggle Dark Mode"
-            >
-              {theme === "light" ? (
-                <i className="flex items-center justify-center far fa-moon w-5 h-5"/>
-              ) : (
-                <i className="flex items-center justify-center fas fa-sun w-5 h-5"/>
-              )}
-            </button>
           </div>
         </div>
       </footer>
@@ -185,7 +191,7 @@ const Footer: React.FC<FooterProps> = ({ themeHanler, theme }) => {
 
 interface FooterProps {
   themeHanler: (theme: Theme) => void;
-  theme: Theme
+  theme: Theme;
 }
 
 export default Footer;
