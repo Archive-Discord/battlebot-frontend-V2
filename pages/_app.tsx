@@ -2,7 +2,7 @@ import type { AppContext, AppProps } from "next/app";
 import { useRouter } from "next/router";
 import { cookieParser } from "@utils/utils";
 import { ToastContainer } from "react-toastify";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import App from "next/app";
 import Navbar from "../components/Navbar";
 import AOS from "aos";
@@ -16,15 +16,44 @@ import "react-toastify/dist/ReactToastify.css";
 import "swiper/css";
 import "swiper/css/navigation";
 import createI18n from "@components/createI18n";
+import { Theme } from "@types";
 
 function BattlebotApp({
   Component,
   pageProps,
   auth,
-  locale
+  locale,
 }: BattlebotAppProps & { locale: string }) {
   const router = useRouter();
-  const i18n = useMemo(() => createI18n({ locale }), [locale])
+  const [theme, setTheme] = useState<Theme>();
+  const i18n = useMemo(() => createI18n({ locale }), [locale]);
+
+  useEffect(() => {
+    const nowTheme = localStorage.getItem("theme");
+    const body = document.getElementById("body");
+    if(nowTheme === "dark") {
+      body?.classList.add("dark");
+      setTheme("dark")
+    } else {
+      body?.classList.remove("dark");
+      setTheme("light")
+    }
+  }, [])
+  useEffect(() => {
+    const body = document.getElementById("body");
+    if (theme === "dark") {
+      body?.classList.add("dark");
+      localStorage.setItem("theme", theme)
+    } else if (!theme || theme === "light") {
+      body?.classList.remove("dark");
+      localStorage.setItem("theme", "light")
+    }
+  }, [theme]);
+
+  const themeHanler = (theme: Theme) => {
+    setTheme(theme);
+  };
+
   useEffect(() => {
     FlareLane.setCurrentPath(router.asPath);
   }, [router.asPath, router.events]);
@@ -45,7 +74,9 @@ function BattlebotApp({
         <Navbar auth={auth} />
         {router.asPath === "/" ?? <hr className="pt-20 border-none" />}
         <Component {...pageProps} />
-        {!router.asPath.startsWith("/dashboard/") && <Footer />}
+        {!router.asPath.startsWith("/dashboard/") && (
+          <Footer themeHanler={themeHanler} theme={theme ? theme : "light"} />
+        )}
         <ToastContainer />
       </I18nextProvider>
     </>

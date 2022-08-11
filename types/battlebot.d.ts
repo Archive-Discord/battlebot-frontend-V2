@@ -26,4 +26,4 @@ export interface Item {
   }
 
   export type PayMethods = "cultureland" | "battlepay"
-  
+  export type Theme = "dark" | "light"

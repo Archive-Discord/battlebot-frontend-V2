@@ -1,12 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useDetectClickOutside } from "react-detect-click-outside";
-import Dropdown from "./Dropdown";
-import Flag from "react-flagpack";
 import { useTranslation } from "react-i18next";
+import { Theme } from "@types";
 
-const Footer = () => {
+const Footer: React.FC<FooterProps> = ({ themeHanler, theme }) => {
   const language = [
     {
       name: "한국어",
@@ -37,12 +36,12 @@ const Footer = () => {
           <ul className="flex lg:flex-row flex-col lg:justify-start items-center lg:space-x-4 text-lg flex-wrap w-full">
             <li>
               <Link href={"/tos"}>
-                <a>{t('footer.tos')}</a>
+                <a>{t("footer.tos")}</a>
               </Link>
             </li>
             <li>
               <Link href={"/privacy"}>
-                <a>{t('footer.privacy')}</a>
+                <a>{t("footer.privacy")}</a>
               </Link>
             </li>
             <li>
@@ -51,7 +50,7 @@ const Footer = () => {
                 target={"_blank"}
                 rel="noreferrer"
               >
-                {t('footer.guide')}
+                {t("footer.guide")}
               </a>
             </li>
             <li>
@@ -61,7 +60,7 @@ const Footer = () => {
                 className="relative inline-flex items-center"
                 rel="noreferrer"
               >
-                {t('footer.recruit')}
+                {t("footer.recruit")}
                 <span className="flex absolute h-2 w-2 right-0 lg:-mr-4 -mr-3">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-600 opacity-75" />
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-purple-500" />
@@ -106,7 +105,10 @@ const Footer = () => {
                 }}
               >
                 <div className="flex flx-row items-center">
-                  <img className="w-8 mr-2 rounded border" src={selectItem.icon} />
+                  <img
+                    className="w-8 mr-2 rounded border"
+                    src={selectItem.icon}
+                  />
                   <span>{selectItem.name}</span>
                 </div>
                 <div className="flex items-center">
@@ -128,7 +130,7 @@ const Footer = () => {
                   transition: "all 0.3s",
                   transform: openDropdown ? "scaleY(1)" : "scaleY(0)",
                   transformOrigin: "bottom",
-                  bottom: "50px"
+                  bottom: "50px",
                 }}
               >
                 {language.map((item, index) => (
@@ -163,11 +165,27 @@ const Footer = () => {
                 ))}
               </div>
             </div>
+            <button
+              className="mt-2 w-8 h-8 bg-blue-100 rounded-lg dark:bg-slate-800 flex items-center justify-center hover:ring-2 ring-blue-400 transition-all duration-300 focus:outline-none"
+              onClick={() => themeHanler(theme === "light" ? "dark" : "light")}
+              aria-label="Toggle Dark Mode"
+            >
+              {theme === "light" ? (
+                <i className="flex items-center justify-center far fa-moon w-5 h-5"/>
+              ) : (
+                <i className="flex items-center justify-center fas fa-sun w-5 h-5"/>
+              )}
+            </button>
           </div>
         </div>
       </footer>
     </>
   );
 };
+
+interface FooterProps {
+  themeHanler: (theme: Theme) => void;
+  theme: Theme
+}
 
 export default Footer;

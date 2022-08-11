@@ -84,7 +84,7 @@ export default class CustomDocument extends Document {
             }}
           />
         </Head>
-        <body>
+        <body id="body">
           <Main />
         </body>
         <NextScript />
