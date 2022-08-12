@@ -50,7 +50,6 @@
       "customlink": "커스텀 링크"
     },
     "premium": {
-<<<<<<< HEAD
       "battlebot": "배틀이 프리미엄",
       "useage": "배틀이를 더욱 유용하게 사용하세요!",
       "month": "프리미엄 월간플랜",
@@ -67,24 +66,6 @@
       "customLink": "커스텀 링크",
       "customLinkJoinServer": "서버만의 링크로 서버 입장",
       "lookBattlebotDevelop": "지속적으로 개발 중인 배틀이를 확인하세요"
-=======
-        "battlebot": "배틀이 프리미엄",
-        "useage": "배틀이를 더욱 유용하게 사용하세요!",
-        "month": "프리미엄 월간플랜",
-        "year": "프리미엄 연간플랜",
-        "won": "₩",
-        "continuePayments": "결제 진행하기",
-        "serverMember500up": "어라.. 서버 인원이 500명 이상인 거 같아요!",
-        "howBattlebotPartner": "배틀이 파트너는 어떠세요?",
-        "partnerStart": "신청하기",
-        "email": "이메일",
-        "verifyToEmail": "이메일을 이용한 이메일 인증",
-        "phone": "전화번호",
-        "verifyToPhone": "전화번호를 이용한 이메일 인증",
-        "customLink": "커스텀 링크",
-        "customLinkJoinServer": "서버만의 링크로 서버 입장",
-        "lookBattlebotDevelop": "지속적으로 개발 중인 배틀이를 확인하세요"
->>>>>>> 2af94d4d888ed2a527dc372bb19ac6c1160a3558
     },
     "analytics": {
       "analytics": "통계",
