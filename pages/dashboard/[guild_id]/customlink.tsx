@@ -132,7 +132,7 @@ const DashboardCustomLink: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
         Toast(res.message, "error");
       } else {
         Toast(
-          "선택한 향목" + res.data.count + "개가 삭제되었습니다",
+          "선택한 향목 " + res.data.count + "개가 삭제되었습니다",
           "success"
         );
         reloadCustomLink();
@@ -177,91 +177,6 @@ const DashboardCustomLink: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
             </div>
             <div className="inline-block min-w-full px-2">
               <div className="overflow-x-auto rounded-lg max-h-[400px]">
-                <table className="min-w-full ">
-                  <thead className="bg-purple-500 border-b">
-                    <tr className="text-white font-bold">
-                      <th
-                        scope="col"
-                        className="text-sm font-medium px-6 py-4 text-left"
-                      >
-                        선택
-                      </th>
-                      <th
-                        scope="col"
-                        className="text-sm font-medium px-6 py-4 text-left"
-                      >
-                        링크 (클릭시 복사)
-                      </th>
-                      <th
-                        scope="col"
-                        className="text-sm font-medium px-6 py-4 text-left"
-                      >
-                        이용횟수
-                      </th>
-                      <th
-                        scope="col"
-                        className="text-sm font-medium px-6 py-4 text-left"
-                      >
-                        사용하는 추가인증
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="bg-purple-100 ">
-                    {guildCustomlink?.random.map(customlink => (
-                      <>
-                        <tr className="border-b">
-                          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                            <input
-                              type={"checkbox"}
-                              checked={getChecked(customlink.path)}
-                              onChange={e => {
-                                if (e.target.checked) {
-                                  setDeleteCustomLinks(prev => [
-                                    ...prev,
-                                    customlink.path,
-                                  ]);
-                                } else {
-                                  setDeleteCustomLinks(prev => [
-                                    ...prev.filter(path => {
-                                      return path !== customlink.path;
-                                    }),
-                                  ]);
-                                }
-                              }}
-                            />
-                          </td>
-                          <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                            <CopyToClipboard
-                              text={`https://battlebot.kr/invite/${customlink.path}`}
-                              onCopy={() => {
-                                Toast(
-                                  "커스텀 링크가 복사되었습니다!",
-                                  "success"
-                                );
-                              }}
-                            >
-                              <span className="cursor-pointer">
-                                https://battlebot.kr/invite/{customlink.path}
-                              </span>
-                            </CopyToClipboard>
-                          </td>
-                          <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                            {numberWithCommas(
-                              customlink.useage ? customlink.useage : 0
-                            )}
-                            회
-                          </td>
-                          <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                            {customlink.option == "email" && "이메일 인증"}
-                            {customlink.option == "kakao" && "카카오 인증"}
-                            {customlink.option == "phone" && "전화번호 인증"}
-                            {!customlink.option && "없음"}
-                          </td>
-                        </tr>
-                      </>
-                    ))}
-                  </tbody>
-                </table>
                 {guildCustomlink?.random.length === 0 ? (
                   <>
                     <div className="w-full flex items-center justify-center">
@@ -274,7 +189,95 @@ const DashboardCustomLink: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
                     </div>
                   </>
                 ) : (
-                  <></>
+                  <>
+                    <table className="min-w-full ">
+                      <thead className="bg-purple-500 border-b">
+                        <tr className="text-white font-bold">
+                          <th
+                            scope="col"
+                            className="text-sm font-medium px-6 py-4 text-left"
+                          >
+                            선택
+                          </th>
+                          <th
+                            scope="col"
+                            className="text-sm font-medium px-6 py-4 text-left"
+                          >
+                            링크 (클릭시 복사)
+                          </th>
+                          <th
+                            scope="col"
+                            className="text-sm font-medium px-6 py-4 text-left"
+                          >
+                            이용횟수
+                          </th>
+                          <th
+                            scope="col"
+                            className="text-sm font-medium px-6 py-4 text-left"
+                          >
+                            사용하는 추가인증
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody className="bg-purple-100 ">
+                        {guildCustomlink?.random.map(customlink => (
+                          <>
+                            <tr className="border-b">
+                              <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                <input
+                                  type={"checkbox"}
+                                  checked={getChecked(customlink.path)}
+                                  onChange={e => {
+                                    if (e.target.checked) {
+                                      setDeleteCustomLinks(prev => [
+                                        ...prev,
+                                        customlink.path,
+                                      ]);
+                                    } else {
+                                      setDeleteCustomLinks(prev => [
+                                        ...prev.filter(path => {
+                                          return path !== customlink.path;
+                                        }),
+                                      ]);
+                                    }
+                                  }}
+                                />
+                              </td>
+                              <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                <CopyToClipboard
+                                  text={`https://battlebot.kr/invite/${customlink.path}`}
+                                  onCopy={() => {
+                                    Toast(
+                                      "커스텀 링크가 복사되었습니다!",
+                                      "success"
+                                    );
+                                  }}
+                                >
+                                  <span className="cursor-pointer">
+                                    https://battlebot.kr/invite/
+                                    {customlink.path}
+                                  </span>
+                                </CopyToClipboard>
+                              </td>
+                              <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                {numberWithCommas(
+                                  customlink.useage ? customlink.useage : 0
+                                )}
+                                회
+                              </td>
+                              <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                {customlink.option == "email" && "이메일 인증"}
+                                {customlink.option == "kakao" && "카카오 인증"}
+                                {customlink.option == "phone" &&
+                                  "전화번호 인증"}
+                                {!customlink.option && "없음"}
+                              </td>
+                            </tr>
+                          </>
+                        ))}
+                      </tbody>
+                    </table>
+                  </>
                 )}
               </div>
             </div>
@@ -328,33 +331,24 @@ const DashboardCustomLink: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
                           </td>
                           <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                             {numberWithCommas(
-                              guildCustomlink.custom.useage ? guildCustomlink.custom.useage : 0
+                              guildCustomlink.custom.useage
+                                ? guildCustomlink.custom.useage
+                                : 0
                             )}
                             회
                           </td>
                           <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                            {guildCustomlink.custom.option == "email" && "이메일 인증"}
-                            {guildCustomlink.custom.option == "kakao" && "카카오 인증"}
-                            {guildCustomlink.custom.option == "phone" && "전화번호 인증"}
+                            {guildCustomlink.custom.option == "email" &&
+                              "이메일 인증"}
+                            {guildCustomlink.custom.option == "kakao" &&
+                              "카카오 인증"}
+                            {guildCustomlink.custom.option == "phone" &&
+                              "전화번호 인증"}
                             {!guildCustomlink.custom.option && "없음"}
                           </td>
                         </tr>
                       </tbody>
                     </table>
-                    {guildCustomlink?.random.length === 0 ? (
-                      <>
-                        <div className="w-full flex items-center justify-center">
-                          <button
-                            onClick={() => setOpenModal(true)}
-                            className="text-lg my-7"
-                          >
-                            여기를 눌러 랜덤 링크를 설정하세요!
-                          </button>
-                        </div>
-                      </>
-                    ) : (
-                      <></>
-                    )}
                   </div>
                 </div>
               </>
@@ -441,6 +435,7 @@ const DashboardCustomLink: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
               <CheckBox
                 placeholder="전화번호 인증 사용하기"
                 isSelect={usePhone}
+                disable={guildPremium ? false : true}
                 onChangeHandler={setUsePhone}
               />
               <span className="ml-6 text-sm text-gray-500 mb-">
@@ -457,6 +452,7 @@ const DashboardCustomLink: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
               <CheckBox
                 placeholder="카카오 계정 인증 사용하기"
                 isSelect={useKakao}
+                disable={guildPremium ? false : true}
                 onChangeHandler={setUseKakao}
               />
               <span className="ml-6 text-sm text-gray-500 mb-1">
@@ -473,6 +469,7 @@ const DashboardCustomLink: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
               <CheckBox
                 placeholder="이메일 인증 사용하기"
                 isSelect={useEmail}
+                disable={guildPremium ? false : true}
                 onChangeHandler={setUseEmail}
               />
               <span className="ml-6 text-sm text-gray-500 mb-1">

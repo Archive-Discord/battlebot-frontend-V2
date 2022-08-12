@@ -85,12 +85,6 @@
       }
     }
   },
-  "input": {
-    "error": {
-      "email": "Please enter your email correctly.",
-      "phone": "Please enter your phone number correctly."
-    }
-  },
   "payments": {
     "won": "원",
     "month": "월",
@@ -131,8 +125,8 @@
   },
   "input": {
     "error": {
-      "email": "이메일을 정확히 입력해 주세요",
-      "phone": "전화번호를 정확히 입력해 주세요",
+      "email": "Please enter your email correctly.",
+      "phone": "Please enter your phone number correctly.",
       "phoneNumberCheck": "“-“없이 입력해 주세요",
       "noName": "이름을 입력해주세요",
       "noEmail": "이메일 주소를 입력해 주세요",
