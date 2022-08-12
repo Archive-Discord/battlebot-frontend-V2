@@ -55,6 +55,13 @@ export const SideBarItems: SideBarItem[] = [
     icon: "fas fa-users",
   },
   {
+    name: "dashboard.sidebar.customlink",
+    path: "/customlink",
+    pathName: "/dashboard/[guild_id]/customlink",
+    categori: "server_manage",
+    icon: "fas fa-link",
+  },
+  {
     name: "dashboard.sidebar.ticket",
     path: "/ticket",
     pathName: "/dashboard/[guild_id]/ticket",

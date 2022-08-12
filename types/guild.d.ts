@@ -43,6 +43,20 @@ export interface TicketMessage {
   embed: Embed;
 }
 
+export interface CustomLinkList {
+  custom: CustomLink;
+  random: CustomLink[]
+}
+
+export interface CustomLink {
+  guild_id: string;
+  path: string;
+  useage: number;
+  type: "custom" | "random";
+  option: "kakao" | "phone" | "email"
+  published_date: Date;
+}
+
 export interface UserGuld extends RESTAPIPartialCurrentUserGuild {
     bot: boolean;
   }

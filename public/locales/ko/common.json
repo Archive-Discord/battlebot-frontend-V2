@@ -37,62 +37,116 @@
     "manage": "관리하기",
     "invite": "초대하기",
     "sidebar": {
-        "categori": {
-            "util": "유틸",
-            "manage": "서버관리"
-        },
-        "dashboard": "대시보드",
-        "premium": "프리미엄",
-        "analytics": "통계",
-        "automod": "자동관리",
-        "members": "유저관리",
-        "ticket": "티켓"
+      "categori": {
+        "util": "유틸",
+        "manage": "서버관리"
+      },
+      "dashboard": "대시보드",
+      "premium": "프리미엄",
+      "analytics": "통계",
+      "automod": "자동관리",
+      "members": "유저관리",
+      "ticket": "티켓",
+      "customlink": "커스텀 링크"
     },
     "premium": {
-        "battlebot": "배틀이 프리미엄",
-        "useage": "배틀이를 더욱 유용하게 사용하세요!",
-        "month": "프리미엄 월간플랜",
-        "year": "프리미엄 연간플랜",
-        "won": "₩",
-        "continuePayments": "결제 진행하기",
-        "serverMember500up": "어라.. 서버 인원이 500명 이상인 거 같아요!",
-        "howBattlebotPartner": "배틀이 파트너는 어떠세요?",
-        "partnerStart": "신청하기",
-        "email": "이메일",
-        "verifyToEmail": "이메일을 이용한 이메일 인증",
-        "phone": "전화번호",
-        "verifyToPhone": "이메일을 이용한 이메일 인증",
-        "customLink": "커스텀 링크",
-        "customLinkJoinServer": "서버만의 링크로 서버 입장",
-        "lookBattlebotDevelop": "지속적으로 개발 중인 배틀이를 확인하세요"
+      "battlebot": "배틀이 프리미엄",
+      "useage": "배틀이를 더욱 유용하게 사용하세요!",
+      "month": "프리미엄 월간플랜",
+      "year": "프리미엄 연간플랜",
+      "won": "₩",
+      "continuePayments": "결제 진행하기",
+      "serverMember500up": "어라.. 서버 인원이 500명 이상인 거 같아요!",
+      "howBattlebotPartner": "배틀이 파트너는 어떠세요?",
+      "partnerStart": "신청하기",
+      "email": "이메일",
+      "verifyToEmail": "이메일을 이용한 이메일 인증",
+      "phone": "전화번호",
+      "verifyToPhone": "이메일을 이용한 이메일 인증",
+      "customLink": "커스텀 링크",
+      "customLinkJoinServer": "서버만의 링크로 서버 입장",
+      "lookBattlebotDevelop": "지속적으로 개발 중인 배틀이를 확인하세요"
     },
     "analytics": {
-        "analytics": "통계",
-        "analyticsDescrption": "서버에 대한 향목별 통계를 확인하세요!",
-        "users": "유저수 통계",
-        "dayOfusers": "일별 접속 유저",
-        "roles": "역할 통계"
+      "analytics": "통계",
+      "analyticsDescrption": "서버에 대한 향목별 통계를 확인하세요!",
+      "users": "유저수 통계",
+      "dayOfusers": "일별 접속 유저",
+      "roles": "역할 통계"
     },
     "index": {
-        "dashboard": "대시보드",
-        "lookAbout": "서버에 대한 간략한 정보를 확인하세요!",
-        "analytics": {
-            "countOfUser": "명",
-            "userCount": "유저 수",
-            "detail": "자세히 보기",
-            "tickets": "생성된 티켓",
-            "verifys": "완료한 인증"
-        }
+      "dashboard": "대시보드",
+      "lookAbout": "서버에 대한 간략한 정보를 확인하세요!",
+      "analytics": {
+        "countOfUser": "명",
+        "userCount": "유저 수",
+        "detail": "자세히 보기",
+        "tickets": "생성된 티켓",
+        "verifys": "완료한 인증"
+      }
+    },
+    "customlink": {
+      "customLink": "커스텀 링크",
+      "useage": "서버만의 링크로 서버에 입장하세요!",
+      "random": "랜덤 커스텀 링크",
+      "makeNew": "새로 만들기",
+      "delete": "삭제"
+    }
+  },
+  "payments": {
+    "won": "원",
+    "month": "월",
+    "acceptAutoPayments": "자동결제 이용에 동의해주세요",
+    "noCard": "등록된 카드가 없습니다",
+    "orderInfo": "결제정보",
+    "usersInfo": "주문자 정보",
+    "payMethod": "결제방식",
+    "payDate": "결제일시",
+    "nextPayDate": "다음 결제 예정일",
+    "itemInfo": "상품 정보",
+    "orderAmount": "상품금액",
+    "disacountAmount": "할인금액",
+    "addMethod": "결제 수단 추가",
+    "amount": "결제금액",
+    "name": "이름",
+    "method": "결제 수단",
+    "payments": "결제하기",
+    "cultureland": {
+      "feeAmount": "문화상품권 결제 수수료",
+      "fee": "문화상품권 결제 수수료에 동의해주세요",
+      "agree": "문화상품권 결제 수수료 동의"
+    },
+    "battlepay": {
+      "autoPayment": "자동결제 이용 동의"
+    },
+    "success": {
+      "order": "결제완료",
+      "orderDescription": "결제가 성공적으로 완료되었습니다",
+      "orderInfo": "주문정보",
+      "itemName": "상품명",
+      "orderAmount": "상품금액",
+      "totalOrderAmount": "총 결제금액",
+      "active": "적용",
+      "guild": "서버",
+      "user": "유저"
     }
   },
   "input": {
     "error": {
-        "email": "이메일을 정확히 입력해 주세요",
-        "phone": "전화번호를 정확히 입력해 주세요"
+      "email": "이메일을 정확히 입력해 주세요",
+      "phone": "전화번호를 정확히 입력해 주세요",
+      "phoneNumberCheck": "“-“없이 입력해 주세요",
+      "noName": "이름을 입력해주세요",
+      "noEmail": "이메일 주소를 입력해 주세요",
+      "noPhone": "전화번호를 입력해주세요"
     }
   },
   "login": {
     "loading": "로그인 중"
   },
-  "retry": "다시 시도하기"
+  "error": {
+    "noNeedParams": "필수 파라미터가 없습니다"
+  },
+  "retry": "다시 시도하기",
+  "beforePage": "이전 페이지로"
 }

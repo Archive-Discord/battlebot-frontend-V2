@@ -1,12 +1,14 @@
 import type { PaymentsMethods as Methods } from "@types";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
+import { useTranslation } from "react-i18next";
 
 const PaymentsMethods: React.FC<PaymentsMethodsProps> = ({
   methods,
   selectMethod,
   methodAddHanler,
 }) => {
+  const { t } = useTranslation();
   const slideHanler = (e: any) => {
     if (methods.length <= e.activeIndex) return;
     selectMethod(methods[e.activeIndex].id);
@@ -47,7 +49,7 @@ const PaymentsMethods: React.FC<PaymentsMethodsProps> = ({
             className="w-80 h-48  border rounded-xl p-4 flex items-center justify-center flex-col"
           >
             <i className="fas fa-plus text-3xl" />
-            <span className="mt-1 font-bold">결제 수단 추가</span>
+            <span className="mt-1 font-bold">{t("payments.addMethod")}</span>
           </div>
         </SwiperSlide>
       </Swiper>

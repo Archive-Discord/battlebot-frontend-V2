@@ -1,22 +1,23 @@
 import type { AppContext, AppProps } from "next/app";
+import type { Theme } from "@types";
 import { useRouter } from "next/router";
 import { cookieParser } from "@utils/utils";
 import { ToastContainer } from "react-toastify";
 import { useEffect, useMemo, useState } from "react";
+import { I18nextProvider } from "react-i18next";
 import App from "next/app";
 import Navbar from "../components/Navbar";
 import AOS from "aos";
 import Footer from "../components/Footer";
 import FlareLane from "@flarelane/flarelane-web-sdk";
-import { I18nextProvider } from "react-i18next";
+import createI18n from "@components/createI18n";
+import Seo from "@components/Seo";
 
 import "../styles/globals.css";
 import "aos/dist/aos.css";
 import "react-toastify/dist/ReactToastify.css";
 import "swiper/css";
 import "swiper/css/navigation";
-import createI18n from "@components/createI18n";
-import { Theme } from "@types";
 
 function BattlebotApp({
   Component,
@@ -31,22 +32,22 @@ function BattlebotApp({
   useEffect(() => {
     const nowTheme = localStorage.getItem("theme");
     const body = document.getElementById("body");
-    if(nowTheme === "dark") {
+    if (nowTheme === "dark") {
       body?.classList.add("dark");
-      setTheme("dark")
+      setTheme("dark");
     } else {
       body?.classList.remove("dark");
-      setTheme("light")
+      setTheme("light");
     }
-  }, [])
+  }, []);
   useEffect(() => {
     const body = document.getElementById("body");
     if (theme === "dark") {
       body?.classList.add("dark");
-      localStorage.setItem("theme", theme)
+      localStorage.setItem("theme", theme);
     } else if (!theme || theme === "light") {
       body?.classList.remove("dark");
-      localStorage.setItem("theme", "light")
+      localStorage.setItem("theme", "light");
     }
   }, [theme]);
 
@@ -71,6 +72,7 @@ function BattlebotApp({
   return (
     <>
       <I18nextProvider i18n={i18n}>
+        <Seo />
         <Navbar auth={auth} />
         {router.asPath === "/" ?? <hr className="pt-20 border-none" />}
         <Component {...pageProps} />

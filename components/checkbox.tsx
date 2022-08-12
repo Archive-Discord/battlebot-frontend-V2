@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { CSSProperties, useEffect, useState } from "react";
 
 const CheckBox: React.FC<CheckBoxProps> = ({
   onChangeHandler,
   className,
   placeholder,
   isSelect,
+  disable,
 }) => {
   const [select, setSelect] = useState<boolean>(isSelect ? isSelect : false);
   useEffect(() => {
@@ -23,6 +24,7 @@ const CheckBox: React.FC<CheckBoxProps> = ({
           type="checkbox"
           checked={select}
           onChange={e => setSelect(e.target.checked)}
+          disabled={disable}
           id={`flexCheckChecked-${placeholder}`}
         />
         <label
@@ -40,6 +42,8 @@ interface CheckBoxProps {
   placeholder: string;
   className?: string;
   isSelect?: boolean;
+  disable?: boolean;
+  style?: CSSProperties
   onChangeHandler: (check: boolean) => void;
 }
 export default CheckBox;

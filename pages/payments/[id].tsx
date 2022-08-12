@@ -30,7 +30,7 @@ import { useTranslation } from "react-i18next";
 
 const Login = dynamic(() => import("@components/Login"));
 const Loading = dynamic(() => import("@components/Loading"));
-const CheckBox = dynamic(() => import("@components/checkbox"));
+const CheckBox = dynamic(() => import("@components/Checkbox"));
 const Dropdown = dynamic(() => import("@components/Dropdown"));
 const Input = dynamic(() => import("@components/Input"));
 
@@ -110,13 +110,13 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
     setPayMethod(method as PayMethods);
   };
   const requestPayments = () => {
-    if (!name) return Toast("이름을 입력해주세요", "error");
-    if (!email) return Toast("이메일을 입력해주세요", "error");
-    if (!phone) return Toast("전화번호를 입력해주세요", "error");
+    if (!name) return Toast(t("input.error.noName"), "error");
+    if (!email) return Toast(t("input.error.noEmail"), "error");
+    if (!phone) return Toast(t("input.error.noPhone"), "error");
     if (payMethod === "battlepay") {
-      if (!autoPayments) return Toast("자동결제 이용에 동의해주세요", "error");
+      if (!autoPayments) return Toast(t("payments.acceptAutoPayments"), "error");
       if (!userCards || userCards.length === 0)
-        return Toast("등록된 카드가 없습니다", "error");
+        return Toast(t("payments.noCard"), "error");
       brandpay(userData).then(pay => {
         pay
           .requestPayment({
@@ -145,7 +145,7 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
           });
       });
     } else if (payMethod === "cultureland") {
-      if(!culturelandFee) return Toast("문화상품권 결제 수수료에 동의해주세요", "error");
+      if(!culturelandFee) return Toast(t("payments.cultureland.fee"), "error");
       tossPayments().then(payments => {
         payments.requestPayment("문화상품권", {
           amount: amount,
@@ -165,18 +165,18 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
         className="min-h-[100vh] container lg:p-10 p-3 lg:mt-12 mt-16"
         style={{ fontFamily: "Noto Sans KR" }}
       >
-        <span className="text-3xl font-bold">결제정보</span>
+        <span className="text-3xl font-bold">{t("payments.orderInfo")}</span>
         <div className="flex mt-5 flex-wrap lg:flex-nowrap">
           <div className="lg:w-3/5 w-full lg:mr-3">
             <div className="w-full border p-5 rounded-lg">
               <span className="text-xl font-bold">
                 <i className="fas fa-user mr-2" />
-                주문자 정보
+                {t("payments.usersInfo")}
               </span>
               <div className="flex-wrap flex flex-row text-lg my-3 items-center">
-                <span>이름</span>
+                <span>{t("payments.name")}</span>
                 <Input
-                  placeholder="이름을 입력해 주세요"
+                  placeholder={t("input.error.noName")}
                   defaultValue={userData.user.username}
                   onChangeHandler={value => setName(value)}
                   className="text-base ml-auto lg:w-80 w-full lg:mt-0 mt-1"
@@ -186,7 +186,7 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
                 <span>연락처</span>
                 <Input
                   type={"phone"}
-                  placeholder="“-“없이 입력해 주세요"
+                  placeholder={t("input.error.phoneNumberCheck")}
                   defaultValue={userData.phone ? userData.phone : undefined}
                   onChangeHandler={value => setPhone(value?.replace(/-/g, ""))}
                   className="text-base ml-auto lg:w-80 w-full lg:mt-0 mt-1"
@@ -196,7 +196,7 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
                 <span>이메일</span>
                 <Input
                   type={"email"}
-                  placeholder="이메일 주소를 입력해주세요"
+                  placeholder={t("input.error.noEmail")}
                   defaultValue={
                     userData.email
                       ? userData.email
@@ -213,7 +213,7 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
               <div className="flex flex-row justify-between mb-2">
                 <span className="text-xl font-bold">
                   <i className="fas fa-credit-card mr-2" />
-                  결제 수단
+                  {t("payments.method")}
                 </span>
               </div>
               <Dropdown items={payMethods} selectCallback={payMethodsHanler} />
@@ -238,7 +238,7 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
             <div className="w-full border p-5 rounded-lg">
               <span className="text-xl font-bold">
                 <i className="fas fa-shopping-cart mr-2" />
-                상품 정보
+                {t("payments.itemInfo")}
               </span>
               <div className="flex flex-row mt-3 h-24">
                 <img
@@ -253,24 +253,24 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
                   <span className="font-bold">{data.name}</span>
                   <span className="text-sm">{data.metadata.name}</span>
                   <span className="font-bold text-xl mt-auto">
-                    {numberWithCommas(data.amount as number)}원
+                    {numberWithCommas(data.amount as number)}{t("payments.won")}
                   </span>
                 </div>
               </div>
               <hr className="w-full my-4" />
               <div>
                 <div className="flex flex-row justify-between">
-                  <span className="text-lg font-bold">상품금액</span>
+                  <span className="text-lg font-bold">{t("payments.orderAmount")}</span>
                   <span className="text-lg">
-                    {numberWithCommas(data.amount as number)}원
+                    {numberWithCommas(data.amount as number)}{t("payments.won")}
                   </span>
                 </div>
                 {discount > 1 ? (
                   <>
                     <div className="flex flex-row justify-between">
-                      <span className="text-lg font-bold">할인금액</span>
+                      <span className="text-lg font-bold">{t("payments.disacountAmount")}</span>
                       <span className="text-lg">
-                        -{numberWithCommas(defaultAmount / discount)}원
+                        -{numberWithCommas(defaultAmount / discount)}{t("payments.won")}
                       </span>
                     </div>
                   </>
@@ -281,10 +281,10 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
                   <>
                     <div className="flex flex-row justify-between">
                       <span className="text-lg font-bold">
-                        문화상품권 결제 수수료
+                      {t("payments.cultureland.feeAmount")}
                       </span>
                       <span className="text-lg">
-                        {numberWithCommas(defaultAmount / 10)}원
+                        {numberWithCommas(defaultAmount / 10)}{t("payments.won")}
                       </span>
                     </div>
                   </>
@@ -294,20 +294,20 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
               </div>
               <hr className="w-full my-4" />
               <div className="flex flex-row justify-between items-center">
-                <span className="text-2xl font-bold">결제금액</span>
+                <span className="text-2xl font-bold">{t("payments.amount")}</span>
                 <span className="text-lg">
-                  월{" "}
+                {t("payments.month")}{" "}
                   <span className="font-bold text-xl">
                     {numberWithCommas(amount)}
                   </span>
-                  원
+                  {t("payments.won")}
                 </span>
               </div>
               {payMethod === "cultureland" ? (
                 <>
                   <CheckBox
                     className="mt-2"
-                    placeholder={"문화상품권 결제 수수료 동의"}
+                    placeholder={t("payments.cultureland.agree")}
                     onChangeHandler={check => setCulturelandFee(check)}
                   />
                 </>
@@ -315,7 +315,7 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
                 <>
                   <CheckBox
                     className="mt-2"
-                    placeholder={"자동결제 이용 동의"}
+                    placeholder={t("payments.battlepay.autoPayment")}
                     onChangeHandler={check => setAutoPayments(check)}
                   />
                 </>
@@ -326,7 +326,7 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
                 }}
                 className="w-full py-3 rounded-lg mt-6 bg-[#7C3AED] text-white font-bold"
               >
-                결제하기
+                {t("payments.payments")}
               </button>
             </div>
           </div>

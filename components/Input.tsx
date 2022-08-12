@@ -1,5 +1,6 @@
 import { validateEmail, validatePhone } from "@utils/utils";
 import React, {
+  CSSProperties,
   HTMLInputTypeAttribute,
   useEffect,
   useState,
@@ -12,6 +13,8 @@ const Input: React.FC<InputProps> = ({
   className,
   placeholder,
   type,
+  style,
+  disable
 }) => {
   const [value, setValue] = useState<string | undefined>(
     defaultValue ? defaultValue : undefined
@@ -43,16 +46,18 @@ const Input: React.FC<InputProps> = ({
       <div className={`${className} flex flex-col`}>
         <input
           type={type}
+          disabled={disable}
           value={getValue()}
           placeholder={placeholder}
           onChange={e => {
             setValue(e.target.value);
           }}
-          className={`border py-2 px-3 rounded-lg focus:outline-none focus:ring-1 ${
+          className={`border py-2 px-2 rounded-lg focus:outline-none focus:ring-1 disabled:opacity-75 ${
             error
               ? "focus:border-red-500 focus:ring-red-500"
               : "focus:border-violet-500 focus:ring-violet-500"
           }`}
+          style={style}
         />
         {error ? (
           <span className="text-sm ml-2 text-red-500">{error}</span>
@@ -68,7 +73,9 @@ interface InputProps {
   placeholder: string;
   onChangeHandler: (value?: string) => void;
   defaultValue?: string;
+  disable?: boolean
   className?: string;
   type?: HTMLInputTypeAttribute;
+  style?: CSSProperties
 }
 export default Input;

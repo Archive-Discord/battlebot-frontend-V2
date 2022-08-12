@@ -1,99 +1,145 @@
 {
+  "battlebot": "BattleBot",
+  "index": {
     "battlebot": "BattleBot",
-    "index": {
-      "battlebot": "BattleBot",
-      "description1": "Manage your Discord server conveniently",
-      "description2": "With The Web Dashboard.",
-      "standard": "Standard",
-      "withBattlebot": "With the BattleBot",
-      "day": "Days",
-      "useingUsers": "Number Of Bot Users",
-      "userCount": "People",
-      "serverCount": "Servers",
-      "useingServers": "Number Of Bot Servers",
-      "simpleAuthSetup": "With Simple Verify Settings",
-      "serverSecurityHigher": "Taking Your Server's Security Even Higher",
-      "verifyInDiscord": "Verified BOT on Discord",
-      "usefulRelief": "Use with confidence",
-      "start": "Start Now!"
-    },
-    "navbar": {
-      "home": "Home",
+    "description1": "Manage your Discord server conveniently",
+    "description2": "With The Web Dashboard.",
+    "standard": "Standard",
+    "withBattlebot": "With the BattleBot",
+    "day": "Days",
+    "useingUsers": "Number Of Bot Users",
+    "userCount": "People",
+    "serverCount": "Servers",
+    "useingServers": "Number Of Bot Servers",
+    "simpleAuthSetup": "With Simple Verify Settings",
+    "serverSecurityHigher": "Taking Your Server's Security Even Higher",
+    "verifyInDiscord": "Verified BOT on Discord",
+    "usefulRelief": "Use with confidence",
+    "start": "Start Now!"
+  },
+  "navbar": {
+    "home": "Home",
+    "premium": "Premium",
+    "dashboard": "Dashboard",
+    "myInfo": "My Info",
+    "logout": "Logout",
+    "login": "Login",
+    "usersInfo": "User's Info"
+  },
+  "footer": {
+    "tos": "Terms of Service",
+    "privacy": "Privacy Policy",
+    "guide": "Use Guide",
+    "recruit": "Employment"
+  },
+  "dashboard": {
+    "selectManageServer": "Select a Server",
+    "manage": "Go",
+    "invite": "SetUp",
+    "sidebar": {
+      "categori": {
+        "util": "Utilities",
+        "manage": "Server Management"
+      },
+      "dashboard": "DashBoard",
       "premium": "Premium",
-      "dashboard": "Dashboard",
-      "myInfo": "My Info",
-      "logout": "Logout",
-      "login": "Login",
-      "usersInfo": "User's Info"
+      "analytics": "Analyze",
+      "automod": "AutoMod",
+      "members": "User Manage",
+      "ticket": "Ticket",
+      "customlink": "커스텀 링크"
     },
-    "footer": {
-      "tos": "Terms of Service",
-      "privacy": "Privacy Policy",
-      "guide": "Use Guide",
-      "recruit": "Employment"
+    "premium": {
+      "battlebot": "BattleBot Premium",
+      "useage": "Use The BattleBot More Effectively!",
+      "month": "Monthly Plan",
+      "year": "Yearly Plan",
+      "won": "₩",
+      "continuePayments": "Continue To Payment",
+      "serverMember500up": "I think the server has more than 500 people!",
+      "howBattlebotPartner": "How's the BattleBot partner??",
+      "partnerStart": "Apply",
+      "email": "Email",
+      "verifyToEmail": "Email authentication",
+      "phone": "Phone Number",
+      "verifyToPhone": "Phone number authentication",
+      "customLink": "Custom Link",
+      "customLinkJoinServer": "Enter the server with a special link",
+      "lookBattlebotDevelop": "Check out the continuous development of the BattleBot"
     },
-    "dashboard": {
-      "selectManageServer": "Select a Server",
-      "manage": "Go",
-      "invite": "SetUp",
-      "sidebar": {
-          "categori": {
-              "util": "Utilities",
-              "manage": "Server Management"
-          },
-          "dashboard": "DashBoard",
-          "premium": "Premium",
-          "analytics": "Analyze",
-          "automod": "AutoMod",
-          "members": "User Manage",
-          "ticket": "Ticket"
-      },
-      "premium": {
-          "battlebot": "BattleBot Premium",
-          "useage": "Use The BattleBot More Effectively!",
-          "month": "Monthly Plan",
-          "year": "Yearly Plan",
-          "won": "₩",
-          "continuePayments": "Continue To Payment",
-          "serverMember500up": "I think the server has more than 500 people!",
-          "howBattlebotPartner": "How's the BattleBot partner??",
-          "partnerStart": "Apply",
-          "email": "Email",
-          "verifyToEmail": "Email authentication",
-          "phone": "Phone Number",
-          "verifyToPhone": "Phone number authentication",
-          "customLink": "Custom Link",
-          "customLinkJoinServer": "Enter the server with a special link",
-          "lookBattlebotDevelop": "Check out the continuous development of the BattleBot"
-      },
+    "analytics": {
+      "analytics": "통계",
+      "analyticsDescrption": "서버에 대한 향목별 통계를 확인하세요!",
+      "users": "유저수 통계",
+      "dayOfusers": "일별 접속 유저",
+      "roles": "역할 통계"
+    },
+    "index": {
+      "dashboard": "대시보드",
+      "lookAbout": "서버에 대한 간략한 정보를 확인하세요!",
       "analytics": {
-          "analytics": "통계",
-          "analyticsDescrption": "서버에 대한 향목별 통계를 확인하세요!",
-          "users": "유저수 통계",
-          "dayOfusers": "일별 접속 유저",
-          "roles": "역할 통계"
-      },
-      "index": {
-          "dashboard": "대시보드",
-          "lookAbout": "서버에 대한 간략한 정보를 확인하세요!",
-          "analytics": {
-              "countOfUser": "명",
-              "userCount": "유저 수",
-              "detail": "자세히 보기",
-              "tickets": "생성된 티켓",
-              "verifys": "완료한 인증"
-          }
+        "countOfUser": "명",
+        "userCount": "유저 수",
+        "detail": "자세히 보기",
+        "tickets": "생성된 티켓",
+        "verifys": "완료한 인증"
       }
+    }
+  },
+  "payments": {
+    "won": "원",
+    "month": "월",
+    "acceptAutoPayments": "자동결제 이용에 동의해주세요",
+    "noCard": "등록된 카드가 없습니다",
+    "orderInfo": "결제정보",
+    "usersInfo": "주문자 정보",
+    "payMethod": "결제방식",
+    "payDate": "결제일시",
+    "nextPayDate": "다음 결제 예정일",
+    "itemInfo": "상품 정보",
+    "orderAmount": "상품금액",
+    "disacountAmount": "할인금액",
+    "addMethod": "결제 수단 추가",
+    "amount": "결제금액",
+    "name": "이름",
+    "method": "결제 수단",
+    "payments": "결제하기",
+    "cultureland": {
+      "feeAmount": "문화상품권 결제 수수료",
+      "fee": "문화상품권 결제 수수료에 동의해주세요",
+      "agree": "문화상품권 결제 수수료 동의"
     },
-    "input": {
-      "error": {
-          "email": "이메일을 정확히 입력해 주세요",
-          "phone": "전화번호를 정확히 입력해 주세요"
-      }
+    "battlepay": {
+      "autoPayment": "자동결제 이용 동의"
     },
-    "login": {
-      "loading": "로그인 중"
-    },
-    "retry": "다시 시도하기"
-  }
-  
+    "success": {
+      "order": "결제완료",
+      "orderDescription": "결제가 성공적으로 완료되었습니다",
+      "orderInfo": "주문정보",
+      "itemName": "상품명",
+      "orderAmount": "상품금액",
+      "totalOrderAmount": "총 결제금액",
+      "active": "적용",
+      "guild": "서버",
+      "user": "유저"
+    }
+  },
+  "input": {
+    "error": {
+      "email": "이메일을 정확히 입력해 주세요",
+      "phone": "전화번호를 정확히 입력해 주세요",
+      "phoneNumberCheck": "“-“없이 입력해 주세요",
+      "noName": "이름을 입력해주세요",
+      "noEmail": "이메일 주소를 입력해 주세요",
+      "noPhone": "전화번호를 입력해주세요"
+    }
+  },
+  "login": {
+    "loading": "로그인 중"
+  },
+  "error": {
+    "noNeedParams": "필수 파라미터가 없습니다"
+  },
+  "retry": "다시 시도하기",
+  "beforePage": "이전 페이지로"
+}

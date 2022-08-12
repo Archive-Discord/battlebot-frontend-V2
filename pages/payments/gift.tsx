@@ -22,7 +22,7 @@ const PaymentsSuccess: NextPage<PageDefaultProps> = ({
   if (error && status === 401) return <Login />;
   if (error && message)
     return (
-      <Error message={message}>
+      <Error message={t(message)}>
         <button
           className="hover:bg-gray-200 border font-bold rounded-md px-3 py-1 mt-5"
           onClick={() => router.back()}
@@ -40,31 +40,31 @@ const PaymentsSuccess: NextPage<PageDefaultProps> = ({
         style={{ fontFamily: "Noto Sans KR" }}
       >
         <div className="flex flex-col">
-          <span className="text-3xl font-bold">결제완료</span>
+          <span className="text-3xl font-bold">{t("payments.success.order")}</span>
           <span className="text-xl text-gray-500">
-            결제가 성공적으로 완료되었습니다
+          {t("payments.success.orderDescription")}
           </span>
         </div>
         <div className="flex flex-col">
           <div className="mt-5 border rounded-lg p-4 w-full">
-            <span className="text-xl font-bold">주문정보</span>
+            <span className="text-xl font-bold">{t("payments.success.orderInfo")}</span>
             <hr className="w-full my-3" />
             <div className="flex flex-col w-full">
               <div className="flex lg:items-center lg:justify-between text-lg lg:flex-row flex-col">
-                <span className="font-bold">상품명</span>
+                <span className="font-bold">{t("payments.success.itemName")}</span>
                 <span>{data.name}</span>
               </div>
               <div className="flex lg:items-center lg:justify-between text-lg lg:flex-row flex-col">
-                <span className="font-bold">주문금액</span>
-                <span>{numberWithCommas(data.amount)}원</span>
+                <span className="font-bold">{t("payments.success.orderAmount")}</span>
+                <span>{numberWithCommas(data.amount)}{t("payments.won")}</span>
               </div>
               <div className="flex lg:items-center lg:justify-between text-lg lg:flex-row flex-col">
                 <span className="font-bold">
-                  적용
+                  {t("payments.success.active")}
                   {data.metadata.type === "guild"
-                    ? "서버"
-                    : data.metadata.type === "유저"
-                    ? "유저"
+                    ? t("payments.success.guild")
+                    : data.metadata.type === "user"
+                    ? t("payments.success.user")
                     : ""}
                 </span>
                 <span>{data.metadata.name}</span>
@@ -72,22 +72,22 @@ const PaymentsSuccess: NextPage<PageDefaultProps> = ({
             </div>
             <hr className="w-full my-3" />
             <div className="flex items-center justify-between text-lg">
-              <span className="font-bold text-2xl">총 결제금액</span>
+              <span className="font-bold text-2xl">{t("payments.success.totalOrderAmount")}</span>
               <span className="text-2xl">
-                {numberWithCommas(data.payment.balanceAmount)}원
+                {numberWithCommas(data.payment.balanceAmount)}{t("payments.won")}
               </span>
             </div>
           </div>
           <div className="mt-5 border rounded-lg w-full p-4">
-            <span className="text-xl font-bold">결제정보</span>
+            <span className="text-xl font-bold">{t("payments.orderInfo")}</span>
             <hr className="w-full my-3" />
             <div className="flex flex-col w-full">
               <div className="flex lg:items-center lg:justify-between text-lg lg:flex-row flex-col">
-                <span className="font-bold">결제방식</span>
+                <span className="font-bold">{t("payments.payMethod")}</span>
                 <span>{data.payment.method}</span>
               </div>
               <div className="flex lg:items-center lg:justify-between text-lg lg:flex-row flex-col">
-                <span className="font-bold">결제일시</span>
+                <span className="font-bold">{t("payments.payDate")}</span>
                 <span className="truncate">
                   {dayjs(data.payment.approvedAt).format(
                     "YYYY년 MM월 DD일 HH시 mm분"
@@ -95,9 +95,9 @@ const PaymentsSuccess: NextPage<PageDefaultProps> = ({
                 </span>
               </div>
               <div className="flex lg:items-center lg:justify-between text-lg lg:flex-row flex-col">
-                <span className="font-bold">다음 결제 예정일</span>
+                <span className="font-bold">{t("payments.nextPayDate")}</span>
                 <span className="truncate">
-                  {dayjs(data.nextPayDate).format("YYYY년 MM월 DD일 HH시 mm분")}
+                  {dayjs(data.nextPayDate).format("YYYY년 MM월 DD일")}
                 </span>
               </div>
             </div>
@@ -117,7 +117,7 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
       props: {
         auth,
         error: true,
-        message: "필수 파라미터가 없습니다",
+        message: "error.noNeedParams",
       },
     };
   const data = await client(
