@@ -158,7 +158,7 @@ const DashboardCustomLink: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
               <span className="text-xl font-bold">
                 {t("dashboard.customlink.random")}
               </span>
-              <div>
+              <div className="z-[-1]">
                 <Button
                   className="mt-2 px-5 py-2 mr-2"
                   type="success"
