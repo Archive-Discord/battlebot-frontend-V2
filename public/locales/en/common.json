@@ -67,33 +67,33 @@
           "lookBattlebotDevelop": "Check out the continuous development of the BattleBot"
       },
       "analytics": {
-          "analytics": "통계",
-          "analyticsDescrption": "서버에 대한 향목별 통계를 확인하세요!",
-          "users": "유저수 통계",
-          "dayOfusers": "일별 접속 유저",
-          "roles": "역할 통계"
+          "analytics": "Analyze",
+          "analyticsDescrption": "Check out the itemized statistics for the server!",
+          "users": "User Count Statistics",
+          "dayOfusers": "Daily Join Users",
+          "roles": "Role Statistics"
       },
       "index": {
-          "dashboard": "대시보드",
-          "lookAbout": "서버에 대한 간략한 정보를 확인하세요!",
+          "dashboard": "Dashboard",
+          "lookAbout": "Check out the information about the server!",
           "analytics": {
-              "countOfUser": "명",
-              "userCount": "유저 수",
-              "detail": "자세히 보기",
-              "tickets": "생성된 티켓",
-              "verifys": "완료한 인증"
+              "countOfUser": "People",
+              "userCount": "Number of Users",
+              "detail": "Learn more",
+              "tickets": "Generated Ticket",
+              "verifys": "Completed Authentication"
           }
       }
     },
     "input": {
       "error": {
-          "email": "이메일을 정확히 입력해 주세요",
-          "phone": "전화번호를 정확히 입력해 주세요"
+          "email": "Please enter your email correctly.",
+          "phone": "Please enter your phone number correctly."
       }
     },
     "login": {
-      "loading": "로그인 중"
+      "loading": "Logging in"
     },
-    "retry": "다시 시도하기"
+    "retry": "Try Again"
   }
   
