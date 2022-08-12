@@ -67,6 +67,7 @@
       "customLinkJoinServer": "Enter the server with a special link",
       "lookBattlebotDevelop": "Check out the continuous development of the BattleBot"
     },
+<<<<<<< HEAD
     "analytics": {
       "analytics": "통계",
       "analyticsDescrption": "서버에 대한 향목별 통계를 확인하세요!",
@@ -83,6 +84,65 @@
         "detail": "자세히 보기",
         "tickets": "생성된 티켓",
         "verifys": "완료한 인증"
+=======
+    "dashboard": {
+      "selectManageServer": "Select a Server",
+      "manage": "Go",
+      "invite": "SetUp",
+      "sidebar": {
+          "categori": {
+              "util": "Utilities",
+              "manage": "Server Management"
+          },
+          "dashboard": "DashBoard",
+          "premium": "Premium",
+          "analytics": "Analyze",
+          "automod": "AutoMod",
+          "members": "User Manage",
+          "ticket": "Ticket"
+      },
+      "premium": {
+          "battlebot": "BattleBot Premium",
+          "useage": "Use The BattleBot More Effectively!",
+          "month": "Monthly Plan",
+          "year": "Yearly Plan",
+          "won": "₩",
+          "continuePayments": "Continue To Payment",
+          "serverMember500up": "I think the server has more than 500 people!",
+          "howBattlebotPartner": "How's the BattleBot partner??",
+          "partnerStart": "Apply",
+          "email": "Email",
+          "verifyToEmail": "Email authentication",
+          "phone": "Phone Number",
+          "verifyToPhone": "Phone number authentication",
+          "customLink": "Custom Link",
+          "customLinkJoinServer": "Enter the server with a special link",
+          "lookBattlebotDevelop": "Check out the continuous development of the BattleBot"
+      },
+      "analytics": {
+          "analytics": "Analyze",
+          "analyticsDescrption": "Check out the itemized statistics for the server!",
+          "users": "User Count Statistics",
+          "dayOfusers": "Daily Join Users",
+          "roles": "Role Statistics"
+      },
+      "index": {
+          "dashboard": "Dashboard",
+          "lookAbout": "Check out the information about the server!",
+          "analytics": {
+              "countOfUser": "People",
+              "userCount": "Number of Users",
+              "detail": "Learn more",
+              "tickets": "Generated Ticket",
+              "verifys": "Completed Authentication"
+          }
+      }
+    },
+    "input": {
+      "error": {
+          "email": "Please enter your email correctly.",
+          "phone": "Please enter your phone number correctly."
+>>>>>>> 2af94d4d888ed2a527dc372bb19ac6c1160a3558
       }
     }
   },
@@ -109,6 +169,7 @@
       "fee": "문화상품권 결제 수수료에 동의해주세요",
       "agree": "문화상품권 결제 수수료 동의"
     },
+<<<<<<< HEAD
     "battlepay": {
       "autoPayment": "자동결제 이용 동의"
     },
@@ -143,3 +204,11 @@
   "retry": "다시 시도하기",
   "beforePage": "이전 페이지로"
 }
+=======
+    "login": {
+      "loading": "Logging in"
+    },
+    "retry": "Try Again"
+  }
+  
+>>>>>>> 2af94d4d888ed2a527dc372bb19ac6c1160a3558
