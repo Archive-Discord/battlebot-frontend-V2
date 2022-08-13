@@ -1,7 +1,7 @@
 import { LottiePlayer } from "lottie-web";
 import { useEffect, useRef, useState } from "react";
 
-const LottieAnimaition: React.FC<LottieAnimaitionProps> = ({animation: animationData, className, speed}) => {
+const LottieAnimaition: React.FC<LottieAnimaitionProps> = ({animation: animationData, className, speed, autoplay, loop}) => {
   const lottieRef = useRef<HTMLDivElement>(null);
   const [lottie, setLottie] = useState<LottiePlayer | null>(null);
 
@@ -14,8 +14,8 @@ const LottieAnimaition: React.FC<LottieAnimaitionProps> = ({animation: animation
       const animation = lottie.loadAnimation({
         container: lottieRef.current,
         renderer: "svg",
-        loop: true,
-        autoplay: true,
+        loop: loop,
+        autoplay: autoplay,
         animationData,
       });
       if(speed) animation.setSpeed(speed)
@@ -27,10 +27,17 @@ const LottieAnimaition: React.FC<LottieAnimaitionProps> = ({animation: animation
   </>;
 };
 
+LottieAnimaition.defaultProps = {
+  autoplay: true,
+  loop: true
+}
+
 interface LottieAnimaitionProps {
     animation: NodeRequire
     className?: string
-    speed?: number
+    speed?: number;
+    autoplay?: boolean;
+    loop?: boolean;
 }
 
 export default LottieAnimaition;
