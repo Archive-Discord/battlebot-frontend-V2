@@ -3,18 +3,19 @@ import type { GetServerSideProps, NextPage } from "next";
 import { swrfetcher } from "@utils/client";
 import { cookieParser } from "@utils/utils";
 import { useRouter } from "next/router";
+import { useTranslation } from "react-i18next";
 import dynamic from "next/dynamic";
 import useSWR from "swr";
-import Error from "@components/Error"
-import { useTranslation } from "react-i18next";
+import Error from "@components/Error";
+import Seo from "@components/Seo";
 
-const Login = dynamic(() => import('@components/Login'))
-const Loading = dynamic(() => import('@components/Loading'))
-const ServerCard = dynamic(() => import("@components/ServerCard"))
+const Login = dynamic(() => import("@components/Login"));
+const Loading = dynamic(() => import("@components/Loading"));
+const ServerCard = dynamic(() => import("@components/ServerCard"));
 
 const Dashboard: NextPage<PageDefaultProps> = ({ auth }) => {
   const router = useRouter();
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   const { data: guildData, error: guildError } = useSWR<UserGulds>(
     "/auth/me/guilds",
     swrfetcher,
@@ -41,6 +42,7 @@ const Dashboard: NextPage<PageDefaultProps> = ({ auth }) => {
 
   return (
     <>
+      <Seo title="대시보드" />
       <div
         className="container min-h-[100vh] w-full h-full flex flex-col justify-center lg:p-5 p-6"
         style={{ fontFamily: "Noto Sans KR" }}
@@ -61,7 +63,7 @@ const Dashboard: NextPage<PageDefaultProps> = ({ auth }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async(ctx) => {
+export const getServerSideProps: GetServerSideProps = async ctx => {
   const cookies = cookieParser(ctx);
   return {
     props: {

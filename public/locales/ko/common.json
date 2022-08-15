@@ -117,6 +117,20 @@
       "useKakaoDescription": "카카오 계정 인증을 거친 후 서버에 입장시킵니다 (다계정 방지)",
       "useEmail": "이메일 인증 사용하기",
       "useEmailDescription": "이메일 인증을 거친 후 서버에 입장시킵니다 (다계정 방지)"
+    },
+    "automod": {
+      "automod": "자동관리",
+      "useage": "서버에서 일어나는 이벤트를 자동으로 관리하세요!",
+      "makeAutomod": "새로운 자동관리",
+      "useingAutomod": "사용중인 자동관리",
+      "onClickMakeAutomod": "여기를 눌러 자동관리를 추가하세요!",
+      "makeNew": "새로 만들기",
+      "generate": "생성하기",
+      "delete": "삭제",
+      "select":"선택",
+      "event": "이벤트",
+      "target": "대상",
+      "start": "실행"
     }
   },
   "payments": {

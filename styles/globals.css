@@ -17,6 +17,7 @@
   font-weight: normal;
   font-style: normal;
 }
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap");
 @font-face {
   font-family: "Noto Sans KR", "Apple SD Gothic Neo", Sans-serif;
   font-style: normal;
@@ -60,14 +61,12 @@
   color: #7c3aed !important;
 }
 
-
 .fade-enter {
   opacity: 0;
 }
 .fade-exit {
   opacity: 1;
   transform: translateX(0%);
-
 }
 .fade-enter-active {
   opacity: 1;

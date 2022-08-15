@@ -11,7 +11,6 @@ import AOS from "aos";
 import Footer from "../components/Footer";
 import FlareLane from "@flarelane/flarelane-web-sdk";
 import createI18n from "@components/createI18n";
-import Seo from "@components/Seo";
 
 import "../styles/globals.css";
 import "aos/dist/aos.css";
@@ -72,7 +71,6 @@ function BattlebotApp({
   return (
     <>
       <I18nextProvider i18n={i18n}>
-        <Seo />
         <Navbar auth={auth} />
         {router.asPath === "/" ?? <hr className="pt-20 border-none" />}
         <Component {...pageProps} />

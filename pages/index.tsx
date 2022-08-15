@@ -6,6 +6,7 @@ import client from "@utils/client";
 import dayjs from "dayjs";
 import CountUp from "react-countup";
 import { useTranslation } from "react-i18next";
+import Seo from "@components/Seo";
 
 const Home: NextPage<ServerSideProps> = ({
   servers,
@@ -37,6 +38,7 @@ const Home: NextPage<ServerSideProps> = ({
 
   return (
     <>
+      <Seo />
       <section
         className="min-h-[100vh] items-center flex overflow-hidden"
         style={{ backgroundColor: "#7C3AED" }}
@@ -175,14 +177,14 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
     return {
       props: {
         servers: 0,
-        users: 0
+        users: 0,
       },
     };
   } else {
     return {
       props: {
         servers: data.servers,
-        users: data.users
+        users: data.users,
       },
     };
   }

@@ -4,20 +4,21 @@ import { cookieParser } from "@utils/utils";
 import { useRouter } from "next/router";
 import { premiumItems } from "@utils/Constants";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import client, { swrfetcher } from "@utils/client";
 import useSWR from "swr";
 import dynamic from "next/dynamic";
 import LottieAnimaition from "@components/LottieAnimaition";
 import Toast from "@utils/toast";
-import Error from "@components/Error"
-import { useTranslation } from "react-i18next";
+import Error from "@components/Error";
+import Seo from "@components/Seo";
 
 const Login = dynamic(() => import("@components/Login"));
 const Layout = dynamic(() => import("@components/DashboardLayout"));
 const Loading = dynamic(() => import("@components/Loading"));
 
 const DashboardPremium: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   const [selectPremiumType, setSelectPremiumType] = useState<"month" | "year">(
     "month"
   );
@@ -50,25 +51,28 @@ const DashboardPremium: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
   if (!guildData) return <Loading />;
 
   const handlePayments = () => {
-    client('POST', '/payments/order', {
+    client("POST", "/payments/order", {
       itemId: `guild_${selectPremiumType}`,
-      guildId: guildData.id
+      guildId: guildData.id,
     }).then(data => {
-      if(data.error) {
-        Toast(data.message, 'error')
+      if (data.error) {
+        Toast(data.message, "error");
       } else {
-        router.push(`/payments/${data.data.paymentId}`)
+        router.push(`/payments/${data.data.paymentId}`);
       }
-    })
-  }
+    });
+  };
   return (
     <>
+      <Seo title="프리미엄" />
       <Layout guild={guildData}>
         <div className="w-full" style={{ fontFamily: "Noto Sans KR" }}>
           <div className="w-full flex flex-col mr-1.5 ml-1.5">
-            <span className="text-2xl font-bold">{t("dashboard.premium.battlebot")}</span>
+            <span className="text-2xl font-bold">
+              {t("dashboard.premium.battlebot")}
+            </span>
             <span className="text-lg mt-1 text-gray-500">
-            {t("dashboard.premium.useage")}
+              {t("dashboard.premium.useage")}
             </span>
           </div>
           <div className="grid lg:grid-cols-2 w-full mt-4 gap-4 lg:mr-1.5 lg:ml-1.5">
@@ -128,7 +132,9 @@ const DashboardPremium: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
           </div>
           <div className="mt-3 w-full flex">
             <button
-              onClick={() => {handlePayments()}}
+              onClick={() => {
+                handlePayments();
+              }}
               style={{ transition: "all 0.3s" }}
               className="px-5 py-2 rounded-xl text-xl lg:ml-2 hover:bg-violet-100 border hover:border-purple-500"
             >
@@ -144,10 +150,10 @@ const DashboardPremium: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
                     animation={require("../../../lottieFiles/partner.json")}
                   />
                   <span className="lg:text-xl text-base font-bold">
-                  {t("dashboard.premium.serverMember500up")}
+                    {t("dashboard.premium.serverMember500up")}
                   </span>
                   <span className="lg:text-2xl text-xl font-bold">
-                  {t("dashboard.premium.howBattlebotPartner")}
+                    {t("dashboard.premium.howBattlebotPartner")}
                   </span>
                   <button
                     onClick={() => {
@@ -164,9 +170,11 @@ const DashboardPremium: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
             )}
             <section className="grid lg:grid-cols-2 grid-cols-1 lg:mt-10 mt-20 px-2 pb-10">
               <div className="col-span-1 flex lg:items-start justify-center items-center flex-col lg:p-10 py-10">
-                <span className="lg:text-2xl text-xl font-bold">{t("dashboard.premium.email")}</span>
+                <span className="lg:text-2xl text-xl font-bold">
+                  {t("dashboard.premium.email")}
+                </span>
                 <span className="lg:text-3xl text-2xl font-bold">
-                {t("dashboard.premium.verifyToEmail")}
+                  {t("dashboard.premium.verifyToEmail")}
                 </span>
               </div>
               <div className="col-span-1">
@@ -190,19 +198,21 @@ const DashboardPremium: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
                 />
               </div>
               <div className="col-span-1 flex lg:items-end justify-center items-center flex-col lg:p-10">
-                <span className="lg:text-2xl text-xl font-bold">{t("dashboard.premium.phone")}</span>
+                <span className="lg:text-2xl text-xl font-bold">
+                  {t("dashboard.premium.phone")}
+                </span>
                 <span className="lg:text-3xl text-2xl font-bold">
-                {t("dashboard.premium.verifyToPhone")}
+                  {t("dashboard.premium.verifyToPhone")}
                 </span>
               </div>
             </section>
             <section className="grid lg:grid-cols-2 grid-cols-1 lg:mt-10 mt-20 px-2 pb-10 min-h-[420px]">
               <div className="col-span-1 flex lg:items-start justify-center items-center flex-col lg:p-10 py-10">
                 <span className="lg:text-2xl text-xl font-bold">
-                {t("dashboard.premium.customLink")}
+                  {t("dashboard.premium.customLink")}
                 </span>
                 <span className="lg:text-3xl text-2xl font-bold">
-                {t("dashboard.premium.customLinkJoinServer")}
+                  {t("dashboard.premium.customLinkJoinServer")}
                 </span>
               </div>
               <div className="col-span-1 flex items-center justify-center">

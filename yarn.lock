@@ -17,6 +17,13 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
+"@ctrl/react-adsense@^1.6.0":
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/@ctrl/react-adsense/-/react-adsense-1.6.0.tgz#8761bbb13934bf4c9acc520041463050cd96d032"
+  integrity sha512-FlekDNpaSkXpxVH9ic9p3fue3FTQl/Cwqv/DG8ZbN00XL6aujHsArCPo0ElnBBB3imGLtnL3q01L/PrB+5NahA==
+  dependencies:
+    tslib "^2.4.0"
+
 "@discordjs/builders@^1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@discordjs/builders/-/builders-1.1.0.tgz#4366a4fe069238c3e6e674b74404c79f3ba76525"

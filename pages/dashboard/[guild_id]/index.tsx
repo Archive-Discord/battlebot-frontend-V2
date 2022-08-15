@@ -10,11 +10,12 @@ import type { NextPage, GetServerSideProps } from "next";
 import { cookieParser } from "@utils/utils";
 import { swrfetcher } from "@utils/client";
 import { useRouter } from "next/router";
+import { useTranslation } from "react-i18next";
 import useSWR from "swr";
 import dynamic from "next/dynamic";
 import AnalyticsServer from "@components/dashboard/AnalyticsServer";
 import Error from "@components/Error";
-import { useTranslation } from "react-i18next";
+import Seo from "@components/Seo";
 
 const Login = dynamic(() => import("@components/Login"));
 const Layout = dynamic(() => import("@components/DashboardLayout"));
@@ -22,7 +23,7 @@ const Loading = dynamic(() => import("@components/Loading"));
 
 const DashboardMain: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
   const router = useRouter();
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   const { data: guildData, error: guildError } = useSWR<Guild>(
     `/guilds/${guildId}`,
     swrfetcher,
@@ -73,11 +74,14 @@ const DashboardMain: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
   if (!guildData) return <Loading />;
   return (
     <>
+      <Seo title="대시보드" />
       <Layout guild={guildData}>
         <div className="flex flex-col mr-1.5 ml-1.5">
-          <span className="text-2xl font-bold">{t("dashboard.index.dashboard")}</span>
+          <span className="text-2xl font-bold">
+            {t("dashboard.index.dashboard")}
+          </span>
           <span className="text-lg mt-1 text-gray-500">
-          {t("dashboard.index.lookAbout")}
+            {t("dashboard.index.lookAbout")}
           </span>
         </div>
         <AnalyticsServer guild={guildData} />

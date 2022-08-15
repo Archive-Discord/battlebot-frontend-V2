@@ -26,8 +26,8 @@ const Dropdown: React.FC<DropdownProps> = ({ items, selectCallback }) => {
             else setOpenDropdown(false);
           }}
         >
-          <div className="flex flx-row items-center">
-            <i className={`${selectItem.icon} w-8 h-8 mr-2 flex items-center justify-center`} />
+          <div className={`flex flx-row items-center ${selectItem.icon && "h-8"}`}>
+            {selectItem.icon && <i className={`${selectItem.icon} w-8 h-8 mr-2 flex items-center justify-center`} />}
             <span>{selectItem.name}</span>
           </div>
           <div className="flex items-center">
@@ -63,10 +63,10 @@ const Dropdown: React.FC<DropdownProps> = ({ items, selectCallback }) => {
               } ${index == items.length - 1 && "rounded-b-xl"}`}
             >
               <div className="w-full flex flex-row items-center justify-between">
-                <div className="flex flex-row items-center">
-                  <i
+                <div className={`flex flex-row items-center ${!item.icon && "h-8"}`}>
+                  {item.icon && <i
                     className={`${item.icon} w-8 h-8 rounded-full mr-2 flex items-center justify-center`}
-                  />
+                  />}
                   {item.name}
                 </div>
                 <div>

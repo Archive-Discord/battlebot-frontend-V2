@@ -42,16 +42,17 @@ export const swrfetcher = (endpoints: string) =>
       throw new Error(
         response.data.message
           ? response.data.message
-          : "알 수 없는 오류가 발생했습니다", {
-            cause: response.status
-          }
+          : "알 수 없는 오류가 발생했습니다",
+        {
+          cause: response.status,
+        }
       );
     });
 
 export interface Response<
   T extends { [key: string]: any } = { [key: string]: any }
 > {
-  data?: any;
+  data?: T | string | any;
   error: boolean;
   status: number;
   message: string;

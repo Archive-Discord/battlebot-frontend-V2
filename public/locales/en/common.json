@@ -46,7 +46,8 @@
       "analytics": "Analyze",
       "automod": "AutoMod",
       "members": "User Manage",
-      "ticket": "Ticket"
+      "ticket": "Ticket",
+      "customlink": "커스텀 링크"
     },
     "premium": {
       "battlebot": "BattleBot Premium",

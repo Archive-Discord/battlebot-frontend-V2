@@ -9,16 +9,17 @@ import client, { swrfetcher } from "@utils/client";
 import useSWR from "swr";
 import dynamic from "next/dynamic";
 import Error from "@components/Error";
-import Modal from "@components/Modal";
-import Button from "@components/Button";
-import Input from "@components/Input";
-import Premium from "@components/Premium";
-import CheckBox from "@components/Checkbox";
 import Toast from "@utils/toast";
+import Seo from "@components/Seo";
 
 const Login = dynamic(() => import("@components/Login"));
 const Layout = dynamic(() => import("@components/DashboardLayout"));
 const Loading = dynamic(() => import("@components/Loading"));
+const CheckBox = dynamic(() => import("@components/Checkbox"));
+const Input = dynamic(() => import("@components/Input"));
+const Button = dynamic(() => import("@components/Button"));
+const Modal = dynamic(() => import("@components/Modal"));
+const Premium = dynamic(() => import("@components/Premium"));
 
 const DashboardCustomLink: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
   const router = useRouter();
@@ -128,7 +129,7 @@ const DashboardCustomLink: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
     client("DELETE", `/guilds/${guildData.id}/customlink`, {
       path: deleteCustomLinks,
     }).then(res => {
-      setDeleteCustomLinks([])
+      setDeleteCustomLinks([]);
       if (res.error) {
         Toast(res.message, "error");
       } else {
@@ -142,6 +143,7 @@ const DashboardCustomLink: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
   };
   return (
     <>
+      <Seo title="커스텀 링크" />
       <Layout guild={guildData}>
         <div className="w-full" style={{ fontFamily: "Noto Sans KR" }}>
           <div className="w-full flex flex-col mr-1.5 ml-1.5">
@@ -351,7 +353,8 @@ const DashboardCustomLink: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
                               t("dashboard.customlink.kakaoVerify")}
                             {guildCustomlink.custom.option == "phone" &&
                               t("dashboard.customlink.phoneVerify")}
-                            {!guildCustomlink.custom.option && "없음"}
+                            {!guildCustomlink.custom.option &&
+                              t("dashboard.customlink.noneVerify")}
                           </td>
                         </tr>
                       </tbody>

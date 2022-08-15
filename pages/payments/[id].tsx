@@ -25,8 +25,9 @@ import dynamic from "next/dynamic";
 import useSWR from "swr";
 import PaymentsMethods from "@components/PaymentsMethods";
 import Toast from "@utils/toast";
-import Error from "@components/Error"
+import Error from "@components/Error";
 import { useTranslation } from "react-i18next";
+import Seo from "@components/Seo";
 
 const Login = dynamic(() => import("@components/Login"));
 const Loading = dynamic(() => import("@components/Loading"));
@@ -54,7 +55,7 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
   );
   const [amount, setAmount] = useState<number>(0);
   const router = useRouter();
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   useEffect(() => {
     setAmount(defaultAmount);
     if (discount > 1) setAmount(defaultAmount - defaultAmount / discount);
@@ -83,7 +84,7 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
           className="hover:bg-gray-200 border font-bold rounded-md px-3 py-1 mt-5"
           onClick={() => router.back()}
         >
-           {t("retry")}
+          {t("retry")}
         </button>
       </Error>
     );
@@ -114,7 +115,8 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
     if (!email) return Toast(t("input.error.noEmail"), "error");
     if (!phone) return Toast(t("input.error.noPhone"), "error");
     if (payMethod === "battlepay") {
-      if (!autoPayments) return Toast(t("payments.acceptAutoPayments"), "error");
+      if (!autoPayments)
+        return Toast(t("payments.acceptAutoPayments"), "error");
       if (!userCards || userCards.length === 0)
         return Toast(t("payments.noCard"), "error");
       brandpay(userData).then(pay => {
@@ -145,15 +147,14 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
           });
       });
     } else if (payMethod === "cultureland") {
-      if(!culturelandFee) return Toast(t("payments.cultureland.fee"), "error");
+      if (!culturelandFee) return Toast(t("payments.cultureland.fee"), "error");
       tossPayments().then(payments => {
         payments.requestPayment("문화상품권", {
           amount: amount,
           orderId: data.id,
           orderName: data.name,
           customerEmail: email,
-          successUrl:
-          window.location.origin + `/payments/gift?phone=${phone}`,
+          successUrl: window.location.origin + `/payments/gift?phone=${phone}`,
           failUrl: window.location.origin + `/payments/fail?phone=${phone}`,
         });
       });
@@ -161,6 +162,7 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
   };
   return (
     <>
+      <Seo title="결제" />
       <div
         className="min-h-[100vh] container lg:p-10 p-3 lg:mt-12 mt-16"
         style={{ fontFamily: "Noto Sans KR" }}
@@ -253,24 +255,31 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
                   <span className="font-bold">{data.name}</span>
                   <span className="text-sm">{data.metadata.name}</span>
                   <span className="font-bold text-xl mt-auto">
-                    {numberWithCommas(data.amount as number)}{t("payments.won")}
+                    {numberWithCommas(data.amount as number)}
+                    {t("payments.won")}
                   </span>
                 </div>
               </div>
               <hr className="w-full my-4" />
               <div>
                 <div className="flex flex-row justify-between">
-                  <span className="text-lg font-bold">{t("payments.orderAmount")}</span>
+                  <span className="text-lg font-bold">
+                    {t("payments.orderAmount")}
+                  </span>
                   <span className="text-lg">
-                    {numberWithCommas(data.amount as number)}{t("payments.won")}
+                    {numberWithCommas(data.amount as number)}
+                    {t("payments.won")}
                   </span>
                 </div>
                 {discount > 1 ? (
                   <>
                     <div className="flex flex-row justify-between">
-                      <span className="text-lg font-bold">{t("payments.disacountAmount")}</span>
+                      <span className="text-lg font-bold">
+                        {t("payments.disacountAmount")}
+                      </span>
                       <span className="text-lg">
-                        -{numberWithCommas(defaultAmount / discount)}{t("payments.won")}
+                        -{numberWithCommas(defaultAmount / discount)}
+                        {t("payments.won")}
                       </span>
                     </div>
                   </>
@@ -281,10 +290,11 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
                   <>
                     <div className="flex flex-row justify-between">
                       <span className="text-lg font-bold">
-                      {t("payments.cultureland.feeAmount")}
+                        {t("payments.cultureland.feeAmount")}
                       </span>
                       <span className="text-lg">
-                        {numberWithCommas(defaultAmount / 10)}{t("payments.won")}
+                        {numberWithCommas(defaultAmount / 10)}
+                        {t("payments.won")}
                       </span>
                     </div>
                   </>
@@ -294,9 +304,11 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
               </div>
               <hr className="w-full my-4" />
               <div className="flex flex-row justify-between items-center">
-                <span className="text-2xl font-bold">{t("payments.amount")}</span>
+                <span className="text-2xl font-bold">
+                  {t("payments.amount")}
+                </span>
                 <span className="text-lg">
-                {t("payments.month")}{" "}
+                  {t("payments.month")}{" "}
                   <span className="font-bold text-xl">
                     {numberWithCommas(amount)}
                   </span>

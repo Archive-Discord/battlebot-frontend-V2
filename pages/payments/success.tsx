@@ -7,6 +7,7 @@ import dynamic from "next/dynamic";
 import dayjs from "dayjs";
 import Error from "@components/Error";
 import { useTranslation } from "react-i18next";
+import Seo from "@components/Seo";
 
 const Login = dynamic(() => import("@components/Login"));
 
@@ -35,6 +36,7 @@ const PaymentsSuccess: NextPage<PageDefaultProps> = ({
 
   return (
     <>
+      <Seo title="결제완료" />
       <div
         className="min-h-[85vh] container lg:p-10 p-3 lg:mt-12 mt-16"
         style={{ fontFamily: "Noto Sans KR" }}
@@ -83,9 +85,12 @@ const PaymentsSuccess: NextPage<PageDefaultProps> = ({
             </div>
             <hr className="w-full my-3" />
             <div className="flex items-center justify-between text-lg">
-              <span className="font-bold text-2xl">{t("payments.success.totalOrderAmount")}</span>
+              <span className="font-bold text-2xl">
+                {t("payments.success.totalOrderAmount")}
+              </span>
               <span className="text-2xl">
-                {numberWithCommas(data.payment.balanceAmount)}{t("payments.won")}
+                {numberWithCommas(data.payment.balanceAmount)}
+                {t("payments.won")}
               </span>
             </div>
           </div>

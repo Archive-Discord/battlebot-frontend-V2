@@ -7,6 +7,7 @@ import dynamic from "next/dynamic";
 import dayjs from "dayjs";
 import Error from "@components/Error";
 import { useTranslation } from "react-i18next";
+import Seo from "@components/Seo";
 
 const Login = dynamic(() => import("@components/Login"));
 
@@ -35,28 +36,40 @@ const PaymentsSuccess: NextPage<PageDefaultProps> = ({
 
   return (
     <>
+      <Seo title="결제완료" />
       <div
         className="min-h-[85vh] container lg:p-10 p-3 lg:mt-12 mt-16"
         style={{ fontFamily: "Noto Sans KR" }}
       >
         <div className="flex flex-col">
-          <span className="text-3xl font-bold">{t("payments.success.order")}</span>
+          <span className="text-3xl font-bold">
+            {t("payments.success.order")}
+          </span>
           <span className="text-xl text-gray-500">
-          {t("payments.success.orderDescription")}
+            {t("payments.success.orderDescription")}
           </span>
         </div>
         <div className="flex flex-col">
           <div className="mt-5 border rounded-lg p-4 w-full">
-            <span className="text-xl font-bold">{t("payments.success.orderInfo")}</span>
+            <span className="text-xl font-bold">
+              {t("payments.success.orderInfo")}
+            </span>
             <hr className="w-full my-3" />
             <div className="flex flex-col w-full">
               <div className="flex lg:items-center lg:justify-between text-lg lg:flex-row flex-col">
-                <span className="font-bold">{t("payments.success.itemName")}</span>
+                <span className="font-bold">
+                  {t("payments.success.itemName")}
+                </span>
                 <span>{data.name}</span>
               </div>
               <div className="flex lg:items-center lg:justify-between text-lg lg:flex-row flex-col">
-                <span className="font-bold">{t("payments.success.orderAmount")}</span>
-                <span>{numberWithCommas(data.amount)}{t("payments.won")}</span>
+                <span className="font-bold">
+                  {t("payments.success.orderAmount")}
+                </span>
+                <span>
+                  {numberWithCommas(data.amount)}
+                  {t("payments.won")}
+                </span>
               </div>
               <div className="flex lg:items-center lg:justify-between text-lg lg:flex-row flex-col">
                 <span className="font-bold">
@@ -72,9 +85,12 @@ const PaymentsSuccess: NextPage<PageDefaultProps> = ({
             </div>
             <hr className="w-full my-3" />
             <div className="flex items-center justify-between text-lg">
-              <span className="font-bold text-2xl">{t("payments.success.totalOrderAmount")}</span>
+              <span className="font-bold text-2xl">
+                {t("payments.success.totalOrderAmount")}
+              </span>
               <span className="text-2xl">
-                {numberWithCommas(data.payment.balanceAmount)}{t("payments.won")}
+                {numberWithCommas(data.payment.balanceAmount)}
+                {t("payments.won")}
               </span>
             </div>
           </div>

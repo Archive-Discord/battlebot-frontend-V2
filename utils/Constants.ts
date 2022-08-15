@@ -106,6 +106,77 @@ export const payMethods: Item[] = [
   },
 ];
 
+export const AutomodTarget: Item[] = [
+  {
+    id: "message",
+    name: "채팅",
+    icon: "fas fa-comment",
+  },
+  {
+    id: "user",
+    name: "유저",
+    icon: "fas fa-user",
+  },
+  {
+    id: "channel",
+    name: "채널",
+    icon: "fas fa-comment-alt",
+  },
+];
+
+export const AutomodEvent = [
+  {
+    id: "blacklist_ban",
+    name: "블랙리스트 자동차단",
+    categori: "user",
+  },
+  {
+    id: "autorole",
+    name: "입장시 역할 자동지급",
+    categori: "user",
+  },
+  {
+    id: "usercreateat",
+    name: "유저 계정 생성일",
+    icon: "fas fa-crown",
+    categori: "user",
+  },
+  {
+    id: "usecurse",
+    name: "욕설 사용시",
+    categori: "message",
+  },
+  {
+    id: "uselink",
+    name: "링크 사용시",
+    categori: "message",
+  },
+  {
+    id: "resetchannel",
+    name: "매일 12시마다 채널 초기화",
+    categori: "channel",
+  },
+];
+
+export const warningTypes = [
+  {
+    id: "delete",
+    name: "메시지 삭제",
+  },
+  {
+    id: "warning",
+    name: "메시지 삭제 후 경고지급",
+  },
+  {
+    id: "kick",
+    name: "메시지 삭제 후 추방",
+  },
+  {
+    id: "ban",
+    name: "메시지 삭제 후 차단",
+  },
+];
+
 export const EndPoints = {
   Discord: {
     API: "https://discord.com/api",

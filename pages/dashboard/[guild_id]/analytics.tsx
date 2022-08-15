@@ -1,17 +1,23 @@
-import type { Guild, Members, PageDefaultProps, Roles, Ticket, User } from "@types";
+import type {
+  Guild,
+  Members,
+  PageDefaultProps,
+  Roles,
+  Ticket,
+  User,
+} from "@types";
 import type { NextPage, GetServerSideProps } from "next";
-import { cookieParser, lastDate, numberToColour } from "@utils/utils";
+import { cookieParser } from "@utils/utils";
 import { swrfetcher } from "@utils/client";
 import { useRouter } from "next/router";
 import { SmallLoading } from "@components/Loading";
+import { useTranslation } from "react-i18next";
 import useSWR from "swr";
 import dynamic from "next/dynamic";
 import Error from "@components/Error";
-import dayjs from "dayjs";
 import GuildRolesChart from "@components/dashboard/GuildRolesChart";
-import GuildTicketChart from "@components/dashboard/GuildMemberJoinChart";
 import GuildMemberJoinChart from "@components/dashboard/GuildMemberJoinChart";
-import { useTranslation } from "react-i18next";
+import Seo from "@components/Seo";
 
 const Login = dynamic(() => import("@components/Login"));
 const Layout = dynamic(() => import("@components/DashboardLayout"));
@@ -19,7 +25,7 @@ const Loading = dynamic(() => import("@components/Loading"));
 
 const DashboardMain: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
   const router = useRouter();
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   const { data: guildData, error: guildError } = useSWR<Guild>(
     `/guilds/${guildId}`,
     swrfetcher,
@@ -71,19 +77,30 @@ const DashboardMain: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
 
   return (
     <>
+      <Seo title="통계" />
       <Layout guild={guildData}>
         <div className="flex flex-col mr-1.5 ml-1.5">
-          <span className="text-2xl font-bold">{t("dashboard.analytics.analytics")}</span>
+          <span className="text-2xl font-bold">
+            {t("dashboard.analytics.analytics")}
+          </span>
           <span className="text-lg mt-1 text-gray-500">
-          {t("dashboard.analytics.analyticsDescrption")}
+            {t("dashboard.analytics.analyticsDescrption")}
           </span>
         </div>
         <div className="flex flex-row lg:flex-nowrap flex-wrap lg:space-y-0 space-y-6 mt-2 p-2">
           <div className="lg:w-2/3 w-full border rounded-md lg:mr-2 flex justify-center flex-col items-center">
-            {guildMembersData ? <GuildMemberJoinChart guildMembersData={guildMembersData}/> : <SmallLoading />}
+            {guildMembersData ? (
+              <GuildMemberJoinChart guildMembersData={guildMembersData} />
+            ) : (
+              <SmallLoading />
+            )}
           </div>
           <div className="lg:w-1/3 w-full border rounded-md lg:mr-2 flex justify-center flex-col items-center">
-            {guildMembersData && guildRolesData ? <GuildRolesChart guildRolesData={guildRolesData}/> : <SmallLoading />}
+            {guildMembersData && guildRolesData ? (
+              <GuildRolesChart guildRolesData={guildRolesData} />
+            ) : (
+              <SmallLoading />
+            )}
           </div>
         </div>
       </Layout>
