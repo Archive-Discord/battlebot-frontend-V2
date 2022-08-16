@@ -71,7 +71,7 @@ const DashboardAutomod: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
 
   const selectItemDelete = () => {};
   const generateAutoMod = () => {};
-  const targetIgnoreEvents = ["blacklist_ban", "usercreateat"]
+  const targetIgnoreEvents = ["blacklist_ban", "usercreateat"];
   const startTartgetLoader = (type: string) => {
     if (type === "autorole") {
       return guildData.roles.filter(role => {
@@ -80,7 +80,7 @@ const DashboardAutomod: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
     } else if (type === "usecurse" || type === "uselink") {
       return warningTypes;
     } else if (type === "resetchannel") {
-      return guildData.channels
+      return guildData.channels;
     } else {
       return warningTypes;
     }
@@ -243,6 +243,22 @@ const DashboardAutomod: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
                 <Dropdown
                   items={startTartgetLoader(eventType)}
                   selectCallback={setStartTarget}
+                />
+              </div>
+            </div>
+          )}
+          {eventType === "usercreateat" && (
+            <div className="flex lg:flex-row flex-col lg:items-baseline items-start justify-between mt-2">
+              <span className="font-bold text-lg">
+                {t("dashboard.automod.start")}
+              </span>
+              <div className="flex items-start flex-col w-full lg:max-w-[250px] lg:mt-0 mt-2">
+                <Input
+                  type={"number"}
+                  max={30}
+                  className="h-12 w-full"
+                  placeholder={"1일"}
+                  onChangeHandler={setStartTarget}
                 />
               </div>
             </div>

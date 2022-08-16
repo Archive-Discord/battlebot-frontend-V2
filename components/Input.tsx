@@ -14,13 +14,14 @@ const Input: React.FC<InputProps> = ({
   placeholder,
   type,
   style,
-  disable
+  max,
+  disable,
 }) => {
   const [value, setValue] = useState<string | undefined>(
     defaultValue ? defaultValue : undefined
   );
   const [error, setError] = useState<string>();
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   useEffect(() => {
     onChangeHandler(value);
   }, [value]);
@@ -38,9 +39,13 @@ const Input: React.FC<InputProps> = ({
     }
   }, [value]);
   const getValue = () => {
-    if(type == "phone") return value?.replace(/[^0-9]/g, '').replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "")
-    return value
-  }
+    if (type == "phone")
+      return value
+        ?.replace(/[^0-9]/g, "")
+        .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3")
+        .replace(/(\-{1,2})$/g, "");
+    return value;
+  };
   return (
     <>
       <div className={`${className} flex flex-col`}>
@@ -50,9 +55,15 @@ const Input: React.FC<InputProps> = ({
           value={getValue()}
           placeholder={placeholder}
           onChange={e => {
-            setValue(e.target.value);
+            if (type === "number") {
+              if (isNaN(Number(e.target.value)) || Number(e.target.value) < 0) return;
+              if(max && Number(e.target.value) > max) return
+              setValue(e.target.value);
+            }
+            setValue(e.target.value)
           }}
-          className={`border py-2 px-2 rounded-lg focus:outline-none focus:ring-1 disabled:opacity-75 ${
+          max={max ? max : undefined}
+          className={`${className} border py-2 px-2 rounded-lg focus:outline-none focus:ring-1 disabled:opacity-75 ${
             error
               ? "focus:border-red-500 focus:ring-red-500"
               : "focus:border-violet-500 focus:ring-violet-500"
@@ -73,9 +84,10 @@ interface InputProps {
   placeholder: string;
   onChangeHandler: (value?: string) => void;
   defaultValue?: string;
-  disable?: boolean
+  disable?: boolean;
   className?: string;
+  max?: number;
   type?: HTMLInputTypeAttribute;
-  style?: CSSProperties
+  style?: CSSProperties;
 }
 export default Input;

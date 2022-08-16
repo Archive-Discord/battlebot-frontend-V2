@@ -279,7 +279,7 @@ const Invite: NextPage<PageDefaultProps & { path: string }> = ({
                         </span>
                         <div className="flex flex-row lg:ml-auto lg:max-w-[310px] lg:w-full">
                           <Input
-                            className="w-[70%] mr-2"
+                            className="w-[100%] mr-2"
                             type={"email"}
                             disable={isSend ? true : false}
                             onChangeHandler={setEmail}
@@ -290,7 +290,7 @@ const Invite: NextPage<PageDefaultProps & { path: string }> = ({
                             label={isSend ? "전송됨" : "전송"}
                             disable={isSend ? true : false}
                             type="success"
-                            className="w-full rounded-lg"
+                            className="w-[40%] rounded-lg"
                             onClick={handleSendEmail}
                           />
                         </div>

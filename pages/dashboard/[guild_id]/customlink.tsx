@@ -162,6 +162,10 @@ const DashboardCustomLink: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
                 {t("dashboard.customlink.random")}
               </span>
               <div>
+                <span className="px-3 py-1 rounded-md bg-purple-500 text-white mt-2 px-5 py-2 mr-2">
+                  {guildCustomlink?.random.length}개 /{" "}
+                  {guildPremium ? "40개" : "15개"}
+                </span>
                 <Button
                   className="mt-2 px-5 py-2 mr-2"
                   type="success"
