@@ -25,7 +25,6 @@ const createI18n = ({ locale }: Props): I18n => {
       resources,
       fallbackLng: "ko",
       lng: locale,
-      debug: true,
       interpolation: { escapeValue: true },
       returnObjects: true,
       returnEmptyString: true,
