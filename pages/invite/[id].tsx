@@ -27,7 +27,7 @@ const Invite: NextPage<PageDefaultProps & { path: string }> = ({
   auth,
 }) => {
   const [page, setPage] = useState<"email" | "phone" | "kakao" | "end" | null>(
-    data.option
+    data.option ? data.option : null
   );
   const [isSend, setIsSend] = useState(false);
   const [email, setEmail] = useState<string>();
