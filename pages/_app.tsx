@@ -11,6 +11,7 @@ import AOS from "aos";
 import Footer from "../components/Footer";
 import FlareLane from "@flarelane/flarelane-web-sdk";
 import createI18n from "@components/createI18n";
+import * as gtag from "@utils/googleAnalytics";
 
 import "../styles/globals.css";
 import "aos/dist/aos.css";
@@ -27,7 +28,16 @@ function BattlebotApp({
   const router = useRouter();
   const [theme, setTheme] = useState<Theme>();
   const i18n = useMemo(() => createI18n({ locale }), [locale]);
-
+  useEffect(() => {
+    const handleRouteChange = (url: URL) => {
+      gtag.pageview(url);
+    };
+    router.events.on("routeChangeComplete", handleRouteChange);
+    FlareLane.setCurrentPath(router.asPath)
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, [router.events]);
   useEffect(() => {
     const nowTheme = localStorage.getItem("theme");
     const body = document.getElementById("body");
@@ -59,9 +69,9 @@ function BattlebotApp({
   }, [router.asPath, router.events]);
 
   useEffect(() => {
-    //FlareLane.initialize({
-    //  projectId: "7926d4f1-fbdb-4db9-bcc7-62fec4f86224",
-    //});
+    FlareLane.initialize({
+      projectId: "7926d4f1-fbdb-4db9-bcc7-62fec4f86224",
+    });
     AOS.init({
       easing: "ease-out-cubic",
       once: true,

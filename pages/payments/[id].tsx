@@ -15,15 +15,16 @@ import {
   userAvaterLink,
 } from "@utils/utils";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { LegacyRef, MutableRefObject, useEffect, useRef, useState } from "react";
 import { brandpay, tossPayments } from "@utils/toss";
 import { SmallLoading } from "@components/Loading";
-import { payMethods } from "@utils/Constants";
+import { isMobile, isDesktop } from "react-device-detect";
 import { AxiosError } from "axios";
 import client, { swrfetcher } from "@utils/client";
 import dynamic from "next/dynamic";
 import useSWR from "swr";
 import PaymentsMethods from "@components/PaymentsMethods";
+import PaymentsMethodDropdown from "@components/PaymentsMethodsDropdown";
 import Toast from "@utils/toast";
 import Error from "@components/Error";
 import { useTranslation } from "react-i18next";
@@ -56,6 +57,8 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
   const [amount, setAmount] = useState<number>(0);
   const router = useRouter();
   const { t } = useTranslation();
+  const kakaopayRef = useRef<HTMLIFrameElement>(null);
+
   useEffect(() => {
     setAmount(defaultAmount);
     if (discount > 1) setAmount(defaultAmount - defaultAmount / discount);
@@ -110,7 +113,7 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
   const payMethodsHanler = (method: string) => {
     setPayMethod(method as PayMethods);
   };
-  const requestPayments = () => {
+  const requestPayments = async () => {
     if (!name) return Toast(t("input.error.noName"), "error");
     if (!email) return Toast(t("input.error.noEmail"), "error");
     if (!phone) return Toast(t("input.error.noPhone"), "error");
@@ -157,6 +160,27 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
           successUrl: window.location.origin + `/payments/gift?phone=${phone}`,
           failUrl: window.location.origin + `/payments/fail?phone=${phone}`,
         });
+      });
+    } else if (payMethod === "kakaopay") {
+      if (!autoPayments)
+        return Toast(t("payments.acceptAutoPayments"), "error");
+      await client("POST", `/payments/order/${data.id}/kakaopay`, {
+        orderId: data.id,
+        phone: phone ? phone.replace(/-/g, "") : userData.phone,
+        amount: amount.toString(),
+      }).then(res => {
+        if (res.error)
+          return Toast(
+            res.message + " 오류 정보와 함께 관리자에게 문의해주세요",
+            "error"
+          );
+        if (isMobile) {
+          window.location.href = res.data.next_redirect_mobile_url;
+        } else if (isDesktop) {
+          window.location.href = res.data.next_redirect_pc_url;
+        } else {
+          window.location.href = res.data.next_redirect_pc_url;
+        }
       });
     }
   };
@@ -218,7 +242,7 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
                   {t("payments.method")}
                 </span>
               </div>
-              <Dropdown items={payMethods} selectCallback={payMethodsHanler} />
+              <PaymentsMethodDropdown selectCallback={payMethodsHanler} />
               {payMethod === "battlepay" ? (
                 <>
                   {userCards ? (

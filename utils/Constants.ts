@@ -97,12 +97,17 @@ export const payMethods: Item[] = [
   {
     id: "battlepay",
     name: "배틀페이",
-    icon: "fas fa-credit-card",
+    icon: "/logo.png",
   },
   {
     id: "cultureland",
     name: "문화상품권",
-    icon: "fas fa-gift",
+    icon: "/cultureland.png",
+  },
+  {
+    id: "kakaopay",
+    name: "카카오페이",
+    icon: "/kakaopay.png",
   },
 ];
 

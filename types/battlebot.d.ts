@@ -25,5 +25,5 @@ export interface Item {
     icon?: string;
   }
 
-  export type PayMethods = "cultureland" | "battlepay"
+  export type PayMethods = "cultureland" | "battlepay" | "kakaopay"
   export type Theme = "dark" | "light"

@@ -1,3 +1,4 @@
+import { GA_TRACKING_ID } from "@utils/googleAnalytics";
 import Document, { Html, Head, Main, NextScript } from "next/document";
 
 export default class CustomDocument extends Document {
@@ -5,7 +6,7 @@ export default class CustomDocument extends Document {
     return (
       <Html lang="ko">
         <Head>
-          <link rel="canonical" href="http://battlebot.kr/" />
+          <link rel="canonical" href="https://battlebot.kr/" />
           <meta name="google" content="notranslate" />
           <meta
             name="naver-site-verification"
@@ -28,7 +29,6 @@ export default class CustomDocument extends Document {
             integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
             crossOrigin="anonymous"
           />
-          {/* Global Site Tag (gtag.js) - Google Analytics */}
           <script
             dangerouslySetInnerHTML={{
               __html: `
@@ -92,6 +92,28 @@ export default class CustomDocument extends Document {
                 y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
               })(window, document, "clarity", "script", "d83w50itqx");
               `,
+            }}
+          />
+          <script
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2701426579223876"
+            crossOrigin="anonymous"
+          />
+          {/* Global Site Tag (gtag.js) - Google Analytics */}
+          <script
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+          />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${GA_TRACKING_ID}', {
+                  page_path: window.location.pathname,
+                });
+            `,
             }}
           />
         </Head>
