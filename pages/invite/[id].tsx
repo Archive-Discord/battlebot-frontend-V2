@@ -56,7 +56,6 @@ const Invite: NextPage<PageDefaultProps & { path: string }> = ({
       </Error>
     );
   if (userError && userError.cause === 401) return <Login />;
-  if (!auth) return <Login />;
   if (!userData) return <Loading />;
 
   const handleVerify = (token: string) => {

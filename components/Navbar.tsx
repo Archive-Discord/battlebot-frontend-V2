@@ -1,14 +1,16 @@
+import type { User as BattleBotUser } from "@types";
 import type { User } from "discord.js";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { NavBarItems } from "@utils/Constants";
 import { classNames, userAvaterLink } from "@utils/utils";
 import { useDetectClickOutside } from "react-detect-click-outside";
+import { useTranslation } from "react-i18next";
+import { swrfetcher } from "@utils/client";
+import useSWR from "swr";
 import Image from "next/image";
 import Link from "next/link";
-import client from "@utils/client";
 import FlareLane from "@flarelane/flarelane-web-sdk";
-import { useTranslation } from "react-i18next";
 
 interface NavbarProps {
   auth: string;
@@ -31,24 +33,28 @@ const Navbar = ({ auth }: NavbarProps) => {
     window.addEventListener("scroll", updateScroll);
   });
 
+  const { data: userData, error: userError } = useSWR<BattleBotUser>(
+    `/auth/me`,
+    swrfetcher
+  );
+
   useEffect(() => {
     if (localStorage.userData) {
       setUser(auth ? JSON.parse(localStorage.userData) : null);
     } else {
-      client("GET", "/auth/me").then(data => {
-        if (data.error) localStorage.removeItem("userData");
-        else {
-          setUser(data.data.user);
-          localStorage.userData = JSON.stringify(data.data.user);
-          FlareLane.setUserId(data.data.user.id);
-          FlareLane.setTags({
-            username: data.data.user.username,
-            discriminator: data.data.user.discriminator,
-          });
-        }
-      });
+      if (!userError && userData) {
+        setUser(userData.user);
+        localStorage.userData = JSON.stringify(userData.user);
+        FlareLane.setUserId(userData.user.id);
+        FlareLane.setTags({
+          username: userData.user.username,
+          discriminator: userData.user.discriminator,
+        });
+      } else {
+        localStorage.removeItem("userData");
+      }
     }
-  }, [auth]);
+  }, [userData, auth]);
 
   const Login = () => {
     window.location.href =
@@ -101,7 +107,7 @@ const Navbar = ({ auth }: NavbarProps) => {
             style={{ fontFamily: "Noto Sans KR" }}
             key="desktop"
           >
-            {NavBarItems.map(item => (
+            {NavBarItems.map((item) => (
               <>
                 <Link href={item.href} key={item.name}>
                   <a
@@ -249,7 +255,7 @@ const Navbar = ({ auth }: NavbarProps) => {
         key="mobile"
       >
         <div className="flex flex-col p-4">
-          {NavBarItems.map(item => (
+          {NavBarItems.map((item) => (
             <>
               <Link href={item.href} key={item.name + "mobile"}>
                 <a
@@ -276,7 +282,8 @@ const Navbar = ({ auth }: NavbarProps) => {
                   className="pl-6 hover:bg-gray-100 py-3 px-2 rounded-lg"
                 >
                   <i className="fas fa-user mr-3" />
-                  {user.username}{t("navbar.usersInfo")}
+                  {user.username}
+                  {t("navbar.usersInfo")}
                 </a>
               </Link>
               <a
