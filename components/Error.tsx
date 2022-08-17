@@ -1,5 +1,6 @@
 import { LottiePlayer } from "lottie-web";
 import { useEffect, useRef, useState } from "react";
+import Seo from "./Seo";
 
 const Error: React.FC<ErrorPageProps> = ({message, children}) => {
   const Ref = useRef<HTMLDivElement>(null);
@@ -23,6 +24,7 @@ const Error: React.FC<ErrorPageProps> = ({message, children}) => {
     }
   }, [lottie]);
   return <>
+  <Seo title={message}/>
     <div className="flex flex-col justify-center items-center min-h-[100vh] w-full h-full" style={{ fontFamily: "Noto Sans KR" }}>
         <div className="w-52 h-52" ref={Ref}/>
         <span className="lg:text-2xl text-xl font-bold px-2">{message}</span>
