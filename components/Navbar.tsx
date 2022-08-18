@@ -107,10 +107,11 @@ const Navbar = ({ auth }: NavbarProps) => {
             style={{ fontFamily: "Noto Sans KR" }}
             key="desktop"
           >
-            {NavBarItems.map((item) => (
+            {NavBarItems.map(item => (
               <>
                 <Link href={item.href} key={item.name}>
                   <a
+                    key={item.name}
                     className={
                       router.asPath === "/"
                         ? classNames(
@@ -157,6 +158,12 @@ const Navbar = ({ auth }: NavbarProps) => {
                       <a className="px-4 py-2 block hover:bg-gray-100 rounded-t">
                         <i className="fas fa-user mr-2" />
                         <span>{t("navbar.myInfo")}</span>
+                      </a>
+                    </Link>
+                    <Link href={`/payments`}>
+                      <a className="px-4 py-2 block hover:bg-gray-100 rounded-t">
+                        <i className="fas fa-credit-card mr-2" />
+                        <span>{t("navbar.payments")}</span>
                       </a>
                     </Link>
                     <div>
@@ -255,10 +262,11 @@ const Navbar = ({ auth }: NavbarProps) => {
         key="mobile"
       >
         <div className="flex flex-col p-4">
-          {NavBarItems.map((item) => (
+          {NavBarItems.map(item => (
             <>
               <Link href={item.href} key={item.name + "mobile"}>
                 <a
+                  key={item.name + "mobile"}
                   className="pl-6 hover:bg-gray-100 py-3 px-2 rounded-lg"
                   onClick={() => {
                     setOpenMobileDropDown(false);

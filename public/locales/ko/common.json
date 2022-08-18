@@ -24,7 +24,8 @@
     "myInfo": "내 정보",
     "logout": "로그아웃",
     "login": "로그인",
-    "usersInfo": "님의 정보"
+    "usersInfo": "님의 정보",
+    "payments": "결제"
   },
   "footer": {
     "tos": "이용약관",
@@ -62,7 +63,7 @@
       "email": "이메일",
       "verifyToEmail": "이메일을 이용한 이메일 인증",
       "phone": "전화번호",
-      "verifyToPhone": "이메일을 이용한 이메일 인증",
+      "verifyToPhone": "전화번호를 이용한 휴대폰 인증",
       "customLink": "커스텀 링크",
       "customLinkJoinServer": "서버만의 링크로 서버 입장",
       "lookBattlebotDevelop": "지속적으로 개발 중인 배틀이를 확인하세요"
@@ -169,6 +170,10 @@
       "active": "적용",
       "guild": "서버",
       "user": "유저"
+    },
+    "users": {
+      "user": "결제관리",
+      "userDescription": "사용중인 프리미엄과 구독을 관리하세요"
     }
   },
   "input": {

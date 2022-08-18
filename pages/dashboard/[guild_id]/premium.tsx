@@ -30,6 +30,13 @@ const DashboardPremium: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
       refreshInterval: 30000,
     }
   );
+  const { data: guildPremiumData, error: guildPremiumError } = useSWR<boolean>(
+    `/guilds/${guildId}/premium`,
+    swrfetcher,
+    {
+      refreshInterval: 30000,
+    }
+  );
   const { data: userData, error: userError } = useSWR<User>(
     `/auth/me`,
     swrfetcher
@@ -75,6 +82,7 @@ const DashboardPremium: NextPage<PageDefaultProps> = ({ auth, guildId }) => {
               {t("dashboard.premium.useage")}
             </span>
           </div>
+          {guildPremiumData ? <div className="w-full border-2 lg:mr-1.5 lg:ml-1.5 p-3 mt-3 rounded-xl flex flex-row items-center bg-violet-100 border-purple-500 font-bold"><i className="fas fa-exclamation-triangle mr-2 text-purple-500"/>이미 프리미엄을 사용중인 서버같아요! 결제수단을 변경하시려면 (우측상단 유저메뉴 {`->`} 결제) 페이지에서 수정해주세요 </div> : ""}
           <div className="grid lg:grid-cols-2 w-full mt-4 gap-4 lg:mr-1.5 lg:ml-1.5">
             <div
               onClick={() => {

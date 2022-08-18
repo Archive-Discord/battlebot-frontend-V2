@@ -15,7 +15,13 @@ import {
   userAvaterLink,
 } from "@utils/utils";
 import { useRouter } from "next/router";
-import { LegacyRef, MutableRefObject, useEffect, useRef, useState } from "react";
+import {
+  LegacyRef,
+  MutableRefObject,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { brandpay, tossPayments } from "@utils/toss";
 import { SmallLoading } from "@components/Loading";
 import { isMobile, isDesktop } from "react-device-detect";
@@ -124,29 +130,39 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
         return Toast(t("payments.noCard"), "error");
       brandpay(userData).then(pay => {
         pay
-          .requestPayment({
-            amount: amount,
-            orderId: data.id,
-            orderName: data.name,
-            customerEmail: email,
-            methodId: selectPayMethod
-              ? (selectPayMethod as MethodId)
-              : (userCards[0].id as MethodId),
-          })
-          .then(result => {
-            return client("POST", "/payments/confirm-payment", {
-              phone: phone ? phone.replace(/-/g, "") : userData.phone,
-              email: email ? email : userData.email,
-              ...result,
-            }).then(payments => {
-              if (payments.error) throw new AxiosError(payments.message);
+          .requestAgreement("빌링")
+          .then(async() => {
+            brandpay(userData).then(pay => {
+              pay
+                .requestPayment({
+                  amount: amount,
+                  orderId: data.id,
+                  orderName: data.name,
+                  customerEmail: email,
+                  methodId: selectPayMethod
+                    ? (selectPayMethod as MethodId)
+                    : (userCards[0].id as MethodId),
+                })
+                .then(result => {
+                  console.log(result)
+                  return client("POST", "/payments/confirm-payment", {
+                    phone: phone ? phone.replace(/-/g, "") : userData.phone,
+                    email: email ? email : userData.email,
+                    ...result,
+                  }).then(payments => {
+                    if (payments.error) throw new AxiosError(payments.message);
+                  });
+                })
+                .then(() => {
+                  router.push(`/payments/success?orderId=${data.id}`);
+                })
+                .catch(error => {
+                  Toast(error.message, "error");
+                });
             });
           })
-          .then(() => {
-            router.push(`/payments/success?orderId=${data.id}`);
-          })
-          .catch(error => {
-            Toast(error.message, "error");
+          .catch(e => {
+            Toast(t("payments.acceptAutoPayments"), "error");
           });
       });
     } else if (payMethod === "cultureland") {
