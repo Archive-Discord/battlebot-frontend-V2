@@ -144,7 +144,6 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
                     : (userCards[0].id as MethodId),
                 })
                 .then(result => {
-                  console.log(result)
                   return client("POST", "/payments/confirm-payment", {
                     phone: phone ? phone.replace(/-/g, "") : userData.phone,
                     email: email ? email : userData.email,

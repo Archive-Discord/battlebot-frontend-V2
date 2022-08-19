@@ -46,8 +46,8 @@
       "premium": "프리미엄",
       "analytics": "통계",
       "automod": "자동관리",
-      "members": "유저관리",
-      "ticket": "티켓",
+      "members": "유저관리 (개발중)",
+      "ticket": "티켓 (개발중)",
       "customlink": "커스텀 링크"
     },
     "premium": {

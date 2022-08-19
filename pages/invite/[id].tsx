@@ -70,6 +70,7 @@ const Invite: NextPage<PageDefaultProps & { path: string }> = ({
   };
 
   const handleEmailVerify = () => {
+    setSendError(undefined)
     if (!emailCode) return setSendError("인증번호를 입력해주세요");
     client("POST", `/invite/${path}/email/verify`, {
       token: emailToken,

@@ -57,6 +57,14 @@ export interface CustomLink {
   published_date: Date;
 }
 
+export interface Automod {
+  _id: string
+  guildId: string;
+  event: AutomodEvent;
+  start: string;
+}
+export type AutomodEvent = "resetchannel" | "blacklist_ban" | "usercreateat" | "usecurse" | "uselink" | "autorole"
+
 export interface UserGuld extends RESTAPIPartialCurrentUserGuild {
     bot: boolean;
   }
