@@ -18,6 +18,7 @@ import "aos/dist/aos.css";
 import "react-toastify/dist/ReactToastify.css";
 import "swiper/css";
 import "swiper/css/navigation";
+import Seo from "@components/Seo";
 
 function BattlebotApp({
   Component,
@@ -80,6 +81,7 @@ function BattlebotApp({
   }, []);
   return (
     <>
+      <Seo/>
       <I18nextProvider i18n={i18n}>
         <Navbar auth={auth} />
         {router.asPath === "/" ?? <hr className="pt-20 border-none" />}
