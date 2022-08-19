@@ -360,7 +360,7 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
   const cookies = cookieParser(ctx);
   const { data, error, message } = await client(
     "GET",
-    `/invite/${ctx.params?.id}`
+    `/invite/${encodeURI(ctx.params?.id as string)}`
   );
   if (error) {
     return {
@@ -376,6 +376,7 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
       props: {
         auth: cookies?.Authorization ? cookies.Authorization : null,
         path: ctx.params?.id,
+        error: false,
         data,
       },
     };

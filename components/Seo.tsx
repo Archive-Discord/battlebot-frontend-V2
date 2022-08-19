@@ -1,12 +1,12 @@
 import Head from "next/head";
 
-const Seo: React.FC<SeoProps> = ({ title, description, keyword, image }) => {
+export default function Seo({ title, description, keyword, image }: SeoProps) {
   return (
     <>
       <Head>
         <title>{"배틀이 - " + title}</title>
         <link rel="canonical" href="https://battlebot.kr" />
-        <link rel="icon" href="https://battlebot.kr/favicon.ico" />
+        <link rel="icon" href="/favicon.ico" />
         <meta name="description" content={description} />
         <meta name="keyword" content={keyword} />
         {/* Open Graph */}
@@ -23,14 +23,15 @@ const Seo: React.FC<SeoProps> = ({ title, description, keyword, image }) => {
       </Head>
     </>
   );
-};
+}
 
 Seo.defaultProps = {
   title: "하나의 봇으로 모든 관리를",
-  description: "배틀이 봇과 대시보드를 이용하여 다른 봇 없이 한 번에 서버를 관리해 보세요!",
+  description:
+    "배틀이 봇과 대시보드를 이용하여 다른 봇 없이 한 번에 서버를 관리해 보세요!",
   keyword:
     "배틀이, Battlebot, 디스코드 서버, 디스코드 서버 검색, 디스코드 니트로, 디스코드 웹, 디스코드 서버찾기, 디스코드 전적이, 디스코드 배틀이, 디스코드 봇 추천, 디스코드 봇 리스트, 디스코드 봇, 디스코드 봇 만들기",
-  image: "https://battlebot.kr/favicon.ico",
+  image: "https://battlebot.kr/logo.png",
 };
 
 interface SeoProps {
@@ -39,5 +40,3 @@ interface SeoProps {
   keyword?: string;
   image?: string;
 }
-
-export default Seo;
