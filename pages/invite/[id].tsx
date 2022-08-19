@@ -6,7 +6,7 @@ import Error from "@components/Error";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 import { SwitchTransition, CSSTransition } from "react-transition-group";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Button from "@components/Button";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
 import Toast from "@utils/toast";
@@ -29,6 +29,7 @@ const Invite: NextPage<PageDefaultProps & { path: string }> = ({
   const [page, setPage] = useState<"email" | "phone" | "kakao" | "end" | null>(
     data?.option ? data.option : null
   );
+  const [mounted, setMounted] = useState(false);
   const [isSend, setIsSend] = useState(false);
   const [email, setEmail] = useState<string>();
   const [phone, setPhone] = useState<string>();
@@ -40,8 +41,11 @@ const Invite: NextPage<PageDefaultProps & { path: string }> = ({
   const captchaRef = useRef<HCaptcha>(null);
   const router = useRouter();
   const { t } = useTranslation();
+  useEffect(() => {
+    setMounted(true);
+  }, []);
   const { data: userData, error: userError } = useSWR<User>(
-    `/auth/me`,
+    mounted ? "/auth/me" : null,
     swrfetcher
   );
   if (error && message)
@@ -70,7 +74,7 @@ const Invite: NextPage<PageDefaultProps & { path: string }> = ({
   };
 
   const handleEmailVerify = () => {
-    setSendError(undefined)
+    setSendError(undefined);
     if (!emailCode) return setSendError("인증번호를 입력해주세요");
     client("POST", `/invite/${path}/email/verify`, {
       token: emailToken,
