@@ -81,7 +81,6 @@ function BattlebotApp({
   }, []);
   return (
     <>
-      <Seo/>
       <I18nextProvider i18n={i18n}>
         <Navbar auth={auth} />
         {router.asPath === "/" ?? <hr className="pt-20 border-none" />}
