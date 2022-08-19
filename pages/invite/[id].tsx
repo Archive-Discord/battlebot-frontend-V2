@@ -6,7 +6,7 @@ import Error from "@components/Error";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 import { SwitchTransition, CSSTransition } from "react-transition-group";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Button from "@components/Button";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
 import Toast from "@utils/toast";
@@ -29,7 +29,6 @@ const Invite: NextPage<PageDefaultProps & { path: string }> = ({
   const [page, setPage] = useState<"email" | "phone" | "kakao" | "end" | null>(
     data?.option ? data.option : null
   );
-  const [mounted, setMounted] = useState(false);
   const [isSend, setIsSend] = useState(false);
   const [email, setEmail] = useState<string>();
   const [phone, setPhone] = useState<string>();
@@ -41,11 +40,8 @@ const Invite: NextPage<PageDefaultProps & { path: string }> = ({
   const captchaRef = useRef<HCaptcha>(null);
   const router = useRouter();
   const { t } = useTranslation();
-  useEffect(() => {
-    setMounted(true);
-  }, []);
   const { data: userData, error: userError } = useSWR<User>(
-    mounted ? "/auth/me" : null,
+    `/auth/me`,
     swrfetcher
   );
   if (error && message)
@@ -60,7 +56,17 @@ const Invite: NextPage<PageDefaultProps & { path: string }> = ({
       </Error>
     );
   if (userError && userError.cause === 401) return <Login />;
-  if (!userData) return <Loading />;
+  if (!userData)
+    return (
+      <>
+        <Seo
+          title={`${data.metadata.name} 서버 입장`}
+          description={`${data.metadata.name} 서버에 인증 후 안전하게 입장하세요!`}
+          image={guildProfileLink(data.metadata)}
+        />
+        <Loading />
+      </>
+    );
 
   const handleVerify = (token: string) => {
     client("POST", `/invite/${path}`, { token }).then(res => {
