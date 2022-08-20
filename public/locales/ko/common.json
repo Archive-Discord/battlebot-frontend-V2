@@ -102,7 +102,7 @@
       "useCount": "이용횟수",
       "useingOptions": "사용하는 추가인증",
       "options": "추가기능",
-      "successDelete": "선택한 향목 {{count}}개가 삭제되었습니다",
+      "successDelete": "선택한 항목 {{count}}개가 삭제되었습니다",
       "successCopy": "커스텀 링크가 복사되었습니다!",
       "onClickMakeRandom": "여기를 눌러 랜덤 링크를 설정하세요!",
       "onClickMakeCustom": " 여기를 눌러 커스텀 링크를 설정하세요!",
