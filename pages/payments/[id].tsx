@@ -15,13 +15,7 @@ import {
   userAvaterLink,
 } from "@utils/utils";
 import { useRouter } from "next/router";
-import {
-  LegacyRef,
-  MutableRefObject,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { useEffect, useRef, useState } from "react";
 import { brandpay, tossPayments } from "@utils/toss";
 import { SmallLoading } from "@components/Loading";
 import { isMobile, isDesktop } from "react-device-detect";
@@ -35,6 +29,8 @@ import Toast from "@utils/toast";
 import Error from "@components/Error";
 import { useTranslation } from "react-i18next";
 import Seo from "@components/Seo";
+import Modal from "@components/Modal";
+import Button from "@components/Button";
 
 const Login = dynamic(() => import("@components/Login"));
 const Loading = dynamic(() => import("@components/Loading"));
@@ -56,6 +52,7 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
   const [culturelandFee, setCulturelandFee] = useState<boolean>(false);
   const [selectPayMethod, setSelectPayMethod] = useState<string>();
   const [payMethod, setPayMethod] = useState<PayMethods>();
+  const [changeMethodAlert, setChangeMethodAlert] = useState<string>();
   const [discount, setDiscount] = useState<number>(0);
   const [defaultAmount, setDefalutAmount] = useState<number>(
     data?.amount ? Number(data.amount) : 0
@@ -63,8 +60,6 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
   const [amount, setAmount] = useState<number>(0);
   const router = useRouter();
   const { t } = useTranslation();
-  const kakaopayRef = useRef<HTMLIFrameElement>(null);
-
   useEffect(() => {
     setAmount(defaultAmount);
     if (discount > 1) setAmount(defaultAmount - defaultAmount / discount);
@@ -74,6 +69,16 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
       setAmount(defaultAmount + defaultAmount / 10);
     }
   }, [payMethod, discount]);
+
+  useEffect(() => {
+    if (payMethod === "cultureland") {
+      setChangeMethodAlert("문화상품권 결제시 자동결제 사용이 불가합니다");
+    } else if (payMethod === "kakaopay") {
+      setChangeMethodAlert(
+        "카카오페이 결제 시 자동 결제 수단 변경이 번거로우실 수 있습니다"
+      );
+    }
+  }, [payMethod]);
 
   const { data: userData, error: userError } = useSWR<User>(
     `/auth/me`,
@@ -119,6 +124,7 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
   const payMethodsHanler = (method: string) => {
     setPayMethod(method as PayMethods);
   };
+
   const requestPayments = async () => {
     if (!name) return Toast(t("input.error.noName"), "error");
     if (!email) return Toast(t("input.error.noEmail"), "error");
@@ -131,7 +137,7 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
       brandpay(userData).then(pay => {
         pay
           .requestAgreement("빌링")
-          .then(async() => {
+          .then(async () => {
             brandpay(userData).then(pay => {
               pay
                 .requestPayment({
@@ -383,6 +389,22 @@ const PaymentsOrder: NextPage<PageDefaultProps> = ({
           </div>
         </div>
       </div>
+      {changeMethodAlert && (
+        <Modal
+          title="결제수단"
+          isOpen={changeMethodAlert ? true : false}
+          button={
+            <Button
+              label="확인"
+              type="success"
+              onClick={() => setChangeMethodAlert(undefined)}
+            />
+          }
+          callbackOpen={() => setChangeMethodAlert(undefined)}
+        >
+          <span className="text-lg">{changeMethodAlert}</span>{" "}
+        </Modal>
+      )}
     </>
   );
 };

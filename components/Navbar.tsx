@@ -140,7 +140,7 @@ const Navbar = ({ auth }: NavbarProps) => {
           >
             {user ? (
               <>
-                <div className="flex flex-row items-center text-sm">
+                <div className="flex flex-row items-center text-sm cursor-pointer">
                   <img
                     className="w-8 h-8 rounded-full mr-2"
                     src={userAvaterLink(user)}
@@ -161,7 +161,7 @@ const Navbar = ({ auth }: NavbarProps) => {
                       </a>
                     </Link>
                     <Link href={`/payments`}>
-                      <a className="px-4 py-2 block hover:bg-gray-100 rounded-t">
+                      <a className="px-4 py-2 block hover:bg-gray-100">
                         <i className="fas fa-credit-card mr-2" />
                         <span>{t("navbar.payments")}</span>
                       </a>
@@ -250,7 +250,7 @@ const Navbar = ({ auth }: NavbarProps) => {
         </div>
       </nav>
       <div
-        className={`z-30 w-full h-full fixed bg-white mt-2 sm:mt-0 lg:hidden overflow-y-scroll lg:scroll-none pt-16 ${
+        className={`z-30 w-full h-full fixed bg-white mt-2 sm:mt-0 lg:hidden overflow-y-auto lg:scroll-none pt-16 ${
           openMobileDropDown ? "visible" : "invisible"
         }`}
         style={{

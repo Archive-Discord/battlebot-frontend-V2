@@ -117,7 +117,7 @@ export default class CustomDocument extends Document {
             }}
           />
         </Head>
-        <body id="body">
+        <body id="body" className="body">
           <Main />
         </body>
         <NextScript />

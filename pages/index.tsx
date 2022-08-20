@@ -40,8 +40,7 @@ const Home: NextPage<ServerSideProps> = ({
     <>
       <Seo />
       <section
-        className="min-h-[100vh] items-center flex overflow-hidden"
-        style={{ backgroundColor: "#7C3AED" }}
+        className="min-h-[100vh] items-center flex overflow-hidden bg-[#7C3AED]"
       >
         <div className="grid lg:grid-cols-3 grid-cols-1 container content-center">
           <div className="col-span-2">
