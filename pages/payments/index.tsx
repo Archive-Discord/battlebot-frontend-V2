@@ -65,7 +65,7 @@ const PaymentsSuccess: NextPage<PageDefaultProps> = ({
 
   useEffect(() => {
     if (subscribesData) {
-      setSelectSubscribePayments(undefined);
+      setSelectSubscribePayments([]);
       client("GET", `/payments/order/target/${selectSubscribe?.target}`).then(
         res => {
           if (res.error)
@@ -259,13 +259,13 @@ const PaymentsSuccess: NextPage<PageDefaultProps> = ({
               <div className="mt-2 space-y-2">
                 {!selectSubscribePayments ? (
                   <>
-                    <SmallLoading />
+                    <span>결제 기록이 없습니다</span>
                   </>
                 ) : (
                   <>
                     {selectSubscribePayments.length === 0 ? (
                       <>
-                        <span>결제 기록이 없습니다</span>
+                        <SmallLoading />
                       </>
                     ) : (
                       <>
