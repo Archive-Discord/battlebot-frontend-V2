@@ -81,7 +81,7 @@ const SidebarSelectServer: React.FC<SideBarSelectServerProps> = ({
                         router.push(`/dashboard/${guild.id}`);
                         setOpenServerList(false);
                       }}
-                      key={index}
+                      key={guild.id}
                       className={`w-full px-3 py-1.5 hover:bg-gray-100 ${
                         index === 0 && "rounded-t-xl"
                       } ${index == guilds.length - 1 && "rounded-b-xl"}`}

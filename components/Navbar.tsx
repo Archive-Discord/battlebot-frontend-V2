@@ -294,6 +294,17 @@ const Navbar = ({ auth }: NavbarProps) => {
                   {t("navbar.usersInfo")}
                 </a>
               </Link>
+              <Link href={`/payments`}>
+              <a
+                  onClick={() => {
+                    setOpenMobileDropDown(false);
+                  }}
+                  className="pl-6 hover:bg-gray-100 py-3 px-2 rounded-lg"
+                >
+                  <i className="fas fa-credit-card mr-3" />
+                  {t("navbar.payments")}
+                </a>
+              </Link>
               <a
                 onClick={() => {
                   setOpenMobileDropDown(false);

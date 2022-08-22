@@ -9,8 +9,6 @@ export interface PageDefaultProps {
     orderId?: string
     data?: any
 }
-
-export type SideBarCategoris = "server_manage" | "utils" | "alert" | "none"
 export interface SideBarItem {
     name: string
     path: string
@@ -25,5 +23,12 @@ export interface Item {
     icon?: string;
   }
 
+  export interface BattleBotEmbed {
+    color?: string;
+    title?: string;
+    description?: string;
+  }
+
+  export type SideBarCategoris = "server_manage" | "utils" | "alert" | "none"
   export type PayMethods = "cultureland" | "battlepay" | "kakaopay"
   export type Theme = "dark" | "light"

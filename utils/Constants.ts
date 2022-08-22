@@ -62,6 +62,13 @@ export const SideBarItems: SideBarItem[] = [
     icon: "fas fa-link",
   },
   {
+    name: "인증",
+    path: "/verify",
+    pathName: "/dashboard/[guild_id]/verify",
+    categori: "server_manage",
+    icon: "fas fa-user-check",
+  },
+  {
     name: "dashboard.sidebar.ticket",
     path: "/ticket",
     pathName: "/dashboard/[guild_id]/ticket",
@@ -160,6 +167,23 @@ export const AutomodEvent = [
     id: "resetchannel",
     name: "매일 12시마다 채널 초기화",
     categori: "channel",
+  },
+];
+
+export const VerifyTypes: Item[] = [
+  {
+    id: "default",
+    name: "캡챠 인증",
+  },
+  {
+    id: "phone",
+    name: "휴대폰 인증",
+    icon: "fas fa-crown",
+  },
+  {
+    id: "email",
+    name: "이메일 인증",
+    icon: "fas fa-crown",
   },
 ];
 
