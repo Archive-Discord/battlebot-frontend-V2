@@ -47,7 +47,7 @@
       "automod": "AutoMod",
       "members": "User Manage",
       "ticket": "Ticket",
-      "customlink": "커스텀 링크"
+      "customlink": "CustomLink"
     },
     "premium": {
       "battlebot": "BattleBot Premium",
