@@ -17,4 +17,4 @@ deploy:
   tags:
     - battlebot-dev
   only:
-    - master
+    - main
