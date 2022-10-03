@@ -34,7 +34,7 @@ import Button from "@components/Button";
 
 const Login = dynamic(() => import("@components/Login"));
 const Loading = dynamic(() => import("@components/Loading"));
-const CheckBox = dynamic(() => import("@components/Checkbox"));
+const CheckBox = dynamic(() => import("@components/checkbox"));
 const Dropdown = dynamic(() => import("@components/Dropdown"));
 const Input = dynamic(() => import("@components/Input"));
 

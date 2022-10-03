@@ -15,7 +15,7 @@ import Seo from "@components/Seo";
 const Login = dynamic(() => import("@components/Login"));
 const Layout = dynamic(() => import("@components/DashboardLayout"));
 const Loading = dynamic(() => import("@components/Loading"));
-const CheckBox = dynamic(() => import("@components/Checkbox"));
+const CheckBox = dynamic(() => import("@components/checkbox"));
 const Input = dynamic(() => import("@components/Input"));
 const Button = dynamic(() => import("@components/Button"));
 const Modal = dynamic(() => import("@components/Modal"));
