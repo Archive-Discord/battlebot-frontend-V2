@@ -5,7 +5,7 @@ COPY . ./app
 
 WORKDIR /app
 COPY .env .env.production
-RUN yarn
+RUN yarn install
 RUN yarn build
 EXPOSE 3000
 
