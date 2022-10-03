@@ -15,6 +15,6 @@ deploy:
     - docker build -t battlebot-front .
     - docker run -d -p 3000:3000 --rm --name battlebot-front battlebot-front
   tags:
-    - docker
+    - battlebot-dev
   only:
     - master
