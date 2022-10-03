@@ -1,19 +1,34 @@
+variables:
+  SERVICE_NAME: battlebot-front
+  DOKCER_IMAGE_URL: registry.gitlab.com/archive87/battlebot-v2/front
+
 stages:
+  - build
   - deploy
 cache:
   paths:
     - node_modules/
 
-deploy:
-  image: docker:dind
-  stage: deploy
+build:
+  image: docker:latest
+  stage: build
   script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
     # environment file
     - echo $ENV_FILE
     # File is outside of build context, so make local copy.
     - cp $ENV_FILE .env
-    - docker build -t battlebot-front .
-    - docker run -d -p 3000:3000 --rm --name battlebot-front battlebot-front
+    - docker build -t $DOKCER_IMAGE_URL .
+    - docker push $DOKCER_IMAGE_URL
+  only:
+    - main
+
+deploy:
+  image: docker:latest
+  stage: deploy
+  script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
+    - docker run -d -p 3000:3000 --rm --name battlebot-front $DOKCER_IMAGE_URL
   tags:
     - battlebot-dev
   only:
