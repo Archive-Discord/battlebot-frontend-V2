@@ -1,0 +1,20 @@
+stages:
+  - deploy
+cache:
+  paths:
+    - node_modules/
+
+deploy:
+  image: docker:dind
+  stage: deploy
+  script:
+    # environment file
+    - echo $ENV_FILE
+    # File is outside of build context, so make local copy.
+    - cp $ENV_FILE .env
+    - docker build -t battlebot-front .
+    - docker run -d -p 3000:3000 --rm --name battlebot-front battlebot-front
+  tags:
+    - docker
+  only:
+    - master

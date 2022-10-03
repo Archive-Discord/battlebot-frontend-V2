@@ -4,7 +4,7 @@ FROM node:16.14.2
 COPY . ./app
 
 WORKDIR /app
-
+COPY .env .env.production
 RUN yarn
 RUN yarn build
 EXPOSE 3000
