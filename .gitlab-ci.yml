@@ -5,6 +5,7 @@ variables:
 stages:
   - build
   - deploy
+
 cache:
   paths:
     - node_modules/
@@ -14,6 +15,8 @@ build:
   stage: build
   tags:
     - gitlab-org-docker
+  services:
+    - docker:dind
   script:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
     # environment file
