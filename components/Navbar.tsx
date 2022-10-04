@@ -272,7 +272,7 @@ const Navbar = ({ auth }: NavbarProps) => {
                     setOpenMobileDropDown(false);
                   }}
                 >
-                  <i className={item.icon + " mr-3"} />
+                  <i className={`${item.icon} mr-3`} />
                   {t(item.name)}
                 </a>
               </Link>
