@@ -134,6 +134,12 @@ const Invite: NextPage<PageDefaultProps & { path: string }> = ({
       }
     });
   };
+
+  const handleKakaoVerify = () => {
+    if (!userData.kakao_email) return Toast("카카오 계정이 연동되어 있지 않습니다", "error");
+    setPage(null);
+  };
+
   return (
     <>
       <Seo
@@ -150,9 +156,11 @@ const Invite: NextPage<PageDefaultProps & { path: string }> = ({
         </div>
         <div className="flex flex-col items-center">
           <div className="flex flex-col items-center">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               className="rounded-full my-2 w-40"
               src={guildProfileLink(data.metadata)}
+              alt="guild_profile"
             />
             <p className="text-2xl font-bold">{data.metadata.name}</p>
           </div>
@@ -319,6 +327,49 @@ const Invite: NextPage<PageDefaultProps & { path: string }> = ({
                             <span className="text-sm font-bold mt-1 text-red-500">
                               {sendError}
                             </span>
+                          )}
+                        </div>
+                      </div>
+                    </Modal>
+                  </>
+                )}
+                {page === "kakao" && (
+                  <>
+                    <Modal
+                      description="해당 서버는 카카오 계정 인증을 진행한 후 입장이 가능합니다"
+                      title="카카오 인증"
+                      button={
+                        <>
+                          <Button
+                            type="success"
+                            label="인증"
+                            disable={userData.kakao_email ? false : true}
+                            onClick={handleKakaoVerify}
+                          />
+                        </>
+                      }
+                      isOpen={true}
+                      callbackOpen={console.log}
+                      notClose
+                    >
+                      <div className="flex lg:items-center lg:flex-row flex-col mb-3">
+                        <span className="text-lg font-bold lg:mb-0 mb-1">
+                          카카오 계정
+                        </span>
+                        <div className="flex flex-row lg:ml-auto lg:max-w-[310px] lg:w-full">
+                          {userData?.kakao_email ? (
+                            <>
+                              {userData?.kakao_email} ({userData?.kakao_name})
+                            </>
+                          ) : (
+                            <>
+                              <Button
+                                type="success"
+                                className="w-full h-10"
+                                label="카카오 계정 연동"
+                                onClick={handleEmailVerify}
+                              />
+                            </>
                           )}
                         </div>
                       </div>

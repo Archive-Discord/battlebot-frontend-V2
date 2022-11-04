@@ -35,7 +35,7 @@ const Modal: React.FC<Modal> = ({
               fontFamily: "Noto Sans KR",
             }}
             ref={ref}
-            className="animate-fade fixed top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-[43rem] bg-white max-w-[90vw] max-h-[70vh] overflow-y-auto overflow-x-hidden rounded-xl"
+            className="animate-fade fixed top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-[43rem] bg-white max-w-[90vw] max-h-[70vh] rounded-xl overflow-visible"
           >
             <div className="p-5 text-2xl font-bold w-full flex items-center">
               <span>{title}</span>
