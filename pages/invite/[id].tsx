@@ -367,7 +367,9 @@ const Invite: NextPage<PageDefaultProps & { path: string }> = ({
                                 type="success"
                                 className="w-full h-10"
                                 label="카카오 계정 연동"
-                                onClick={handleEmailVerify}
+                                onClick={() => {
+                                  window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/auth/kakao?redirect=${window.location.href}`;
+                                }}
                               />
                             </>
                           )}
