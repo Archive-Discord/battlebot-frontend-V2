@@ -21,7 +21,7 @@ const Footer: React.FC<FooterProps> = ({ themeHanler, theme }) => {
   const { t, i18n } = useTranslation();
   const [openDropdown, setOpenDropdown] = useState(false);
   const [selectItem, setSelectItem] = useState(
-    language.filter(language => language.id === i18n.language)[0]
+    language.filter(language => language.id === i18n.language)[0] ? language.filter(language => language.id === i18n.language)[0] : language[0]
   );
   const ref = useDetectClickOutside({
     onTriggered: () => setOpenDropdown(false),
