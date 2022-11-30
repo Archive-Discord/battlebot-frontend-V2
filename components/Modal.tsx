@@ -35,7 +35,7 @@ const Modal: React.FC<Modal> = ({
               fontFamily: "Noto Sans KR",
             }}
             ref={ref}
-            className="animate-fade fixed top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-[43rem] bg-white max-w-[90vw] max-h-[70vh] rounded-xl overflow-visible"
+            className="animate-fade fixed top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-[43rem] bg-white max-w-[90vw] max-h-[70vh] rounded-xl overflow-y-scroll"
           >
             <div className="p-5 text-2xl font-bold w-full flex items-center">
               <span>{title}</span>
@@ -55,8 +55,7 @@ const Modal: React.FC<Modal> = ({
             </div>
             <hr className="w-full" />
             <div className="p-5">{children}</div>
-            <hr className="w-full" />
-            <div className="p-5 flex items-center justify-end">
+            <div className="px-5 py-3 flex items-center border-t sticky bottom-0 bg-white justify-end">
               <div>
                 {!notClose && (
                   <Button

@@ -13,12 +13,11 @@ import FlareLane from "@flarelane/flarelane-web-sdk";
 import createI18n from "@components/createI18n";
 import * as gtag from "@utils/googleAnalytics";
 
-import "../styles/globals.css";
 import "aos/dist/aos.css";
 import "react-toastify/dist/ReactToastify.css";
+import "../styles/globals.css";
 import "swiper/css";
 import "swiper/css/navigation";
-import Seo from "@components/Seo";
 
 function BattlebotApp({
   Component,
@@ -34,7 +33,7 @@ function BattlebotApp({
       gtag.pageview(url);
     };
     router.events.on("routeChangeComplete", handleRouteChange);
-    FlareLane.setCurrentPath(router.asPath)
+    FlareLane.setCurrentPath(router.asPath);
     return () => {
       router.events.off("routeChangeComplete", handleRouteChange);
     };

@@ -94,3 +94,32 @@
   background-color: none;
   border-radius: 10px;
 }
+
+.Toastify__toast {
+  background-color: #313234;
+  border-radius: 12px;
+  color: #fff;
+}
+
+.Toastify__toast-body {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex: none;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: fit-content;
+}
+
+.Toastify__toast-container {
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  justify-content: center;
+  flex-direction: column;
+}

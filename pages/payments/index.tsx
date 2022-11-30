@@ -4,6 +4,7 @@ import type {
   User,
   PaymentsMethods as Methods,
   PaymentsTarget,
+  paymentsType,
 } from "@types";
 import type { Guild, User as DiscordUser } from "discord.js";
 import type { NextPage, GetServerSideProps } from "next";
@@ -55,7 +56,7 @@ const PaymentsSuccess: NextPage<PageDefaultProps> = ({
     error: subscribesError,
     mutate: reloadSubscribes,
   } = useSWR<Subscribe[]>(`/payments/subscribes`, swrfetcher, {
-    refreshInterval: 500000
+    refreshInterval: 500000,
   });
   const {
     data: userCards,
@@ -77,11 +78,10 @@ const PaymentsSuccess: NextPage<PageDefaultProps> = ({
   }, [selectSubscribe]);
 
   useEffect(() => {
-    if(!selectSubscribe && subscribesData) {
-      setSelectSubscribe(subscribesData[0])
+    if (!selectSubscribe && subscribesData) {
+      setSelectSubscribe(subscribesData[0]);
     }
-  }, [subscribesData])
-  
+  }, [subscribesData]);
 
   if (error && message)
     return (
@@ -152,6 +152,29 @@ const PaymentsSuccess: NextPage<PageDefaultProps> = ({
       reloadSubscribes();
     });
   };
+
+  const useingPayMethod = {
+    tosspayments: (
+      <UseingMethod userCards={userCards} selectSubscribe={selectSubscribe} />
+    ),
+    kakaopay: <span className="font-bold">카카오 페이</span>,
+  };
+
+  const changeMethodItems = {
+    tosspayments: (
+      <PaymentsMethods
+        methods={userCards ? userCards : []}
+        selectMethod={setMethod}
+        methodAddHanler={addMethod}
+      />
+    ),
+    kakaopay: (
+      <div className="lg:ml-auto">
+        <span>결제수단 변경을 위해 우측 하단 변경 버튼을 눌러주세요</span>
+      </div>
+    ),
+  };
+
   return (
     <>
       <Seo title="결제관리" />
@@ -284,7 +307,9 @@ const PaymentsSuccess: NextPage<PageDefaultProps> = ({
                                         <span className="font-bold text-lg space-x-1">
                                           <span>결제실패</span>
                                           <span className="text-sm font-gray-300">
-                                            {dayjs(subscribePayment.createAt).format("YYYY.MM.DD HH시 MM분")}
+                                            {dayjs(
+                                              subscribePayment.createAt
+                                            ).format("YYYY.MM.DD HH시 MM분")}
                                           </span>
                                         </span>
                                         <div className="flex flex-row text-base lg:flex-nowrap flex-wrap text-gray-600">
@@ -320,7 +345,9 @@ const PaymentsSuccess: NextPage<PageDefaultProps> = ({
                                             {subscribePayment.payment.method}
                                           </span>
                                           <span className="text-sm font-gray-300">
-                                            {dayjs(subscribePayment.createAt).format("YYYY.MM.DD HH시 MM분")}
+                                            {dayjs(
+                                              subscribePayment.createAt
+                                            ).format("YYYY.MM.DD HH시 MM분")}
                                           </span>
                                         </span>
                                         <div className="flex flex-row text-base lg:flex-nowrap flex-wrap text-gray-600">
@@ -355,7 +382,9 @@ const PaymentsSuccess: NextPage<PageDefaultProps> = ({
                                       type="success"
                                       label="상세"
                                       onClick={() => {
-                                        router.push(`/payments/success?orderId=${subscribePayment.id}`)
+                                        router.push(
+                                          `/payments/success?orderId=${subscribePayment.id}`
+                                        );
                                       }}
                                     />
                                   </div>
@@ -402,42 +431,12 @@ const PaymentsSuccess: NextPage<PageDefaultProps> = ({
         <div className="flex lg:flex-row flex-col lg:items-baseline items-start justify-between">
           <span className="font-bold text-lg">사용중인 결제수단</span>
           <span>
-            {selectSubscribe?.paymentsType === "tosspayments" && (
-              <>
-                <UseingMethod
-                  userCards={userCards}
-                  selectSubscribe={selectSubscribe}
-                />
-              </>
-            )}
-            {selectSubscribe?.paymentsType === "kakaopay" && (
-              <>
-                <span className="font-bold">카카오 페이</span>
-              </>
-            )}
+            {useingPayMethod[selectSubscribe?.paymentsType as paymentsType]}
           </span>
         </div>
         <div className="flex-wrap flex lg:flex-row text-lg my-3">
           <span className="font-bold text-lg">결제수단 변경</span>
-          {selectSubscribe?.paymentsType === "tosspayments" && (
-            <>
-              <PaymentsMethods
-                methods={userCards ? userCards : []}
-                selectMethod={setMethod}
-                methodAddHanler={addMethod}
-              />
-            </>
-          )}
-
-          {selectSubscribe?.paymentsType === "kakaopay" && (
-            <>
-              <div className="lg:ml-auto">
-                <span>
-                  결제수단 변경을 위해 우측 하단 변경 버튼을 눌러주세요
-                </span>
-              </div>
-            </>
-          )}
+          {changeMethodItems[selectSubscribe?.paymentsType as paymentsType]}
         </div>
       </Modal>
     </>
